@@ -1,0 +1,15 @@
+@CHARSET "UTF-8";
+.container-fluid {
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-right: auto;
+  margin-left: auto;
+}
+.container-fluid .signin {
+	float: center;
+	margin-left: 500px;
+}
+
+#sign-box {
+	height: 550px;
+}

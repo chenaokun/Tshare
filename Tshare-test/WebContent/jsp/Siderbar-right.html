@@ -1,0 +1,31 @@
+<div class="grid_3 push_0">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h3 class="panel-title" align="center" >Group Name</h3>
+    </div>
+    <div class="panel-body" id="group-discription" align="center"></div>
+    <div class="panel-body" align="center" id="group-colon"> </div>
+   
+  </div>
+</div>
+
+<script type="text/javascript">
+//test values
+
+var mainPage = "/test/main.html";
+var i;
+var groupMem = ["Member1","Member2","Member3","Member4","Member5","Member6","Member7","Member8"];
+var descrip = "This is group description";
+document.getElementById("group-discription").innerHTML = descrip;
+
+for(i=0; i<groupMem.length; i++)
+{
+	if(i != 0 ) document.getElementById("group-colon").innerHTML += "<hr>";	
+	var div = document.createElement("div");
+	var text = document.createTextNode(groupMem[i]);
+	div.appendChild(text);
+	div.setAttribute("onclick","window.location.reload(mainPage)");
+	var element = document.getElementById("group-colon");
+	element.appendChild(div);
+}
+</script>
