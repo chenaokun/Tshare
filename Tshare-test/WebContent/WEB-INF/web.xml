@@ -14,5 +14,13 @@
   <servlet-mapping>
     <servlet-name>logIn</servlet-name>
     <url-pattern>/logIn</url-pattern>
-  </servlet-mapping>  
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>settleUp</servlet-name>
+    <servlet-class>javaFile.settleUp</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>settleUp</servlet-name>
+    <url-pattern>/settleUp</url-pattern>
+  </servlet-mapping>    
 </web-app>

@@ -1,6 +1,15 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8" import="java.util.*,javaFile.*"%> 	
+ <% User us=(User)session.getAttribute("userInfo");
+ 	String userId=us.Id;
+ 	String groupId="1";
+ 	String balance=(String)session.getAttribute(userId+groupId+"balance");
+ 	
+ %>
+ 	
 <div  id="bill">
 	<div class="row">
-    	<div style="height: 40px; border-width: 8px;" class="col-sm-3">You Owes   $ 55</div>
+    	<div style="height: 40px; border-width: 8px;" class="col-sm-3">You Owes  $<%=balance %></div>
     	<div class="col-sm-2"></div>
     	<div class="col-sm-3"></div>
     	<div class="col-sm-4"></div>

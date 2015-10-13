@@ -33,7 +33,6 @@ public class logIn extends HttpServlet {
     // reading the user input      
     response.setContentType("text/html");
 	response.setCharacterEncoding("utf-8");
-	PrintWriter out = response.getWriter();
 	String u=request.getParameter("usrname");
 	String p=request.getParameter("password");
 	System.out.println("username:"+u);
@@ -45,6 +44,7 @@ public class logIn extends HttpServlet {
 	if(pwDB!=null&&pwDB.length()>2&&p.equals(pwDB.substring(1, pwDB.length()-1))){
 		//request.getRequestDispatcher("/jsp/Welcome.jsp").forward(request, response);
 		User StoredUser=new User(user);
+		System.out.println("Stored user: "+StoredUser.Id);
 		request.getSession().setAttribute("userInfo", StoredUser);
 		response.sendRedirect("/Tshare-test2/jsp/Welcome.jsp");
 	}

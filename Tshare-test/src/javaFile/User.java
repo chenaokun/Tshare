@@ -10,6 +10,6 @@ public class User {
 	public String photo;
 	
 	public User(Item user){
-		this.Id=user.getJSON("usename");
+		this.Id=removeQuo.remove(user.getJSON("Id"));
 	}
 }
