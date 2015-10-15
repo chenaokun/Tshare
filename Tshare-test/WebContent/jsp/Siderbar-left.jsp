@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" import="java.util.*,javaFile.*"%>
  <% User us=(User)session.getAttribute("userInfo");
- 	System.out.println("session received:"+us.Id);%>
+ 	//System.out.println("session received:"+us.Id);%>
  	
 	<div class="grid_4 pull_8">
     	<div class="sidebarbox">

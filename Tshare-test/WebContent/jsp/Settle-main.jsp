@@ -1,9 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" import="java.util.*,javaFile.*"%> 	
+    pageEncoding="UTF-8" import="java.util.*,javaFile.*, java.util.Map.Entry;"%> 	
  <% User us=(User)session.getAttribute("userInfo");
  	String userId=us.Id;
  	String groupId="1";
- 	String balance=(String)session.getAttribute(userId+groupId+"balance");
+ 	String balance=(String)session.getAttribute(userId+groupId+"balance"); 	
+ 	System.out.println("testtesttest");
+ 	HashMap<String[], Integer> optimized=(HashMap<String[], Integer>)session.getAttribute(userId+groupId+"optimized");
  	
  %>
  	
@@ -43,9 +45,16 @@
     	<div class="col-sm-4"></div>
 	</div>
 	<hr>
+	<% for (Entry<String[], Integer> entry : optimized.entrySet()) { 
+		String[] key = entry.getKey();
+		System.out.println(userId+" "+key[1]);
+		if(!key[1].equals(userId)&&!key[0].equals(userId))
+			continue;
+	    int value = entry.getValue();
+	    if(key[1].equals(userId)){%>
 	<div class="row">
-    	<div class="col-sm-3">Mary pays You</div>
-    	<div class="col-sm-2">$40</div>
+    	<div class="col-sm-3"><%=key[0]%> pays You</div>
+    	<div class="col-sm-2"><%=Integer.toString(-1*value)%></div>
     	<div class="col-sm-3">Amount paid:</div>
     	<div class="col-sm-4">
     		<form id="form2" name="form2" method="post">
@@ -53,5 +62,18 @@
         		<input class="btn btn-info btn-xs" type="submit" value="Submit">
      		</form>
      	</div>
-	</div>
+	</div> <% } else {%>
+	<div class="row">
+    	<div class="col-sm-3">You pay <%=key[1]%></div>
+    	<div class="col-sm-2"><%=Integer.toString(value)%></div>
+    	<div class="col-sm-3">Amount paid:</div>
+    	<div class="col-sm-4">
+    		<form id="form2" name="form2" method="post">
+        		<input type="text" name="textfield" id="textfield2" size="10">
+        		<input class="btn btn-info btn-xs" type="submit" value="Submit">
+     		</form>
+     	</div>
+	</div> 
+		<% } %>
+	<% } %>
 </div>

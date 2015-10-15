@@ -19,6 +19,7 @@ public class Solution {
     	
     	for(int i=0;i<ubList.size();i++){
     		ub=ubList.get(i);
+    		System.out.println(ub.userId+" "+Integer.toString(ub.balance));
     		pqMax.add(ub);
     		pqMin.add(ub);    		
     	}

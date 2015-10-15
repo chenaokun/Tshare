@@ -39,6 +39,8 @@ public class logIn extends HttpServlet {
 	System.out.println("input password:"+p);
 	
 	Item user=getPW(u,"Usr_info");
+	if(user==null)
+		response.sendRedirect("/Tshare-test2/jsp/sign_in.jsp");
 	String pwDB=user.getJSON("password");
 	System.out.println("valid password:"+pwDB);
 	if(pwDB!=null&&pwDB.length()>2&&p.equals(pwDB.substring(1, pwDB.length()-1))){
