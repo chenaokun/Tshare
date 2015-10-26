@@ -1,11 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" import="java.util.*,javaFile.*"%>
- <% User us=(User)session.getAttribute("userInfo");
+ <% User us1=(User)session.getAttribute("userInfo");
  	//System.out.println("session received:"+us.Id);%>
  	
 	<div class="grid_4 pull_8">
     	<div class="sidebarbox">
-      		<h3>Hello! <%=us.Id%></h3>
+      		<h3>Hello! <%=us1.Id%></h3>
       		<ul>
         		<li><a href="#">My profile</a> </li>
         		<li><a href="#">Setting</a></li>
@@ -57,7 +57,7 @@
 			}	
 			function saveGroupName(name) {
 				//alert(name);
-				localStorage.setItem("groupname"	, name);
+				localStorage.setItem("groupname", name);
 			}	
 		
 </script>

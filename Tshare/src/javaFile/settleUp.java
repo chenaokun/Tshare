@@ -43,12 +43,13 @@ public class settleUp extends HttpServlet {
 	  dynamoDB = new DynamoDB(client);
 	  //to be modified
 	  String groupId="1";
+	  //int groupId = 1;
 	  
 	  String tableName="currentBalance";
 	  Table table = dynamoDB.getTable(tableName);
 	  try {	         
 	         Item item = table.getItem("groupId", groupId, "userId", userId); 
-	         //System.out.println(item.toString());
+	         System.out.println(item.toString());
 	         String balance=removeQuo.remove(item.getJSON("balance"));
 	         request.getSession().setAttribute(userId+groupId+"balance", balance);
 	         //System.out.println("balance="+balance);
@@ -61,20 +62,26 @@ public class settleUp extends HttpServlet {
 	         QueryRequest queryRequest = new QueryRequest().withTableName(tableName);
 	         queryRequest.setKeyConditions(keyConditions);
 	         QueryResult queryResult = client.query(queryRequest);
-	         System.out.println(queryResult.toString());
+	         System.out.println(queryResult.toString()+" test");
 	         List<Map<String, AttributeValue>> items = queryResult.getItems();
+	         System.out.println("list!");
+	         
 	         Iterator<Map<String, AttributeValue>> itemsIter = items.iterator();
 	         String totalBalance = null;
 	         String user=null;
 	         ArrayList<userBalance> ubList=new ArrayList<userBalance>();
 	         while (itemsIter.hasNext()) {
+	        	 	System.out.println("iterator");
+	        	 	
 	        	    Map<String, AttributeValue> currentItem = itemsIter.next();
 	        	    Iterator<String> currentItemIter = currentItem.keySet().iterator();
 	        	   
 	        	    while (currentItemIter.hasNext()) {
 	        	        String attr = (String) currentItemIter.next();
 	        	        if (attr.equals("balance") ) {
-	        	            totalBalance = currentItem.get(attr).getS();	        	            
+	        	            totalBalance = currentItem.get(attr).getS();
+	        	            System.out.println(totalBalance);
+	        	            
 	        	        }
 	        	        else if (attr.equals("userId") ) {
 	        	        	user = currentItem.get(attr).getS();	        	            

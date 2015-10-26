@@ -14,7 +14,7 @@
 	
 	<div id="content" class="container_12 lsb_grid_4">
 		
-		<%@ include file="Group-Settle.html" %>
+		<%@ include file="Group-Settle.jsp" %>
 		<%@ include file="Siderbar-left.jsp" %>
 		<%@ include file="Siderbar-right.html" %>
 	</div>

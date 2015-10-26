@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" import="java.util.*,javaFile.*, java.util.Map.Entry;"%> 	
+    pageEncoding="UTF-8" import="java.util.*,javaFile.*, java.util.Map.Entry"%> 	
  <% User us=(User)session.getAttribute("userInfo");
  	String userId=us.Id;
  	String groupId="1";
