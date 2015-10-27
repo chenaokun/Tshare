@@ -59,7 +59,6 @@ public class logIn extends HttpServlet {
 	  Table table = dynamoDB.getTable(tableName);
 	  
 	  try {
-
 	         System.out.println("getting table " + tableName);	        
 	         Item item = table.getItem("Id", userID);    
 	         String user_pass = item.toString();

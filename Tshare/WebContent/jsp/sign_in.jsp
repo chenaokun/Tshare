@@ -60,8 +60,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				<p class="h5">Password</p>
    			</div>
   			<input type="password" name="password"><br>
-  			<div>&nbsp;</div>
-			<input type="submit" class="submit" value="Submit" >
+  			<div>&nbsp;</div>  			
+			<input type="submit" class="submit" value="Submit" >		
+			<ul>
+        		<li><a href="register.jsp">Sign Up</a> </li>
+      		</ul>
+      		
 		</form>
 	</div>
 </div>

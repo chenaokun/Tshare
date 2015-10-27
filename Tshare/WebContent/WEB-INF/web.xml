@@ -30,5 +30,13 @@
   <servlet-mapping>
     <servlet-name>payToSettle</servlet-name>
     <url-pattern>/payToSettle</url-pattern>
-  </servlet-mapping>    
+  </servlet-mapping>   
+  <servlet>
+    <servlet-name>signUp</servlet-name>
+    <servlet-class>javaFile.signUp</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>signUp</servlet-name>
+    <url-pattern>/signUp</url-pattern>
+  </servlet-mapping> 
 </web-app>
