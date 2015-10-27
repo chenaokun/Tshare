@@ -23,4 +23,12 @@
     <servlet-name>settleUp</servlet-name>
     <url-pattern>/settleUp</url-pattern>
   </servlet-mapping>    
+  <servlet>
+    <servlet-name>payToSettle</servlet-name>
+    <servlet-class>javaFile.payToSettle</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>payToSettle</servlet-name>
+    <url-pattern>/payToSettle</url-pattern>
+  </servlet-mapping>    
 </web-app>

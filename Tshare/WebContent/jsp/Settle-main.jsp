@@ -7,24 +7,29 @@
  	System.out.println("testtesttest");
  	HashMap<String[], Integer> optimized=(HashMap<String[], Integer>)session.getAttribute(userId+groupId+"optimized");
  	
+ 	
  %>
  	
 <div  id="bill">
 	<div class="row">
+	<%if(Integer.parseInt(balance)>=0){ %>
     	<div style="height: 40px; border-width: 8px;" class="col-sm-3">You Owes  $<%=balance %></div>
+    <% } else {%>
+    	<div style="height: 40px; border-width: 8px;" class="col-sm-3">People Owe you  $<%=-Integer.parseInt(balance) %></div>
+    <%}%>
     	<div class="col-sm-2"></div>
     	<div class="col-sm-3"></div>
     	<div class="col-sm-4"></div>
     	<p>&nbsp;</p>
 	</div>
-	<div class="row">
+<!--	<div class="row">
     	<div class="col-sm-3">Basic Plan</div>
     	<div class="col-sm-2"></div>
     	<div class="col-sm-3"></div>
     	<div class="col-sm-4"></div>
     	<hr>
-	</div>
-	<!--<%for(int i=0;i<2;i++) {%>-->
+	</div>-->
+	<!--<%for(int i=0;i<2;i++) {%>
 		<div class="row">
     		<div class="col-sm-3">Mary pays You</div>
     		<div class="col-sm-2">$40</div>
@@ -36,7 +41,7 @@
       			</form>
     		</div>
     		<p>&nbsp;</p>
-		</div>
+		</div>-->
 	<!--<%} %>-->
 	<div class="row">
     	<div class="col-sm-3">Optimized Plan</div>
@@ -57,8 +62,8 @@
     	<div class="col-sm-2"><%=Integer.toString(-1*value)%></div>
     	<div class="col-sm-3">Amount paid:</div>
     	<div class="col-sm-4">
-    		<form id="form2" name="form2" method="post">
-        		<input type="text" name="textfield" id="textfield2" size="10">
+    		<form action="../payToSettle" method="get">
+        		<input type="text" name="amount" id="textfield2" size="10">
         		<input class="btn btn-info btn-xs" type="submit" value="Submit">
      		</form>
      	</div>
@@ -68,8 +73,8 @@
     	<div class="col-sm-2"><%=Integer.toString(value)%></div>
     	<div class="col-sm-3">Amount paid:</div>
     	<div class="col-sm-4">
-    		<form id="form2" name="form2" method="post">
-        		<input type="text" name="textfield" id="textfield2" size="10">
+    		<form action="../payToSettle?receiver=<%=key[1]%>&before=<%=value%>" method="post">
+        		<input type="text" name="amount" id="textfield2" size="10">
         		<input class="btn btn-info btn-xs" type="submit" value="Submit">
      		</form>
      	</div>
