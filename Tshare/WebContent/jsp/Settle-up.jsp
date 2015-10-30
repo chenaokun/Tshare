@@ -16,7 +16,7 @@
 		
 		<%@ include file="Group-Settle.jsp" %>
 		<%@ include file="Siderbar-left.jsp" %>
-		<%@ include file="Siderbar-right.html" %>
+		<%@ include file="Siderbar-right.jsp" %>
 	</div>
 	
 	<%@ include file="Footer.html" %>

@@ -39,4 +39,12 @@
     <servlet-name>signUp</servlet-name>
     <url-pattern>/signUp</url-pattern>
   </servlet-mapping> 
+   <servlet>
+    <servlet-name>addBill</servlet-name>
+    <servlet-class>javaFile.addBill</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>addBill</servlet-name>
+    <url-pattern>/addBill</url-pattern>
+  </servlet-mapping> 
 </web-app>

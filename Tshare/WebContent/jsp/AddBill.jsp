@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" import="java.util.*,javaFile.*, java.util.Map.Entry"%> 	
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -15,10 +15,10 @@
 	<div id="content" class="container_12 lsb_grid_4">
 		<div class="grid_8 push_4">		
 			<%@ include file="Group-single.html" %>
-			<%@ include file="AddBill.html" %>
+			<%@ include file="NewBill.jsp" %>
 		</div>
 		<%@ include file="Siderbar-left.jsp" %>	
-		<%@ include file="Siderbar-rightSelect.html" %>
+		<%@ include file="Siderbar-right.jsp" %>
 	</div>
 	
 	<%@ include file="Footer.html" %>
