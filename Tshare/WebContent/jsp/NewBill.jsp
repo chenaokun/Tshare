@@ -32,6 +32,8 @@
 	
 	<div>
 		<form action="../settleUp" method="post" >
+  			<div class="h5">Bill Name: </div>
+  			<input name="billName" type="text"><br>
   			<div class="h5">You Paid: </div>
   			<input name="amount" type="text"><br>
   			<div class="h5">
