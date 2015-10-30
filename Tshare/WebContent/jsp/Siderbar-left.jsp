@@ -39,7 +39,7 @@
 				var a = document.createElement("a");
 				var text = document.createTextNode("Y763"+i);
 				a.appendChild(text);
-				a.setAttribute("href", "Main-page.jsp");
+				a.setAttribute("href", "../addBill");
 				a.setAttribute("onclick", "saveGroupName(text)");
 				li.appendChild(a);	
 				var element = document.getElementById("group");
