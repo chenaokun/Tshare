@@ -52,40 +52,8 @@
     		</ul>
 		</div>
 	</div> 
-
-	   
-<script>	
-		//a.setAttribute(href, "#");
-			for(var i=1; i<8; i++) {
-				var li = document.createElement("li");
-				var a = document.createElement("a");
-				var text = document.createTextNode("Y763"+i);
-				a.appendChild(text);
-				a.setAttribute("href", "../addBill");
-				a.setAttribute("onclick", "saveGroupName(text)");
-				li.appendChild(a);	
-				var element = document.getElementById("group");
-				element.appendChild(li);
-			}	
-			for(var i=1; i<8; i++) {
-				var li = document.createElement("li");
-				var a = document.createElement("a");
-				var text = document.createTextNode("friend"+i);
-				a.appendChild(text);
-				a.setAttribute("href", "#");
-				li.appendChild(a);	
-				var element = document.getElementById("friend");
-				element.appendChild(li);
-			}	
-			function saveGroupName(name) {
-				//alert(name);
-				localStorage.setItem("groupname", name);
-			}	
-
-	
-	  <div  class="modal fade"  id="myaddGroup" role="dialog">
+	<div  class="modal fade"  id="myaddGroup" role="dialog">
     	<div class="modal-dialog">   
-     	<!-- Modal content-->
       		<div class="modal-content">
         		<div class="modal-header">
           			<button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -117,9 +85,7 @@
       
     	</div>
   	</div>
-  	
-
-		
+	   
 	<script src="https://code.jquery.com/jquery-1.10.2.js"></script>		
 	<script>
 	
