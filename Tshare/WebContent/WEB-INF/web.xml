@@ -7,7 +7,7 @@
     <welcome-file>default.htm</welcome-file>
     <welcome-file>default.jsp</welcome-file>
   </welcome-file-list>
-   <servlet>
+  <servlet>
     <servlet-name>logIn</servlet-name>
     <servlet-class>javaFile.logIn</servlet-class>
   </servlet>
@@ -22,7 +22,7 @@
   <servlet-mapping>
     <servlet-name>settleUp</servlet-name>
     <url-pattern>/settleUp</url-pattern>
-  </servlet-mapping>    
+  </servlet-mapping>
   <servlet>
     <servlet-name>payToSettle</servlet-name>
     <servlet-class>javaFile.payToSettle</servlet-class>
@@ -30,7 +30,7 @@
   <servlet-mapping>
     <servlet-name>payToSettle</servlet-name>
     <url-pattern>/payToSettle</url-pattern>
-  </servlet-mapping>   
+  </servlet-mapping>
   <servlet>
     <servlet-name>signUp</servlet-name>
     <servlet-class>javaFile.signUp</servlet-class>
@@ -38,13 +38,23 @@
   <servlet-mapping>
     <servlet-name>signUp</servlet-name>
     <url-pattern>/signUp</url-pattern>
-  </servlet-mapping> 
-   <servlet>
+  </servlet-mapping>
+  <servlet>
     <servlet-name>addBill</servlet-name>
     <servlet-class>javaFile.addBill</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>addBill</servlet-name>
     <url-pattern>/addBill</url-pattern>
-  </servlet-mapping> 
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>PutBillToDB</display-name>
+    <servlet-name>PutBillToDB</servlet-name>
+    <servlet-class>javaFile.PutBillToDB</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>PutBillToDB</servlet-name>
+    <url-pattern>/PutBillToDB</url-pattern>
+  </servlet-mapping>
 </web-app>
