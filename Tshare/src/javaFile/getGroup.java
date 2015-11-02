@@ -12,6 +12,8 @@ import com.amazonaws.services.dynamodbv2.AmazonDynamoDB;
 import com.amazonaws.services.dynamodbv2.AmazonDynamoDBClient;
 import com.amazonaws.services.dynamodbv2.document.DynamoDB;
 import com.amazonaws.services.dynamodbv2.document.Item;
+import com.amazonaws.services.dynamodbv2.document.ItemCollection;
+import com.amazonaws.services.dynamodbv2.document.QueryOutcome;
 import com.amazonaws.services.dynamodbv2.document.Table;
 import com.amazonaws.services.dynamodbv2.model.AttributeValue;
 import com.amazonaws.services.dynamodbv2.model.ComparisonOperator;
@@ -121,6 +123,29 @@ public class getGroup {
 	         System.err.println(e.getMessage());
 	     }
 	    return null;
+  }
+  
+  public HashMap<String,String> getGroupMember(String groupId){
+	  client.setRegion(Region.getRegion(Regions.US_WEST_2));
+		 dynamoDB = new DynamoDB(client);
+		 Table table = dynamoDB.getTable("currentBalance");
+		 ItemCollection<QueryOutcome> col = table.query("groupId",groupId);
+		 ArrayList<String> memberList=new ArrayList<String>();
+		 for (Item item: col) {
+			 memberList.add(item.getJSON("userId"));
+			 System.out.println(item.getJSON("userId"));
+		 }
+		 HashMap<String,String> groupToMember=new HashMap<String,String>();
+		 table = dynamoDB.getTable("Usr_info");
+		 Item item;
+		 for(String Id: memberList){
+			 Id=removeQuo.remove(Id);
+			 item = table.getItem("Id", Id);
+			 String name=item.getJSON("userName");
+			 groupToMember.put(Id, removeQuo.remove(name));
+		 }
+		 return groupToMember;
+		 
   }
 }
 

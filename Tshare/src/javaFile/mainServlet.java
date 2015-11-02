@@ -71,6 +71,8 @@ public class mainServlet extends HttpServlet {
 			}
 		}
 		
+		HashMap<String,String> members = gg.getGroupMember(groupId);
+		request.getSession().setAttribute("groupToMember", members);
 		response.sendRedirect("/Tshare-test2/jsp/Main-page.jsp");
 		
 	  }

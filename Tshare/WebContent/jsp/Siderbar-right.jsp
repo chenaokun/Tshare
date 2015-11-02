@@ -4,6 +4,7 @@
 	String groupName="groupName";
 	String groupDescription="groupDescription";
 	HashMap<String, String> groupToMember=(HashMap<String, String>)session.getAttribute("groupToMember");
+	groupInfo current_group = (groupInfo)session.getAttribute("curr_group"); 
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -15,13 +16,13 @@
 <div class="grid_3 push_0">
   <div class="panel panel-default">
     <div class="panel-heading">
-      <h3 class="panel-title" align="center" ><%=groupName%></h3>
+      <h3 class="panel-title" align="center" ><%=current_group.groupName%></h3>
     </div>
-    <div class="panel-body" align="center"><%=groupDescription%></div>
+    <div class="panel-body" align="center"><%=current_group.description%></div>
     <% for (Entry<String, String> entry : groupToMember.entrySet()) { 		
 	    String member = entry.getValue();
 	%>
-	<div><%=member%></div><hr>
+	<div class="panel-body" align="center" id="group-colon"><%=member%></div><hr>
 	<% } %>
   </div>
 </div>
