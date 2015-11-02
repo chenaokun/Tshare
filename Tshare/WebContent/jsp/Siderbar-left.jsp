@@ -52,7 +52,7 @@
     		</ul>
 		</div>
 	</div> 
-<<<<<<< Updated upstream
+
 	   
 <script>	
 		//a.setAttribute(href, "#");
@@ -81,7 +81,7 @@
 				//alert(name);
 				localStorage.setItem("groupname", name);
 			}	
-=======
+
 	
 	  <div  class="modal fade"  id="myaddGroup" role="dialog">
     	<div class="modal-dialog">   
@@ -117,19 +117,8 @@
       
     	</div>
   	</div>
-      	
-    
-	<!-- <script>	    
-			var li = document.createElement("li");
-			var a = document.createElement("a");
-			var text = document.createTextNode("test");
-			a.appendChild(text);
-			a.setAttribute("href", "Main-page.jsp");
-			a.setAttribute("onclick", "saveGroupName(text)");
-			li.appendChild(a);	
-			var element = document.getElementById("group");
-			element.appendChild(li);	
-		</script> -->
+  	
+
 		
 	<script src="https://code.jquery.com/jquery-1.10.2.js"></script>		
 	<script>
@@ -159,7 +148,5 @@
     	    $(formElement).submit();
 						
 		}
-		
->>>>>>> Stashed changes
 		
 	</script>
