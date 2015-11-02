@@ -14,14 +14,23 @@ import com.amazonaws.services.dynamodbv2.AmazonDynamoDB;
 import com.amazonaws.services.dynamodbv2.AmazonDynamoDBClient;
 import com.amazonaws.services.dynamodbv2.document.DynamoDB;
 import com.amazonaws.services.dynamodbv2.document.Item;
+import com.amazonaws.services.dynamodbv2.document.ItemCollection;
+import com.amazonaws.services.dynamodbv2.document.ScanOutcome;
 import com.amazonaws.services.dynamodbv2.document.Table;
-
-
-
-
-
+import com.amazonaws.services.dynamodbv2.model.AttributeValue;
+import com.amazonaws.services.dynamodbv2.model.ComparisonOperator;
+import com.amazonaws.services.dynamodbv2.model.Condition;
+import com.amazonaws.services.dynamodbv2.model.QueryRequest;
+import com.amazonaws.services.dynamodbv2.model.QueryResult;
+import com.amazonaws.services.dynamodbv2.model.ScanRequest;
+import com.amazonaws.services.dynamodbv2.model.ScanResult;
 
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
 public class logIn extends HttpServlet { 
 	
 	 static AmazonDynamoDB client = new AmazonDynamoDBClient(new ProfileCredentialsProvider());
@@ -42,33 +51,43 @@ public class logIn extends HttpServlet {
 	if(user==null)
 		response.sendRedirect("/Tshare-test2/jsp/sign_in.jsp");
 	String pwDB=user.getJSON("password");
-	System.out.println("valid password:"+pwDB);
+	//System.out.println("valid password:"+pwDB);
 	if(pwDB!=null&&pwDB.length()>2&&p.equals(pwDB.substring(1, pwDB.length()-1))){
 		//request.getRequestDispatcher("/jsp/Welcome.jsp").forward(request, response);
 		User StoredUser=new User(user);
-		System.out.println("Stored user: "+StoredUser.Id);
+		//System.out.println("Stored user: "+StoredUser.Id);
 		request.getSession().setAttribute("userInfo", StoredUser);
 		response.sendRedirect("/Tshare-test2/jsp/Welcome.jsp");
 	}
 	else response.sendRedirect("/Tshare-test2/jsp/sign_in.jsp");
+	getGroup gg = new getGroup();
+	ArrayList<String> group=gg.getGroupSet(u);
+	ArrayList<groupInfo> all_groups = new ArrayList<groupInfo>();
+	for(String g : group) {
+		groupInfo gi = gg.searchGroup(g);
+		all_groups.add(gi);
+	}
+	request.getSession().setAttribute("groupInfo", all_groups);
   }
   
-  private static Item getPW(String userID, String tableName){
+  private static Item getPW(String userId, String tableName){
 	  client.setRegion(Region.getRegion(Regions.US_WEST_2));
 	  dynamoDB = new DynamoDB(client);
 	  Table table = dynamoDB.getTable(tableName);
 	  
 	  try {
-	         System.out.println("getting table " + tableName);	        
-	         Item item = table.getItem("Id", userID);    
+
+	         //System.out.println("getting table " + tableName);	        
+	         Item item = table.getItem("Id", userId);    
 	         String user_pass = item.toString();
-	         System.out.println(user_pass);
+	         //System.out.println(user_pass);
 	         return item;
 
 	     } catch (Exception e) {
-	         System.err.println("Failed to create item in " + tableName);
+	         System.err.println("Failed to get item in " + tableName);
 	         System.err.println(e.getMessage());
 	     }
 	    return null;
   }
+  
 }

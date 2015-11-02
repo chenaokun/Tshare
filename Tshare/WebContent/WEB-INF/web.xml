@@ -15,6 +15,27 @@
     <servlet-name>logIn</servlet-name>
     <url-pattern>/logIn</url-pattern>
   </servlet-mapping>
+  
+   <servlet>
+    <servlet-name>GroupServlet</servlet-name>
+    <servlet-class>javaFile.GroupServlet</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+    <servlet-name>GroupServlet</servlet-name>
+    <url-pattern>/GroupServlet</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>mainServlet</servlet-name>
+    <servlet-class>javaFile.mainServlet</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+    <servlet-name>mainServlet</servlet-name>
+    <url-pattern>/main-page</url-pattern>
+  </servlet-mapping>
+  
   <servlet>
     <servlet-name>settleUp</servlet-name>
     <servlet-class>javaFile.settleUp</servlet-class>

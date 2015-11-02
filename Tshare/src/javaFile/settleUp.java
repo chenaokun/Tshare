@@ -35,7 +35,7 @@ public class settleUp extends HttpServlet {
   protected void doGet(HttpServletRequest request, 
       HttpServletResponse response) throws ServletException, IOException 
   {
-	  System.out.println("called");	 
+	  //System.out.println("called");	 
 	  User u=(User)request.getSession().getAttribute("userInfo");
 	  String userId=u.Id;
 	  System.out.println("userid="+userId);
