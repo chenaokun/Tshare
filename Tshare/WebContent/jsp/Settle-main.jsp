@@ -13,10 +13,10 @@
  	
 <div  id="bill">
 	<div class="row">
-	<%if(Integer.parseInt(balance)>=0){ %>
+	<%if(Double.parseDouble(balance)>=0){ %>
     	<div style="height: 40px; border-width: 8px;" class="col-sm-3">You Owes  $<%=balance %></div>
     <% } else {%>
-    	<div style="height: 40px; border-width: 8px;" class="col-sm-3">People Owe you  $<%=-Integer.parseInt(balance) %></div>
+    	<div style="height: 40px; border-width: 8px;" class="col-sm-3">People Owe you  $<%=-Double.parseDouble(balance) %></div>
     <%}%>
     	<div class="col-sm-2"></div>
     	<div class="col-sm-3"></div>
