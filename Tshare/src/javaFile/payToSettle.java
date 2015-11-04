@@ -33,10 +33,13 @@ import com.amazonaws.services.dynamodbv2.model.UpdateItemResult;
 public class payToSettle extends HttpServlet {
 	 static AmazonDynamoDB client = new AmazonDynamoDBClient(new ProfileCredentialsProvider());
 	 static DynamoDB dynamoDB;
-	 static String groupId="1";
+	 static String groupId="";
  protected void doGet(HttpServletRequest request, 
      HttpServletResponse response) throws ServletException, IOException 
    {
+	 groupInfo group=(groupInfo)request.getSession().getAttribute("curr_group");
+	 groupId=group.groupId;
+	 
 	 client.setRegion(Region.getRegion(Regions.US_WEST_2));
 	 
 	 // reading the user input    
@@ -94,7 +97,7 @@ public class payToSettle extends HttpServlet {
 	         HashMap<String, Condition> keyConditions = new HashMap<String, Condition>();
 	         keyConditions.put("groupId", new Condition().
 	        		  withComparisonOperator(ComparisonOperator.EQ).
-	        		  withAttributeValueList(new AttributeValue().withS("1")));
+	        		  withAttributeValueList(new AttributeValue().withS(groupId)));
 	         QueryRequest queryRequest = new QueryRequest().withTableName(tableName);
 	         queryRequest.setKeyConditions(keyConditions);
 	         QueryResult queryResult = client.query(queryRequest);

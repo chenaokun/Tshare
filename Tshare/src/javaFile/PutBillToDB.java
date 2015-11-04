@@ -33,7 +33,8 @@ public class PutBillToDB extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String groupId = "1";
+		groupInfo group=(groupInfo)request.getSession().getAttribute("curr_group");
+		String groupId=group.groupId;
 		
 		String billTotalAmt = request.getParameter("amount");
 		String billName = request.getParameter("billName");

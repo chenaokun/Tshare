@@ -2,9 +2,10 @@
     pageEncoding="UTF-8" import="java.util.*,javaFile.*, java.util.Map.Entry"%> 	
  <% User us=(User)session.getAttribute("userInfo");
  	String userId=us.Id;
- 	String groupId="1";
+ 	groupInfo group1=(groupInfo)request.getSession().getAttribute("curr_group");
+	String groupId=group1.groupId;
  	String balance=(String)session.getAttribute(userId+groupId+"balance"); 	
- 	System.out.println("testtesttest");
+ 	System.out.println("Settle-main:test");
  	HashMap<String[], Integer> optimized=(HashMap<String[], Integer>)session.getAttribute(userId+groupId+"optimized");
  	
  	

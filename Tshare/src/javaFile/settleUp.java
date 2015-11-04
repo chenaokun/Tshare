@@ -42,7 +42,8 @@ public class settleUp extends HttpServlet {
 	  client.setRegion(Region.getRegion(Regions.US_WEST_2));
 	  dynamoDB = new DynamoDB(client);
 	  //to be modified
-	  String groupId="1";
+	  groupInfo group=(groupInfo)request.getSession().getAttribute("curr_group");
+	  String groupId=group.groupId;
 	  //int groupId = 1;
 	  
 	  String tableName="currentBalance";
@@ -58,7 +59,7 @@ public class settleUp extends HttpServlet {
 	         HashMap<String, Condition> keyConditions = new HashMap<String, Condition>();
 	         keyConditions.put("groupId", new Condition().
 	        		  withComparisonOperator(ComparisonOperator.EQ).
-	        		  withAttributeValueList(new AttributeValue().withS("1")));
+	        		  withAttributeValueList(new AttributeValue().withS(groupId)));
 	         QueryRequest queryRequest = new QueryRequest().withTableName(tableName);
 	         queryRequest.setKeyConditions(keyConditions);
 	         QueryResult queryResult = client.query(queryRequest);

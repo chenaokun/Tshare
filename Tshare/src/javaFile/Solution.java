@@ -17,14 +17,23 @@ public class Solution {
     	userBalance ubReceive=null;
     	HashMap<String[], Integer> plan=new HashMap<String[], Integer>();
     	
+    	int check=0;
+    	
     	for(int i=0;i<ubList.size();i++){
     		ub=ubList.get(i);
     		System.out.println(ub.userId+" "+Integer.toString(ub.balance));
     		pqMax.add(ub);
-    		pqMin.add(ub);    		
+    		pqMin.add(ub);
+    		check+=ub.balance;
+    	}
+    	
+    	if(check!=0){
+    		System.out.println("ERROR IN DATABASE. Total balance within group is "+ check);
+    		return plan;
     	}
     	
     	while(!pqMax.isEmpty()){
+    		System.out.println("Solution: loop");
     		ubSend=pqMax.poll();
     		pqMin.remove(ubSend);
     		ubReceive=pqMin.poll();

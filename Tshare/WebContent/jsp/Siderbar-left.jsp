@@ -13,12 +13,12 @@
 </head>
 
  <% User us1=(User)session.getAttribute("userInfo");
-    ArrayList<groupInfo> group = (ArrayList<groupInfo>)session.getAttribute("groupInfo");
+    ArrayList<groupInfo> group2 = (ArrayList<groupInfo>)session.getAttribute("groupInfo");
  %>
  	
 	<div class="grid_4 pull_8">
     	<div class="sidebarbox">
-      		<h3>Hello! <%=us1.Id%></h3>
+      		<h3>Hello! <%=us1.name%></h3>
       		<ul>
         		<li><a href="#">My profile</a> </li>
         		<li><a href="#">Setting</a></li>
@@ -36,7 +36,7 @@
 				<li><a href="#">group3</a></li>
 				<li><a href="#">group4</a></li> -->
 			<%
-			for(groupInfo g : group) {
+			for(groupInfo g : group2) {
 				String gn = g.groupName;%>
 				<li><a onclick="saveGroupName(this)" groupName="<%=g.groupName%>" groupId="<%=g.groupId%>"><%=g.groupName%></a></li>
 			<%}%>
