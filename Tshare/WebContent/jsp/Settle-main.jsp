@@ -6,7 +6,7 @@
 	String groupId=group1.groupId;
  	String balance=(String)session.getAttribute(userId+groupId+"balance"); 	
  	System.out.println("Settle-main:test");
- 	HashMap<String[], Integer> optimized=(HashMap<String[], Integer>)session.getAttribute(userId+groupId+"optimized");
+ 	HashMap<String[], Double> optimized=(HashMap<String[], Double>)session.getAttribute(userId+groupId+"optimized");
  	
  	
  %>
@@ -51,16 +51,16 @@
     	<div class="col-sm-4"></div>
 	</div>
 	<hr>
-	<% for (Entry<String[], Integer> entry : optimized.entrySet()) { 
+	<% for (Entry<String[], Double> entry : optimized.entrySet()) { 
 		String[] key = entry.getKey();
 		System.out.println(userId+" "+key[1]);
 		if(!key[1].equals(userId)&&!key[0].equals(userId))
 			continue;
-	    int value = entry.getValue();
+	    Double value = entry.getValue();
 	    if(key[1].equals(userId)){%>
 	<div class="row">
     	<div class="col-sm-3"><%=key[0]%> pays You</div>
-    	<div class="col-sm-2"><%=Integer.toString(-1*value)%></div>
+    	<div class="col-sm-2"><%=Double.toString(-1*value)%></div>
     	<div class="col-sm-3">Amount paid:</div>
     	<div class="col-sm-4">
     		<form action="../payToSettle" method="get">
@@ -71,7 +71,7 @@
 	</div> <% } else {%>
 	<div class="row">
     	<div class="col-sm-3">You pay <%=key[1]%></div>
-    	<div class="col-sm-2"><%=Integer.toString(value)%></div>
+    	<div class="col-sm-2"><%=Double.toString(value)%></div>
     	<div class="col-sm-3">Amount paid:</div>
     	<div class="col-sm-4">
     		<form action="../payToSettle?receiver=<%=key[1]%>&before=<%=value%>" method="post">

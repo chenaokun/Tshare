@@ -127,10 +127,10 @@ public class payToSettle extends HttpServlet {
 	        	        }
 	        	        
 	        	    }
-	        	    userBalance ub=new userBalance(user, Integer.parseInt(totalBalance));
+	        	    userBalance ub=new userBalance(user, Double.parseDouble(totalBalance));
        	        ubList.add(ub);
 	        	}
-	         HashMap<String[], Integer> plan;
+	         HashMap<String[], Double> plan;
 	         Solution sol=new Solution();
 	         plan=sol.getSolution(ubList);
 	         request.getSession().setAttribute(userId+groupId+"optimized", plan);

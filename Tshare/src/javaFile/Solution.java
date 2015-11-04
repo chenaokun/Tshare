@@ -7,7 +7,7 @@ import java.util.PriorityQueue;
 
 public class Solution {
 	int maxGroupMember=100;
-    public HashMap<String[], Integer> getSolution(ArrayList<userBalance> ubList) {
+    public HashMap<String[], Double> getSolution(ArrayList<userBalance> ubList) {
     	sortMax max = new sortMax();
     	sortMin min = new sortMin();
     	PriorityQueue<userBalance> pqMax = new PriorityQueue<userBalance>(maxGroupMember, max);
@@ -15,13 +15,13 @@ public class Solution {
     	userBalance ub=null;
     	userBalance ubSend=null;
     	userBalance ubReceive=null;
-    	HashMap<String[], Integer> plan=new HashMap<String[], Integer>();
+    	HashMap<String[], Double> plan=new HashMap<String[], Double>();
     	
     	int check=0;
     	
     	for(int i=0;i<ubList.size();i++){
     		ub=ubList.get(i);
-    		System.out.println(ub.userId+" "+Integer.toString(ub.balance));
+    		System.out.println(ub.userId+" "+Double.toString(ub.balance));
     		pqMax.add(ub);
     		pqMin.add(ub);
     		check+=ub.balance;
@@ -44,7 +44,7 @@ public class Solution {
     			transactionParties[1]=ubReceive.userId;
     			plan.put(transactionParties,Math.abs(ubReceive.balance));    			
     			ubSend.balance=ubSend.balance+ubReceive.balance;
-    			ubReceive.balance=0;
+    			ubReceive.balance=0.0;
     			
     		}
     		else{    			
@@ -53,14 +53,14 @@ public class Solution {
     			transactionParties[1]=ubReceive.userId;
     			plan.put(transactionParties,Math.abs(ubSend.balance));    			
     			ubReceive.balance=ubSend.balance+ubReceive.balance;
-    			ubSend.balance=0;
+    			ubSend.balance=0.0;
     		}
-    		if(ubSend.balance!=0){
+    		if(Math.abs(ubSend.balance)>0.01){
     			pqMax.add(ubSend);
     			pqMin.add(ubSend);
     		}
     		
-    		if(ubReceive.balance!=0)
+    		if(Math.abs(ubReceive.balance)>0.01)
     			pqMax.add(ubReceive);
     			pqMin.add(ubReceive);
     	}
@@ -71,13 +71,13 @@ public class Solution {
     
     static class sortMax implements Comparator<userBalance> {    	 
 		public int compare(userBalance ub1, userBalance ub2) {
-			return ub2.balance - ub1.balance;
+			return (int)(ub2.balance - ub1.balance);
 		}
 	}
     
     static class sortMin implements Comparator<userBalance> {    	 
 		public int compare(userBalance ub1, userBalance ub2) {
-			return ub1.balance - ub2.balance;
+			return (int)(ub1.balance - ub2.balance);
 		}
 	}
 }

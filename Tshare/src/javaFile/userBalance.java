@@ -1,10 +1,10 @@
 package javaFile;
 
 public class userBalance {
-	 int balance;
+	Double balance;
 	 String userId;
 	 
-	 userBalance(String s, int i){
+	 userBalance(String s, Double i){
 		 this.balance=i;
 		 this.userId=s;
 	 }

@@ -11,6 +11,6 @@ public class User {
 	
 	public User(Item user){
 		this.Id=removeQuo.remove(user.getJSON("Id"));
-		this.name=removeQuo.remove(user.getJSON("uesrName"));
+		this.name=removeQuo.remove(user.getJSON("userName"));
 	}
 }
