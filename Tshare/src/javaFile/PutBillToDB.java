@@ -2,9 +2,7 @@ package javaFile;
 
 import java.io.IOException;
 import java.util.Date;
-
 import java.io.*;
-
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -35,7 +33,7 @@ public class PutBillToDB extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+		String groupId = "1";
 		
 		String billTotalAmt = request.getParameter("amount");
 		String billName = request.getParameter("billName");
@@ -50,12 +48,18 @@ public class PutBillToDB extends HttpServlet {
 		int length = userList.length;
 		double billAmtDouble = Double.parseDouble(billTotalAmt)/length;
 		String billAmt = String.valueOf(billAmtDouble);
+		
+		User u=(User)request.getSession().getAttribute("userInfo");
+		String userID=u.Id;
+ 		String body=userID+" paid "+billTotalAmt+" for "+ billName+". You owe "+userID+" "+billAmt+".";
+		AmazonSES.sendNotice(userList, body, "New Bill Added at Tshare", userID);
+		
 		//Test Data
 		/*String billAmt = "123";
 		String billName = "Test Bill";
 		String billDesc = "Test Bill Description";
 		String[] userList = {"Ann ann@mail.com", "Kate kate@mail.com", "Jack jack@mail.com"};*/
-		String groupId = "33892";
+		
 		
 		User StoredUser = (User) request.getSession().getAttribute("userInfo");
 		String paidUserId = StoredUser.Id;
