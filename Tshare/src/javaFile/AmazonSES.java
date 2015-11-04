@@ -17,8 +17,19 @@ public class AmazonSES {
                                                       // sandbox, this address must be verified.
     static String BODY = "";
     static String SUBJECT = "";
-  
-
+    static final String part1="<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>"
+    		+"<html xmlns='http://www.w3.org/1999/xhtml'><head><meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />"
+    		+"<title>Demystifying Email Design</title><meta name='viewport' content='width=device-width, initial-scale=1.0'/>"
+    		+"</head><body style='margin: 0; padding: 0;'><table align='center' border='0' cellpadding='0' cellspacing='0' width='600' style='border: 1px solid #cccccc; border-collapse: collapse;'><tr><td>"
+    		+"<table align='center' border='0' cellpadding='0' cellspacing='0' width='600' style='border-collapse: collapse;'>"
+    		+"<tr><td bgcolor='#70bbd9' style='padding:15px 15px 15px 15px;'>"
+    		+"<table border='0' cellpadding='0' cellspacing='0' width='100%'><tr>"
+    		+"<td  align='center' style='color: #ffffff; font-family: Arial, sans-serif; font-size: 14px;' width='75%'>"
+    		+"Tshare Update</td></table></td></tr></table></td></tr><tr><td bgcolor='#ffffff' style='padding: 40px 30px 40px 30px;'>"
+    		+"<table border='0' cellpadding='0' cellspacing='0' width='100%'><tr>"
+    		+"<td  align='center' style='color: #70bbd9; font-family: Arial, sans-serif; font-size: 14px;' width='75%'>";
+    static final String part2="</td></table></tr></table></body></html>";
+    
     public static void sendNotice(String[] t, String b, String s, String except) throws IOException {    	
                 
         // Construct an object to contain the recipient address.
@@ -28,10 +39,12 @@ public class AmazonSES {
         SUBJECT=s;
         // Create the subject and body of the message.
         Content subject = new Content().withData(SUBJECT);
-        Content textBody = new Content().withData(BODY); 
-        Body body = new Body().withText(textBody);
+        //Content textContent = new Content().withData(BODY); 
+        Content htmlContent = new Content().withData(part1+BODY+part2);
         // Create a message with the specified subject and body.
-        Message message = new Message().withSubject(subject).withBody(body);
+        Message msg = new Message().withSubject(subject);
+        Body body = new Body().withHtml(htmlContent);//.withText(textContent)
+        msg.setBody(body);
         
         for(int i=0;i<t.length;i++){
         	if(except.equals(t[i]))
@@ -41,7 +54,7 @@ public class AmazonSES {
 	        Destination des=new Destination().withToAddresses(TO);	              
 	        
 	        // Assemble the email.
-	        SendEmailRequest request = new SendEmailRequest().withSource(FROM).withDestination(destination).withMessage(message).withDestination(des);
+	        SendEmailRequest request = new SendEmailRequest().withSource(FROM).withDestination(destination).withMessage(msg).withDestination(des);
 	        
 	        try
 	        {        

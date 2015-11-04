@@ -32,7 +32,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="defaultNavbar1">
 <ul class="nav navbar-nav navbar-right">
-  <li><a href="#">Sign Up </a></li>
+  <li><a href="jsp/register.jsp">Sign Up </a></li>
   
   <li><a href="jsp/sign_in.jsp">Sign In </a></li>
 </ul>
