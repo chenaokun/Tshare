@@ -1,6 +1,7 @@
 package javaFile;
 
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -45,17 +46,17 @@ public class payToSettle extends HttpServlet {
 	 // reading the user input    
 	   response.setContentType("text/html");
 		response.setCharacterEncoding("utf-8");
-		Integer amount=Integer.parseInt(request.getParameter("amount"));
-		Integer before=Integer.parseInt(request.getParameter("before"));
+		Double amount=Double.parseDouble(request.getParameter("amount"));
+		Double before=Double.parseDouble(request.getParameter("before"));
 		String receiver=request.getParameter("receiver");
 		User u=(User)request.getSession().getAttribute("userInfo");
 		String userId=u.Id;
-		Integer after=before-amount;
+		Double after=before-amount;
 		System.out.println(after);
-		
+		BigDecimal afterRound = new BigDecimal(after).setScale(2, BigDecimal.ROUND_HALF_UP);
 		Map<String, AttributeValueUpdate> updateItems = new HashMap<String, AttributeValueUpdate>();
 
-		updateItems.put("balance", new AttributeValueUpdate().withValue(new AttributeValue(Integer.toString(after))).withAction("PUT"));
+		updateItems.put("balance", new AttributeValueUpdate().withValue(new AttributeValue(String.valueOf(afterRound))).withAction("PUT"));
 		
 		Map<String, AttributeValue> itemKeys = new HashMap<String, AttributeValue>();
 		itemKeys.put("userId", new AttributeValue(userId));
@@ -74,10 +75,11 @@ public class payToSettle extends HttpServlet {
 		Table table = dynamoDB.getTable(tableName);
 		Item item = table.getItem("groupId", groupId, "userId", receiver); 
 		String balance=removeQuo.remove(item.getJSON("balance"));
-		Integer receiverBefore=Integer.parseInt(balance);
-		Integer receiverAfter=receiverBefore+amount;
-		updateItems.put("balance", new AttributeValueUpdate().withValue(new AttributeValue(Integer.toString(receiverAfter))).withAction("PUT"));
-		System.out.println("updating "+receiver+"'s balance: "+ Integer.toString(receiverAfter));
+		Double receiverBefore=Double.parseDouble(balance);
+		Double receiverAfter=receiverBefore+amount;
+		BigDecimal newBalanceRound = new BigDecimal(receiverAfter).setScale(2, BigDecimal.ROUND_HALF_UP);
+		updateItems.put("balance", new AttributeValueUpdate().withValue(new AttributeValue(String.valueOf(newBalanceRound))).withAction("PUT"));
+		System.out.println("updating "+receiver+"'s balance: "+ String.valueOf(newBalanceRound));
 		itemKeys.put("userId", new AttributeValue(receiver));
 		updateItemRequest
         .withTableName("currentBalance")
