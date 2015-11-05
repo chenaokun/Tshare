@@ -20,7 +20,7 @@
     	<div class="sidebarbox">
       		<h3>Hello! <%=us1.name%></h3>
       		<ul>
-        		<li><a href="#">My profile</a> </li>
+        		<li><a href="/Tshare-test2/jsp/profile/Profile-Main.jsp">My profile</a> </li>
         		<li><a href="#">Setting</a></li>
       		</ul>
     	</div>
@@ -104,7 +104,7 @@
 			var name = a.getAttribute("groupName");
 			var Id = a.getAttribute("groupId");
 			localStorage.setItem("groupname", name);
-			var postFormStr = "<form id='hidden_form' method='POST' action='../main-page'>\n";
+			var postFormStr = "<form id='hidden_form' method='POST' action='/Tshare-test2/main-page'>\n";
 			postFormStr += "<input type='hidden' name='groupId' value='" + Id + "'></input>";
 			postFormStr += "<input type='hidden' name='groupName' value='" + name + "'></input>";
 			postFormStr += "</form>";

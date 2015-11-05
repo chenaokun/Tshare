@@ -16,6 +16,15 @@
     <url-pattern>/logIn</url-pattern>
   </servlet-mapping>
   
+  <servlet>
+    <servlet-name>updateProfile</servlet-name>
+    <servlet-class>javaFile.updateProfile</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>updateProfile</servlet-name>
+    <url-pattern>/updateProfile</url-pattern>
+  </servlet-mapping>
+  
    <servlet>
     <servlet-name>GroupServlet</servlet-name>
     <servlet-class>javaFile.GroupServlet</servlet-class>

@@ -117,11 +117,7 @@ public class PutBillToDB extends HttpServlet {
 		
 		if(userId.equals(paidUserId)) billAmt =
 				String.valueOf(0-Double.parseDouble(billAmt)*((double)memCnt-1));
-		
-<<<<<<< HEAD
-		
-=======
->>>>>>> origin/master
+
 		Item item = new Item().withPrimaryKey("billId",date+" "+paidUserId,"userId",userId)
 				.withString("groupId", groupId)
 				.withString("billName", billName)
