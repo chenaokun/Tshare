@@ -8,10 +8,12 @@
 </head> -->
 <head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 <script src="/scripts/jquery.min.js"></script>
-   <script src="/bootstrap/js/bootstrap.min.js"></script>
+<script src="/bootstrap/js/bootstrap.min.js"></script>
+
 <style type="text/css"> 
 
  #menu {
@@ -55,7 +57,7 @@
 				String gn = g.groupName;%>
 				<li id="menu">
 				<a onclick="saveGroupName(this)" groupName="<%=g.groupName%>" groupId="<%=g.groupId%>"><%=g.groupName%></a></li>	
-				<li id="menu1"> <button type="button" class="btn btn-info btn-xs" data-toggle="modal" data-target="#addMember" data-whatever="@mdo"  data-id="<%=g.groupId%>" data-name="<%=g.groupName%>">+</button>
+				<li id="menu1"> <span title="Add new members"  data-toggle="tooltip" data-placement="top"><button  type="button" class="btn btn-info btn-xs" data-toggle="modal" data-target="#addMember" data-whatever="@mdo"  data-id="<%=g.groupId%>" data-name="<%=g.groupName%>">+</button></span>
 				
 				<%-- <button type="button" data-toggle="modal" data-target="#myaddMember" data-rel="popup" data-position-to="window" 
 				data-transition="fade" class="btn btn-info btn-xs" data-id=<%=g.groupId%> data-name=<%=g.groupName%>>Add member</button> --%></li>
@@ -140,6 +142,7 @@
 
 	
 	<script>
+	
 	$('#addMember').on('show.bs.modal', function (event) {
 		  var button = $(event.relatedTarget); // Button that triggered the modal
 		  id = button.data('id'); // Extract info from data-* attributes		  
@@ -161,7 +164,11 @@
 		f.setAttribute('action',"../addMember?groupId="+sessionStorage.id+"&list="+text+"&curPath="+window.location.href);
 		f.submit();
 	}
-	</script>		
+	$(document).ready(function(){
+	    $('[data-toggle="tooltip"]').tooltip();   
+	});
+	</script>
+			
 	<script>
 	
 		for(var i=1; i<8; i++) {
