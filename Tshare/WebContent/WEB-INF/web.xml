@@ -34,6 +34,16 @@
     <url-pattern>/updateProfile</url-pattern>
   </servlet-mapping>
   
+  <servlet>
+    <servlet-name>addMember</servlet-name>
+    <servlet-class>javaFile.addMember</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>addMember</servlet-name>
+    <url-pattern>/addMember</url-pattern>
+  </servlet-mapping>
+  
+  
    <servlet>
     <servlet-name>GroupServlet</servlet-name>
     <servlet-class>javaFile.GroupServlet</servlet-class>

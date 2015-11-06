@@ -41,7 +41,7 @@ $('#editname').click(function() {
 	 input.select();	 
 	 
 	 var text1 = $('#groupdes').text();
-	 var input1 = $('<input id="attribute1" size= "8" type="text" value="' + text1 + '" />');
+	 var input1 = $('<input id="attribute1" class="form-control" type="text" value="' + text1 + '" />');
 	 $('#groupdes').text('').append(input1);
 	 
 	 var save = document.createElement("input");

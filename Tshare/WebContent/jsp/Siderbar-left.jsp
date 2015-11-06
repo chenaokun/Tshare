@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" import="java.util.*,javaFile.*"%>
+    
 <!-- <head>
 <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -9,7 +10,21 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<script src="/scripts/jquery.min.js"></script>
+   <script src="/bootstrap/js/bootstrap.min.js"></script>
+<style type="text/css"> 
 
+ #menu {
+    float: left;
+    margin: 0;
+    width:80%;
+}   
+ #menu1 {
+    float: left;
+    margin: 0;
+    width:20%;
+}     
+    </style>
 </head>
 
  <% User us1=(User)session.getAttribute("userInfo");
@@ -38,7 +53,12 @@
 			<%
 			for(groupInfo g : group2) {
 				String gn = g.groupName;%>
-				<li><a onclick="saveGroupName(this)" groupName="<%=g.groupName%>" groupId="<%=g.groupId%>"><%=g.groupName%></a></li>				
+				<li id="menu">
+				<a onclick="saveGroupName(this)" groupName="<%=g.groupName%>" groupId="<%=g.groupId%>"><%=g.groupName%></a></li>	
+				<li id="menu1"> <button type="button" class="btn btn-info btn-xs" data-toggle="modal" data-target="#addMember" data-whatever="@mdo"  data-id="<%=g.groupId%>" data-name="<%=g.groupName%>">+</button>
+				
+				<%-- <button type="button" data-toggle="modal" data-target="#myaddMember" data-rel="popup" data-position-to="window" 
+				data-transition="fade" class="btn btn-info btn-xs" data-id=<%=g.groupId%> data-name=<%=g.groupName%>>Add member</button> --%></li>
 			<%}%>
 			
     		</ul>
@@ -85,8 +105,63 @@
       
     	</div>
   	</div>
-	   
-	<script src="https://code.jquery.com/jquery-1.10.2.js"></script>		
+  	
+	<div class="modal fade" id="addMember" tabindex="-1" role="dialog" aria-labelledby="addMemberLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="addMemberLabel"></h4>
+      </div>
+      <div class="modal-body">
+        <form action="javascript:sendMessage()">          
+          <div class="form-group">
+            <label for="message-text" class="control-label">Add new members:</label>
+            <textarea class="form-control" id="list"></textarea>
+          </div>
+               
+		<p>Please use ; as separator of group member email addresses.</p>
+		<div>
+			<p align="right">
+			<button type="submit" class="btn btn-info">Submit</button></p>
+		</div>	
+		</form> 
+      </div>
+      <!-- <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" onclick="sendMessage()">Send message</button>
+      </div> -->
+    </div>
+  </div>
+  </div>
+  	
+  	 		
+  
+
+	
+	<script>
+	$('#addMember').on('show.bs.modal', function (event) {
+		  var button = $(event.relatedTarget); // Button that triggered the modal
+		  id = button.data('id'); // Extract info from data-* attributes		  
+		  sessionStorage.id=id;
+		  // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+		  // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+		  var name = button.data('name'); 
+		  sessionStorage.name=name;
+		  var modal = $(this);
+		  modal.find('.modal-title').text(name);
+		  modal.find('.modal-body input').val(id);
+		})
+		
+	function sendMessage(){
+		var text=$('#list').val();
+		var f = document.createElement("form");
+		f.setAttribute('method',"post");
+		
+		f.setAttribute('action',"../addMember?groupId="+sessionStorage.id+"&list="+text+"&curPath="+window.location.href);
+		f.submit();
+	}
+	</script>		
 	<script>
 	
 		for(var i=1; i<8; i++) {
@@ -102,7 +177,7 @@
 		
 		function saveGroupName(a) {
 			var name = a.getAttribute("groupName");
-			var Id = a.getAttribute("groupId");
+			var Id = a.getAttribute("groupId");			
 			localStorage.setItem("groupname", name);
 			var postFormStr = "<form id='hidden_form' method='POST' action='/Tshare-test2/main-page'>\n";
 			postFormStr += "<input type='hidden' name='groupId' value='" + Id + "'></input>";
