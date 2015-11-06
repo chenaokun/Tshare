@@ -38,7 +38,7 @@
 			<%
 			for(groupInfo g : group2) {
 				String gn = g.groupName;%>
-				<li><a onclick="saveGroupName(this)" groupName="<%=g.groupName%>" groupId="<%=g.groupId%>"><%=g.groupName%></a></li>
+				<li><a onclick="saveGroupName(this)" groupName="<%=g.groupName%>" groupId="<%=g.groupId%>"><%=g.groupName%></a></li>				
 			<%}%>
 			
     		</ul>

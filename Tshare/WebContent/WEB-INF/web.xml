@@ -17,6 +17,15 @@
   </servlet-mapping>
   
   <servlet>
+    <servlet-name>updateGroupInfo</servlet-name>
+    <servlet-class>javaFile.updateGroupInfo</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>updateGroupInfo</servlet-name>
+    <url-pattern>/updateGroupInfo</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
     <servlet-name>updateProfile</servlet-name>
     <servlet-class>javaFile.updateProfile</servlet-class>
   </servlet>
