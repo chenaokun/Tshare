@@ -57,7 +57,7 @@
 				String gn = g.groupName;%>
 				<li id="menu">
 				<a onclick="saveGroupName(this)" groupName="<%=g.groupName%>" groupId="<%=g.groupId%>"><%=g.groupName%></a></li>	
-				<li id="menu1"> <span title="Add new members"  data-toggle="tooltip" data-placement="top"><button  type="button" class="btn btn-info btn-xs" data-toggle="modal" data-target="#addMember" data-whatever="@mdo"  data-id="<%=g.groupId%>" data-name="<%=g.groupName%>">+</button></span>
+				<li id="menu1"> <span title="Delete This Group"  data-toggle="tooltip" data-placement="top"><button  type="button" class="btn btn-info btn-xs" data-toggle="modal" data-target="#deleteGroup" data-id="<%=g.groupId%>" data-name="<%=g.groupName%>">x</button></span>
 				
 				<%-- <button type="button" data-toggle="modal" data-target="#myaddMember" data-rel="popup" data-position-to="window" 
 				data-transition="fade" class="btn btn-info btn-xs" data-id=<%=g.groupId%> data-name=<%=g.groupName%>>Add member</button> --%></li>
@@ -108,42 +108,31 @@
     	</div>
   	</div>
   	
-	<div class="modal fade" id="addMember" tabindex="-1" role="dialog" aria-labelledby="addMemberLabel">
-  <div class="modal-dialog" role="document">
+	
+  	
+  	 		
+  <div class="modal fade" id="deleteGroup">
+  <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="addMemberLabel"></h4>
+        <h4 class="modal-title"></h4>
       </div>
       <div class="modal-body">
-        <form action="javascript:sendMessage()">          
-          <div class="form-group">
-            <label for="message-text" class="control-label">Add new members:</label>
-            <textarea class="form-control" id="list"></textarea>
-          </div>
-               
-		<p>Please use ; as separator of group member email addresses.</p>
-		<div>
-			<p align="right">
-			<button type="submit" class="btn btn-info">Submit</button></p>
-		</div>	
-		</form> 
+        <p>Do you really want to delete this group?</p>
       </div>
-      <!-- <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary" onclick="sendMessage()">Send message</button>
-      </div> -->
-    </div>
-  </div>
-  </div>
-  	
-  	 		
-  
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+        <button type="button" class="btn btn-primary" onclick="javascript:deleteThisGroup()">Yes</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
 
 	
 	<script>
 	
-	$('#addMember').on('show.bs.modal', function (event) {
+	$('#deleteGroup').on('show.bs.modal', function (event) {
 		  var button = $(event.relatedTarget); // Button that triggered the modal
 		  id = button.data('id'); // Extract info from data-* attributes		  
 		  sessionStorage.id=id;
@@ -156,17 +145,19 @@
 		  modal.find('.modal-body input').val(id);
 		})
 		
-	function sendMessage(){
-		var text=$('#list').val();
-		var f = document.createElement("form");
-		f.setAttribute('method',"post");
-		
-		f.setAttribute('action',"../addMember?groupId="+sessionStorage.id+"&list="+text+"&curPath="+window.location.href);
-		f.submit();
-	}
+	
+	
 	$(document).ready(function(){
 	    $('[data-toggle="tooltip"]').tooltip();   
 	});
+	
+	function deleteThisGroup(){
+		var f = document.createElement("form");
+		f.setAttribute('method',"post");
+		
+		f.setAttribute('action',"../deleteGroup?groupId="+sessionStorage.id+"&curPath="+window.location.href);
+		f.submit();
+	}
 	</script>
 			
 	<script>

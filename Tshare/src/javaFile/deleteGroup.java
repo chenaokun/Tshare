@@ -1,7 +1,9 @@
 package javaFile;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map.Entry;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -13,48 +15,45 @@ import com.amazonaws.regions.Region;
 import com.amazonaws.regions.Regions;
 import com.amazonaws.services.dynamodbv2.AmazonDynamoDB;
 import com.amazonaws.services.dynamodbv2.AmazonDynamoDBClient;
+import com.amazonaws.services.dynamodbv2.document.DeleteItemOutcome;
 import com.amazonaws.services.dynamodbv2.document.DynamoDB;
-import com.amazonaws.services.dynamodbv2.document.Item;
 import com.amazonaws.services.dynamodbv2.document.Table;
+import com.amazonaws.services.dynamodbv2.model.DeleteItemRequest;
 
-public class addMember extends HttpServlet{
+public class deleteGroup extends HttpServlet{
+	
 	static AmazonDynamoDB client = new AmazonDynamoDBClient(new ProfileCredentialsProvider());
 	static DynamoDB dynamoDB;
 	
 	protected void doGet(HttpServletRequest request, 
 		      HttpServletResponse response) throws ServletException, IOException 
 	{
-		String curPath=request.getParameter("curPath");
-		String groupId=request.getParameter("groupId");
-		String list=request.getParameter("list");
-		groupInfo group=(groupInfo) request.getSession().getAttribute("curr_group");
-		HashMap<String,String> members=(HashMap<String, String>) request.getSession().getAttribute("groupToMember");
 		
+		String groupId=request.getParameter("groupId");
+		groupInfo group=(groupInfo) request.getSession().getAttribute("curr_group");
+		ArrayList<groupInfo> groupList = (ArrayList<groupInfo>)request.getSession().getAttribute("groupInfo");
 		client.setRegion(Region.getRegion(Regions.US_WEST_2));
 		dynamoDB = new DynamoDB(client);
-	    Table table= dynamoDB.getTable("currentBalance");
-	    String[] member = list.split(";");
-	    for(int i=0; i < member.length; i++){
-       	 Item item = new Item()
-                    .withPrimaryKey("groupId", groupId,"userId", member[i])
-                    .withString("balance", "0");
-       	 table.putItem(item);       	 
-        }
-	    if(group.groupId==null||!group.groupId.equals(groupId)){			
-			response.sendRedirect(curPath);		
-	    }
-	    else{
-	    	table = dynamoDB.getTable("Usr_info");
-	    	for(String Id: member){
-	    		 Item item = table.getItem("Id", Id); 
-				 String name=item.getJSON("userName");
-				 members.put(Id, removeQuo.remove(name));
-			 }
-	    	request.getSession().setAttribute("groupToMember", members);
-	    	response.sendRedirect(curPath);
-	    }
-	    
-	    
+		System.out.println("In deleteGroup.java: "+groupId);
+		getGroup g=new getGroup();
+		HashMap<String,String> memberList=g.getGroupMember(groupId);
+		Table table = dynamoDB.getTable("currentBalance");
+		for (Entry<String, String> entry : memberList.entrySet()) { 		
+		    String member = entry.getKey();
+		    System.out.println(groupId+" "+member);
+			table.deleteItem("groupId", groupId, "userId", member) ;
+		}
+		ArrayList<groupInfo> newList=new ArrayList<groupInfo>();
+		for(groupInfo gi:groupList){
+			if(!groupId.equals(gi.groupId))
+				newList.add(gi);
+		}
+		request.getSession().setAttribute("groupInfo", newList);	
+		
+		response.sendRedirect("/Tshare-test2/jsp/groupDeleted.jsp");
+		
+		
+		
 	}
 	
 	public void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -62,5 +61,4 @@ public class addMember extends HttpServlet{
 
 		this.doGet(request, response);
 	}
-	
 }

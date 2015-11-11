@@ -43,6 +43,15 @@
     <url-pattern>/addMember</url-pattern>
   </servlet-mapping>
   
+  <servlet>
+    <servlet-name>deleteGroup</servlet-name>
+    <servlet-class>javaFile.deleteGroup</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>deleteGroup</servlet-name>
+    <url-pattern>/deleteGroup</url-pattern>
+  </servlet-mapping>
+  
   
    <servlet>
     <servlet-name>GroupServlet</servlet-name>
