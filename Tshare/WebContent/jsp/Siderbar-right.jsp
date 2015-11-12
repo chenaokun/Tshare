@@ -15,7 +15,14 @@
 <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 <script src="/scripts/jquery.min.js"></script>
 <script src="/bootstrap/js/bootstrap.min.js"></script>
+<style>
+#button1 {
 
+    background: transparent;
+    border: none !important;
+    font-size:0;
+}
+</style>
 <title>right bar</title>
 </head>
 <body>
@@ -28,10 +35,12 @@
   		<input align="right" type="image" src="../images/edit.svg" id="editname" width="20" height="20">
 	  </div>	  
     </div>
-    <div class="panel-body" align="c"C:/Users/Di/Documents/GitHub/Tshare/Tshare"enter" id="groupdes"><%=current_group.description%></div>
+    <div class="panel-body" align="center" id="groupdes"><%=current_group.description%></div>
     
-    <div class="panel-body" align="center" id="groupdes"> Group Members
-    <span title="addMember"  data-toggle="tooltip" data-placement="top"><button  data-toggle="modal" data-target="#addMember" data-id="<%=current_group.groupId%>" data-name="<%=current_group.groupName%>"><img src="../images/addMember.png" width="20" height="20"></button></span>
+    <div class="panel-body" align="center" id="groupdes"> Group Members</div>
+    <div align="center">
+    <span title="addMember"  data-toggle="tooltip" data-placement="top"><button id="button1"  data-toggle="modal" data-target="#addMember" ><img src="../images/addMember.png" width="20" height="20"></button></span>
+    <span title="deleteMember"  data-toggle="tooltip" data-placement="top"><button id="button1" data-toggle="modal" data-target="#deleteMember"><img src="../images/deleteMember.png" width="25" height="25"></button></span>
     </div>
     <% for (Entry<String, String> entry : groupToMember.entrySet()) { 		
 	    String member = entry.getValue();
@@ -75,6 +84,43 @@
   </div>
 
 
+<div class="modal fade" id="deleteMember" tabindex="-1" role="dialog" aria-labelledby="deleteMemberLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="deleteMemberLabel"><%= current_group.groupName%></h4>
+      </div>
+      <div class="modal-body">
+        <form action="../deleteMember" method="get">          
+          <div class="form-group">
+            <label for="message-text" class="control-label">Members to delete:</label>
+            <div>
+            <% for (Entry<String, String> entry : groupToMember.entrySet()) { 		
+   				String Id	=	entry.getKey();
+	    		String member = entry.getValue();
+	    		String option=member+" ("+Id+")";
+			%>			
+   			<input type="checkbox" name="userList" value="<%=Id%>"> <%=option%><br>
+  			<% } %>
+  			</div>
+          </div>
+              
+		
+		<div>
+			<p align="right">
+			<button type="submit" class="btn btn-info">Submit</button></p>
+		</div>	
+		</form> 
+      </div>
+      <!-- <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" onclick="sendMessage()">Send message</button>
+      </div> -->
+    </div>
+  </div>
+  </div>
+
 
 	<script src="https://code.jquery.com/jquery-1.10.2.js"></script>	
 <script>
@@ -83,7 +129,7 @@ function sendMessage(){
 	var f = document.createElement("form");
 	f.setAttribute('method',"post");
 	
-	f.setAttribute('action',"../addMember?groupId="+sessionStorage.id+"&list="+text);
+	f.setAttribute('action',"../addMember?list="+text+"&curPath="+window.location.href );
 	f.submit();
 }
 

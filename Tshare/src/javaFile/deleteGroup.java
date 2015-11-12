@@ -43,12 +43,14 @@ public class deleteGroup extends HttpServlet{
 		    System.out.println(groupId+" "+member);
 			table.deleteItem("groupId", groupId, "userId", member) ;
 		}
+		table = dynamoDB.getTable("groupDescription");
+		table.deleteItem("groupId", groupId);
 		ArrayList<groupInfo> newList=new ArrayList<groupInfo>();
 		for(groupInfo gi:groupList){
 			if(!groupId.equals(gi.groupId))
 				newList.add(gi);
 		}
-		request.getSession().setAttribute("groupInfo", newList);	
+		request.getSession().setAttribute("groupInfo", newList);		
 		
 		response.sendRedirect("/Tshare-test2/jsp/groupDeleted.jsp");
 		

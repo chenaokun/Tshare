@@ -17,6 +17,15 @@
   </servlet-mapping>
   
   <servlet>
+    <servlet-name>deleteMember</servlet-name>
+    <servlet-class>javaFile.deleteMember</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>deleteMember</servlet-name>
+    <url-pattern>/deleteMember</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
     <servlet-name>updateGroupInfo</servlet-name>
     <servlet-class>javaFile.updateGroupInfo</servlet-class>
   </servlet>

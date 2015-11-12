@@ -25,11 +25,11 @@ public class addMember extends HttpServlet{
 		      HttpServletResponse response) throws ServletException, IOException 
 	{
 		String curPath=request.getParameter("curPath");
-		String groupId=request.getParameter("groupId");
 		String list=request.getParameter("list");
 		groupInfo group=(groupInfo) request.getSession().getAttribute("curr_group");
+		String groupId=group.groupId;
 		HashMap<String,String> members=(HashMap<String, String>) request.getSession().getAttribute("groupToMember");
-		
+		System.out.println("addMember.java: "+groupId);
 		client.setRegion(Region.getRegion(Regions.US_WEST_2));
 		dynamoDB = new DynamoDB(client);
 	    Table table= dynamoDB.getTable("currentBalance");
@@ -40,19 +40,17 @@ public class addMember extends HttpServlet{
                     .withString("balance", "0");
        	 table.putItem(item);       	 
         }
-	    if(group.groupId==null||!group.groupId.equals(groupId)){			
-			response.sendRedirect(curPath);		
-	    }
-	    else{
+	    
 	    	table = dynamoDB.getTable("Usr_info");
 	    	for(String Id: member){
 	    		 Item item = table.getItem("Id", Id); 
 				 String name=item.getJSON("userName");
 				 members.put(Id, removeQuo.remove(name));
 			 }
+	    	
 	    	request.getSession().setAttribute("groupToMember", members);
 	    	response.sendRedirect(curPath);
-	    }
+	    
 	    
 	    
 	}
