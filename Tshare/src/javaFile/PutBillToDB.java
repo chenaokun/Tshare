@@ -85,7 +85,9 @@ public class PutBillToDB extends HttpServlet {
 		String dateStr = date.toString();
 		
 		System.out.println("To add attribute to bill form");
+
 		AddBillForm(dateStr, paidUserId, billDesc, billImg, groupId);
+
 		
 		for( String userId : userList)
 		{
@@ -128,7 +130,9 @@ public class PutBillToDB extends HttpServlet {
 		PutItemOutcome outcome = table.putItem(item);
 	}
 	
+
 	protected static void AddBillForm(String date, String userId, String billDesc, String billImg, String groupId )
+
 	{
 		client.setRegion(Region.getRegion(Regions.US_WEST_2));
 		dynamoDB = new DynamoDB(client);
@@ -138,6 +142,7 @@ public class PutBillToDB extends HttpServlet {
 				.withString("description", billDesc)
 				.withString("photoPath",billImg)
 				.withString("groupId", groupId);
+
 		System.out.println("To put into bill table");
 		PutItemOutcome outcome = table.putItem(item);
 		

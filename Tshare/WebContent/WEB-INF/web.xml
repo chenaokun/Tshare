@@ -101,6 +101,15 @@
   </servlet-mapping>
   
   <servlet>
+    <servlet-name>activityServlet</servlet-name>
+    <servlet-class>javaFile.activityServlet</servlet-class>
+  </servlet> 
+  <servlet-mapping>
+    <servlet-name>activityServlet</servlet-name>
+    <url-pattern>/activity</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
     <servlet-name>settleUp</servlet-name>
     <servlet-class>javaFile.settleUp</servlet-class>
   </servlet>
