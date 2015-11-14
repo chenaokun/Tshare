@@ -59,6 +59,23 @@
   	</div>
 <script src="../js/jquery-1.11.2.min.js" type="text/javascript"></script>
 <script src="../js/bootstrap-3.3.4.js" type="text/javascript"></script>
+<script>
+
+
+function saveImg(){
 	
+	if(sessionStorage.haveImage){
+	usrname=sessionStorage.usrname;
+	img=sessionStorage.img;
+	var ajax = new XMLHttpRequest();
+	var postData = "canvasData="+encodeURIComponent(img);		    
+	ajax.open("POST",'../uploadToS3?usrname='+usrname,true);
+	ajax.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+	ajax.send(postData); 
+	}
+}
+
+window.onload = saveImg;
+</script>
 </body>
 </html>

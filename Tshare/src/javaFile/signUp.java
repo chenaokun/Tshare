@@ -1,6 +1,8 @@
 package javaFile;
 
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -16,6 +18,10 @@ import com.amazonaws.services.dynamodbv2.document.DynamoDB;
 import com.amazonaws.services.dynamodbv2.document.Item;
 import com.amazonaws.services.dynamodbv2.document.PutItemOutcome;
 import com.amazonaws.services.dynamodbv2.document.Table;
+import com.amazonaws.services.s3.AmazonS3;
+import com.amazonaws.services.s3.AmazonS3Client;
+import com.amazonaws.services.s3.model.CannedAccessControlList;
+import com.amazonaws.services.s3.model.ObjectMetadata;
 
 public class signUp extends HttpServlet{
 	static AmazonDynamoDB client = new AmazonDynamoDBClient(new ProfileCredentialsProvider());
@@ -73,10 +79,19 @@ public class signUp extends HttpServlet{
 		 Item item = new Item()
 		    .withPrimaryKey("Id", userId)
 		    .withString("password", password1)
-		    .withString("userName", fullName);
+		    .withString("userName", fullName)
+		    .withString("photoPath", img);
 		
-		 PutItemOutcome outcome = table.putItem(item);
+		 PutItemOutcome outcome = table.putItem(item);	 	 
+		 
+			
 		 response.sendRedirect("/Tshare-test2/jsp/register_success.jsp");
 		 
 	}
+	 public void doPost(HttpServletRequest request, HttpServletResponse response)
+				throws ServletException, IOException {
+
+			this.doGet(request, response);
+		}
+		
 }
