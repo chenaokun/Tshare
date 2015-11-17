@@ -6,6 +6,7 @@
 	String groupDescription="groupDescription";
 	HashMap<String, String> groupToMember=(HashMap<String, String>)session.getAttribute("groupToMember");
 	groupInfo current_group = (groupInfo)session.getAttribute("curr_group"); 
+	HashMap<String, String> groupToImg=(HashMap<String, String>)session.getAttribute("groupToImg");
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -44,10 +45,16 @@
     </div>
     <% for (Entry<String, String> entry : groupToMember.entrySet()) { 		
 	    String member = entry.getValue();
+	    String Id=entry.getKey();
+	    String version=groupToImg.get(Id);
 	%>
-	<div class="panel-body" align="center" id="group-colon"><%=member%>
-	
-	</div><hr>
+	<div class="panel-body" align="center" id="group-colon">
+	<%if(!version.equals("0")) {    	%>
+    			<img src="https://s3-us-west-2.amazonaws.com/tshareavatar/<%=Id+version%>" height="30" width="30" >  
+    	  		<%} else{%>
+    		<img src="../images/avatar.jpg" height="30" width="30" >   
+    	  <%} %>
+	<%=member%></div><hr>
 	<% } %>
   </div>
   </div>

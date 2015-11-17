@@ -136,6 +136,7 @@ public class getGroup {
 			 System.out.println(item.getJSON("userId"));
 		 }
 		 HashMap<String,String> groupToMember=new HashMap<String,String>();
+		 HashMap<String,String> groupToImg=new HashMap<String,String>();
 		 table = dynamoDB.getTable("Usr_info");
 		 Item item;
 		 for(String Id: memberList){
@@ -143,7 +144,10 @@ public class getGroup {
 			 item = table.getItem("Id", Id);
 			 String name=item.getJSON("userName");
 			 groupToMember.put(Id, removeQuo.remove(name));
+			 String img=item.getJSON("photoPath");
+			 groupToImg.put(Id, removeQuo.remove(img));
 		 }
+		 
 		 return groupToMember;
 		 
   }

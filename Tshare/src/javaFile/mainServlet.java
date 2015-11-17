@@ -11,6 +11,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.TimeZone;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -21,6 +22,8 @@ import com.amazonaws.services.dynamodbv2.AmazonDynamoDB;
 import com.amazonaws.services.dynamodbv2.AmazonDynamoDBClient;
 import com.amazonaws.services.dynamodbv2.document.DynamoDB;
 import com.amazonaws.services.dynamodbv2.document.Item;
+import com.amazonaws.services.dynamodbv2.document.ItemCollection;
+import com.amazonaws.services.dynamodbv2.document.QueryOutcome;
 import com.amazonaws.services.dynamodbv2.document.Table;
 import com.amazonaws.services.dynamodbv2.model.AttributeDefinition;
 import com.amazonaws.services.dynamodbv2.model.AttributeValue;
@@ -71,8 +74,30 @@ public class mainServlet extends HttpServlet {
 			}
 		}
 		
-		HashMap<String,String> members = gg.getGroupMember(groupId);
-		request.getSession().setAttribute("groupToMember", members);
+		client.setRegion(Region.getRegion(Regions.US_WEST_2));
+		 dynamoDB = new DynamoDB(client);
+		 Table table = dynamoDB.getTable("currentBalance");
+		 ItemCollection<QueryOutcome> col = table.query("groupId",groupId);
+		 ArrayList<String> memberList=new ArrayList<String>();
+		 for (Item item: col) {
+			 memberList.add(item.getJSON("userId"));
+			 System.out.println(item.getJSON("userId"));
+		 }
+		 HashMap<String,String> groupToMember=new HashMap<String,String>();
+		 HashMap<String,String> groupToImg=new HashMap<String,String>();
+		 table = dynamoDB.getTable("Usr_info");
+		 Item item;
+		 for(String Id: memberList){
+			 Id=removeQuo.remove(Id);
+			 item = table.getItem("Id", Id);
+			 String name=item.getJSON("userName");
+			 groupToMember.put(Id, removeQuo.remove(name));
+			 String img=item.getJSON("photoPath");
+			 groupToImg.put(Id, removeQuo.remove(img));
+		 }
+		 
+		request.getSession().setAttribute("groupToMember",groupToMember);
+		request.getSession().setAttribute("groupToImg",groupToImg);
 		response.sendRedirect("/Tshare-test2/jsp/Main-page.jsp");
 		
 	  }

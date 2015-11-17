@@ -6,6 +6,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Welcome-page</title>
+<script src="http://code.jquery.com/jquery-1.11.1.min.js" ></script>
 <!-- <link href="../../css/bootstrap.css" rel="stylesheet">
 <link href="../../css/siderbar.css" rel="stylesheet" type="text/css">
 <link href="http://fonts.googleapis.com/css?family=Yanone+Kaffeesatz:regular,bold&amp;subset=latin" rel="stylesheet" type="text/css"> -->
@@ -17,7 +18,7 @@
 		<div class="grid_8 push_4"> 
 			<%@ include file="changeImg.jsp" %>
 		</div>
-		<%@ include file="../Siderbar-left.jsp" %> 
+		<%@ include file="../Siderbar-left-forProfileImg.jsp" %> 
 		
 	</div>
 	
