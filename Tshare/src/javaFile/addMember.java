@@ -29,6 +29,7 @@ public class addMember extends HttpServlet{
 		groupInfo group=(groupInfo) request.getSession().getAttribute("curr_group");
 		String groupId=group.groupId;
 		HashMap<String,String> members=(HashMap<String, String>) request.getSession().getAttribute("groupToMember");
+		HashMap<String,String> groupToImg=(HashMap<String, String>) request.getSession().getAttribute("groupToImg");
 		System.out.println("addMember.java: "+groupId);
 		client.setRegion(Region.getRegion(Regions.US_WEST_2));
 		dynamoDB = new DynamoDB(client);
@@ -46,8 +47,10 @@ public class addMember extends HttpServlet{
 	    		 Item item = table.getItem("Id", Id); 
 				 String name=item.getJSON("userName");
 				 members.put(Id, removeQuo.remove(name));
+				 String img=item.getJSON("photoPath");
+				 groupToImg.put(Id, removeQuo.remove(img));
 			 }
-	    	
+	    	request.getSession().setAttribute("groupToImg", groupToImg);
 	    	request.getSession().setAttribute("groupToMember", members);
 	    	response.sendRedirect(curPath);
 	    
