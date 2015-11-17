@@ -34,6 +34,17 @@
     <url-pattern>/uploadToS3</url-pattern>
   </servlet-mapping>
   
+   <servlet>
+    <servlet-name>deleteAndUpload</servlet-name>
+    <servlet-class>javaFile.deleteAndUpload</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>deleteAndUpload</servlet-name>
+    <url-pattern>/deleteAndUpload</url-pattern>
+  </servlet-mapping>
+  
+  
+  
   <servlet>
     <servlet-name>updateGroupInfo</servlet-name>
     <servlet-class>javaFile.updateGroupInfo</servlet-class>

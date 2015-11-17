@@ -16,7 +16,7 @@ import com.amazonaws.services.s3.AmazonS3Client;
 import com.amazonaws.services.s3.model.CannedAccessControlList;
 import com.amazonaws.services.s3.model.ObjectMetadata;
 
-public class uploadToS3 extends HttpServlet{
+public class deleteAndUpload extends HttpServlet{
 	
 	
 	protected void doGet(HttpServletRequest request, 
@@ -27,15 +27,19 @@ public class uploadToS3 extends HttpServlet{
 		System.out.println("uploadToS3");
 		InputStream fis = new ByteArrayInputStream(bI);
 		String usrname=request.getParameter("usrname");
+		String version=request.getParameter("version");
+		String beforeVersion=Integer.toString(Integer.parseInt(version)-1);
 		AmazonS3 s3 = new AmazonS3Client();
 		Region usWest02 = Region.getRegion(Regions.US_WEST_2);
 		s3.setRegion(usWest02);
+		s3.deleteObject("tshareavatar", usrname+beforeVersion);
+		System.out.println(usrname+beforeVersion);
 		ObjectMetadata metadata = new ObjectMetadata();
 		metadata.setContentLength(bI.length);
 		metadata.setContentType("image/png");
 		metadata.setCacheControl("public, max-age=31536000");
-		s3.putObject("tshareavatar", usrname+"1", fis, metadata);
-		s3.setObjectAcl("tshareavatar", usrname+"1", CannedAccessControlList.PublicReadWrite);
+		s3.putObject("tshareavatar", usrname+version, fis, metadata);
+		s3.setObjectAcl("tshareavatar", usrname+version, CannedAccessControlList.PublicReadWrite);
 	}
 		
 		

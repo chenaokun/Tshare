@@ -38,10 +38,17 @@
    	<hr>
 	<div class="row">
     	<div class="col-sm-3">Photo</div>
-    	<div class="col-sm-2"></div>    
-    	<div class="col-sm-2"></div>
-    
-	</div>
+    	<%if(!userP.img.equals("0")) {    	%>
+    	<div class="col-sm-2"><img src="https://s3-us-west-2.amazonaws.com/tshareavatar/<%=userP.Id+userP.img%>" height="42" width="42"></div>  
+    	  <%} else{%>
+    	<div class="col-sm-2"><img src="../../images/avatar.jpg" height="42" width="42"></div>    
+    	  <%} %>
+    	<div class="col-sm-2">
+	    	<form action="updateImg.jsp" method="get">
+	    	<button>Edit</button>
+	    	</form>
+    	</div>    
+	</div>	
 	<hr>
 </div>	
 </body>

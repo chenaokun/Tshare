@@ -9,7 +9,6 @@
 <title>Welcome-page</title>
 <link href="../../css/bootstrap.css" rel="stylesheet">
 <link href="../../css/siderbar.css" rel="stylesheet" type="text/css">
-
 <link href="http://fonts.googleapis.com/css?family=Yanone+Kaffeesatz:regular,bold&amp;subset=latin" rel="stylesheet" type="text/css">
 </head>
 <body>
@@ -17,11 +16,13 @@
 	
 	<div id="content" class="container_12 lsb_grid_4">
 		<div class="grid_8 push_4">
-			<%@ include file="changeName.jsp" %>
+			<%@ include file="partUpdateSuccess.jsp" %>
 		</div>
 		<%@ include file="../Siderbar-left.jsp" %>
 	</div>
 	
 	<%@ include file="../Footer.html" %>
+
 </body>
+</html>
 </html>

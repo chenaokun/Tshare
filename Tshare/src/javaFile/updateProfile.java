@@ -52,7 +52,13 @@ public class updateProfile extends HttpServlet{
 			}
 			updateTable(tableName, userId, "password", password1);			
 		}
-		response.sendRedirect("/Tshare-test2/jsp/profile/updateSuccess.jsp");		
+		else if(subject.equals("img")){
+			System.out.println("img");
+			updateTable(tableName, userId,"photoPath",Integer.toString(Integer.parseInt(user.img)+1));
+			user.img=Integer.toString(Integer.parseInt(user.img)+1);
+			request.getSession().setAttribute("userInfo", user);
+		}
+		response.sendRedirect("/Tshare-test2/jsp/profile/updateImgSuccess.jsp");	
 	}
 	
 	void updateTable(String tableName, String userId, String attribute, String value){
