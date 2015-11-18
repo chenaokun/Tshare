@@ -5,6 +5,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>allActivity</title>
+
 <link href="../css/bootstrap.css" rel="stylesheet">
 <link href="../css/siderbar.css" rel="stylesheet" type="text/css">
 <link href="http://fonts.googleapis.com/css?family=Yanone+Kaffeesatz:regular,bold&amp;subset=latin" rel="stylesheet" type="text/css">

@@ -18,17 +18,27 @@
     		Double amount = Double.parseDouble(a.amount);
     		System.out.println(amount);
     		if(amount>0){%>
-    			<div class="row">
-    				<h5 style="text-align:center"><%=a.billName %></h5>
-    				<h5 style="text-align:center">You owns $<%=amount %> to <%=a.payerId %></h5>  		   		
-    				<hr>
-				</div>
+    			<div class="panel panel-default">
+      				<div class="panel-heading">
+        				<h4 class="panel-title">    				       				
+          					
+          					    <h5 style="text-align:left">BillName: <%=a.billName %> &nbsp;&nbsp;&nbsp;&nbsp;
+          					    You owns $<%=amount %> to <%=a.payerId %></h5>          					
+          				</h4>
+      				</div>     				      				
+      			</div>
+    			
     		<%} else{%>
-    			<div class="row">
-    				<div style="text-align:center"><%=a.billName %></div>
-    				<div style="text-align:center">You spent $<%=a.totalAmount%></div>
-    				<hr>
-				</div>
+    			<div class="panel panel-default">
+      				<div class="panel-heading">
+        				<h4 class="panel-title">    				       				
+          					
+          					    <h5 style="text-align:left">BillName: <%=a.billName %> &nbsp;&nbsp;&nbsp;&nbsp;
+          					    You spent $<%=a.totalAmount%></h5>          					
+          				</h4>
+      				</div>     				      				
+      			</div>
+    			
     		<%} %>    	
     <%} %>
 	

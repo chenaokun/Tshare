@@ -81,6 +81,14 @@
     <url-pattern>/deleteGroup</url-pattern>
   </servlet-mapping>
   
+  <servlet>
+    <servlet-name>deleteBill</servlet-name>
+    <servlet-class>javaFile.deleteBill</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>deleteBill</servlet-name>
+    <url-pattern>/deleteBill</url-pattern>
+  </servlet-mapping>
   
    <servlet>
     <servlet-name>GroupServlet</servlet-name>

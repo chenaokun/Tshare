@@ -71,22 +71,22 @@ public class getActivity {
 		        	       if (attr.equals("billId") ) {
 		        	        String billId = currentItem.get(attr).getS(); 
 		        	        curr_activity.setId(billId);		        
-		        	        System.out.println("billId : "+billId);        	        	
+		        	        //System.out.println("billId : "+billId);        	        	
 		        	       } else if (attr.equals("billName") ) {
 		        	    	   String billName = currentItem.get(attr).getS();   
-		        	           System.out.println("billName : "+billName);
+		        	           //System.out.println("billName : "+billName);
 		        	           curr_activity.setName(billName);		        	           
 		        	       } else if (attr.equals("paidBy")) {
 		        	    	   String payer = currentItem.get(attr).getS();   
-		        	           System.out.println("payer : "+payer);
+		        	           //System.out.println("payer : "+payer);
 		        	           curr_activity.setPayer(payer);
 		        	       } else if (attr.equals("amount")) {
 		        	    	   String amount = currentItem.get(attr).getS();   
-		        	           System.out.println("amount : "+amount);
+		        	           //System.out.println("amount : "+amount);
 		        	           curr_activity.setAmount(amount);
 		        	       } else if (attr.equals("totalAmount")) {
 		        	    	   String totalAmount = currentItem.get(attr).getS();   
-		        	           System.out.println("totalAmount : "+totalAmount);
+		        	           //System.out.println("totalAmount : "+totalAmount);
 		        	           curr_activity.setTotal(totalAmount);
 		        	       }
 		        	  		        	       
@@ -146,15 +146,15 @@ public class getActivity {
 		        	       if (attr.equals("billId") ) {
 		        	        String billId = currentItem.get(attr).getS(); 
 		        	        curr_activity.setId(billId);		        
-		        	        System.out.println("billId : "+billId);        	        	
+		        	        //System.out.println("billId : "+billId);        	        	
 		        	       	        	           
 		        	       } else if (attr.equals("description")) {
 		        	    	   String description = currentItem.get(attr).getS();   
-		        	           System.out.println("description : "+description);
+		        	           //System.out.println("description : "+description);
 		        	           curr_activity.setDescription(description);
 		        	       } else if (attr.equals("photoPath")) {
 		        	    	   String photoPath = currentItem.get(attr).getS();   
-		        	           System.out.println("photoPath : "+photoPath);
+		        	           //System.out.println("photoPath : "+photoPath);
 		        	           curr_activity.setTotal(photoPath);
 		        	       }
 		        	  		        	       
@@ -164,20 +164,39 @@ public class getActivity {
 		         }
 		        
 		        for(activityInfo ai : all_activity){
-		        	String billId = ai.billId;
-		    		 Table table = dynamoDB.getTable("expense");
-		    		 /*QuerySpec spec = new QuerySpec()
-		    				    .withKeyConditionExpression("userId = :v_user and billId= :v_bill")
-		    				
-		    				    .withValueMap(new ValueMap()
-		    				        .withString(":v_user", userId)
-		    				        .withString(":v_bill", billId));
-		    				    
-		    		 ItemCollection<QueryOutcome> col = table.query(spec);
-		    		 ArrayList<String> memberList=new ArrayList<String>();
-		    		 for (Item item: col) {
-		    			 System.out.println(item.getJSON("userId"));		    		 
-		    		 }*/
+		        	String billId = ai.billId;		    		 
+		    		 Map<String, AttributeValue> expressionAttributeValues2 = 
+		    				    new HashMap<String, AttributeValue>();
+		    		 expressionAttributeValues2.put(":b", new AttributeValue().withS(billId));
+		    		 
+		    		 /*get members in this bill*/
+		    		 ScanRequest scanRequest2 = new ScanRequest()
+		 			        .withTableName("expense")
+		 			        .withFilterExpression("billId = :b")
+		 			        .withExpressionAttributeValues(expressionAttributeValues2);
+		 		  			
+		 			 ScanResult result2 = client.scan(scanRequest2);
+		 		     List<Map<String, AttributeValue>> items2 = result2.getItems(); 
+		 			    
+		 	         Iterator<Map<String, AttributeValue>> itemsIter2 = items2.iterator();	         
+		 	         String members = "";
+		 	         while (itemsIter2.hasNext()) {
+		 	        	    Map<String, AttributeValue> currentItem = itemsIter2.next();
+		 	        	    Iterator<String> currentItemIter = currentItem.keySet().iterator();
+		 	        	   
+		 	        	    while (currentItemIter.hasNext()) {
+		 	        	        String attr = (String) currentItemIter.next();
+		 	        	        if (attr.equals("userId") ) {
+		 	        	        	String member = currentItem.get(attr).getS();   
+		 	        	        	members +=member+";";		 	        	        	        	        	
+		 	        	        }        	        
+		 	        	    }   	    
+		 	          }
+		 	        
+		 	         ai.setMembers(members);
+		 	         
+		 	         /*set amount, totalAmount, paidBy, billName */
+		 	         Table table = dynamoDB.getTable("expense");
 		    		 Item item = table.getItem("userId", userId, "billId", billId); 
 		    		 if(item == null){
 		    			 ai.flag = false;
@@ -189,17 +208,18 @@ public class getActivity {
 		    			 ai.billName = removeQuo.remove(item.getJSON("billName"));
 		    		 }
 		    		 
+		    		 
 		        }
 		        return all_activity;
 		        
 		     } catch (Exception e) {
-		         System.err.println("Failed to fetch item in groupDescription");
+		         System.err.println("Failed to fetch item");
 		         System.err.println(e.getMessage());
 		     }
 		  return null;
 	}
 	
 	public static void main(String[] args){
-		userActivity("yanghuizi", "1");
+		allActivity("yanghuizi", "1");
 	}
 }

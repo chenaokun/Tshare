@@ -9,6 +9,7 @@ public class activityInfo {
 	public String amount;
 	public String totalAmount;
 	public String photoPath;
+	public String members;
 	public boolean flag;
 	
 	public activityInfo(){
@@ -43,5 +44,9 @@ public class activityInfo {
 	
 	public void setFlag(boolean f){
 		this.flag = f;
+	}
+	
+	public void setMembers(String members){
+		this.members = members;
 	}
 }

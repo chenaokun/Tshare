@@ -1,7 +1,4 @@
 package javaFile;
-
-
-
 import com.amazonaws.services.dynamodbv2.document.Item;
 
 public class User {

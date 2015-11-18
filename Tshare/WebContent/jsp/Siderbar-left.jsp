@@ -53,10 +53,6 @@
 				data-transition="fade" class="btn btn-info btn-xs">Add group</a> 
 			</h4>
 			<ul id = "group">
-    			<!--<li><a href="#">group1</a></li>
-  				<li><a href="#">group2</a></li>
-				<li><a href="#">group3</a></li>
-				<li><a href="#">group4</a></li> -->
 			<%
 			for(groupInfo g : group2) {
 				String gn = g.groupName;%>
@@ -72,13 +68,11 @@
 		   
     		<h4>Friends</h4>
 			<ul id = "friend">
-    			<!--<li><a href="#">friend1</a></li>
-  				<li><a href="#">friend2</a></li>
-				<li><a href="#">friend</a></li>
-				<li><a href="#">friend</a></li> -->
+    			
     		</ul>
 		</div>
 	</div> 
+	
 	<div  class="modal fade"  id="myaddGroup" role="dialog">
     	<div class="modal-dialog">   
       		<div class="modal-content">
