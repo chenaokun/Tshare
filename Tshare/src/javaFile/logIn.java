@@ -51,23 +51,22 @@ public class logIn extends HttpServlet {
 	if(user==null)
 		response.sendRedirect("/Tshare-test2/jsp/sign_in.jsp");
 	String pwDB=user.getJSON("password");
-	//System.out.println("valid password:"+pwDB);
-	if(pwDB!=null&&pwDB.length()>2&&p.equals(pwDB.substring(1, pwDB.length()-1))){
-		//request.getRequestDispatcher("/jsp/Welcome.jsp").forward(request, response);
-		User StoredUser=new User(user);
-		//System.out.println("Stored user: "+StoredUser.Id);
+	if(pwDB!=null&&pwDB.length()>2&&p.equals(pwDB.substring(1, pwDB.length()-1))){			
+		User StoredUser=new User(user);		
 		request.getSession().setAttribute("userInfo", StoredUser);
 		response.sendRedirect("/Tshare-test2/jsp/Welcome.jsp");
 	}
 	else response.sendRedirect("/Tshare-test2/jsp/sign_in.jsp");
+	HashMap<String, String> groupBalance =new HashMap<String, String>();
 	getGroup gg = new getGroup();
-	ArrayList<String> group=gg.getGroupSet(u);
+	ArrayList<String> group=gg.getGroupSet(u,groupBalance);
 	ArrayList<groupInfo> all_groups = new ArrayList<groupInfo>();
 	for(String g : group) {
 		groupInfo gi = gg.searchGroup(g);
 		all_groups.add(gi);
-	}
+	}	
 	request.getSession().setAttribute("groupInfo", all_groups);
+	request.getSession().setAttribute("groupBalance", groupBalance);
   }
   
   private static Item getPW(String userId, String tableName){

@@ -1,10 +1,12 @@
 package javaFile;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 import com.amazonaws.auth.profile.ProfileCredentialsProvider;
 import com.amazonaws.regions.Region;
 import com.amazonaws.regions.Regions;
@@ -84,7 +86,7 @@ public class getGroup {
 
 	 }
 
-  public ArrayList<String> getGroupSet(String userId){
+  public ArrayList<String> getGroupSet(String userId, HashMap<String, String> groupBalance){
 	  client.setRegion(Region.getRegion(Regions.US_WEST_2));
 	  dynamoDB = new DynamoDB(client);
 	  //Table table = dynamoDB.getTable(tableName);
@@ -106,15 +108,21 @@ public class getGroup {
 	         while (itemsIter.hasNext()) {
 	        	    Map<String, AttributeValue> currentItem = itemsIter.next();
 	        	    Iterator<String> currentItemIter = currentItem.keySet().iterator();
-	        	   
+	        	    String groupId="";
+	        	    String balance="";
 	        	    while (currentItemIter.hasNext()) {
-	        	        String attr = (String) currentItemIter.next();
+	        	        String attr = (String) currentItemIter.next();        	        
+	        	        
 	        	        if (attr.equals("groupId") ) {
 	        	        	String curr_group = currentItem.get(attr).getS();   
 	        	        	groups.add(curr_group);
-	        	        	//System.out.println("group : "+curr_group);        	        	
-	        	        }        	        
-	        	    }   	    
+	        	        	groupId=currentItem.get(attr).getS();   	        	
+	        	        }    
+	        	        else if(attr.equals("balance")){
+	        	        	balance=currentItem.get(attr).getS();
+	        	        }
+	        	    }
+	        	    groupBalance.put(groupId, balance);
 	          }
 	         return groups;
 

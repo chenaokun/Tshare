@@ -17,7 +17,7 @@
 	<div id="content" class="container_12 lsb_grid_4">
 		<div class="grid_8 push_4">
 			<h1>Welcome To Tshare! <%=u.name%></h1>
-        	<h2>Hahahaha!!~!!</h2>
+        	<%@ include file="summary.jsp" %>
 		</div>
 		<%@ include file="Siderbar-left.jsp" %>
 	</div>

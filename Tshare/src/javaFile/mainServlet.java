@@ -57,7 +57,8 @@ public class mainServlet extends HttpServlet {
 		getGroup gg = new getGroup();
 		
 		User u=(User)request.getSession().getAttribute("userInfo");
-		ArrayList<String> group=gg.getGroupSet(u.Id);
+		HashMap<String, String> groupBalance =new HashMap<String, String>();
+		ArrayList<String> group=gg.getGroupSet(u.Id, groupBalance);
 		ArrayList<groupInfo> all_groups = new ArrayList<groupInfo>();
 		for(String g : group) {
 			groupInfo gi = gg.searchGroup(g);

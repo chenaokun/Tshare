@@ -26,6 +26,16 @@
   </servlet-mapping>
   
   <servlet>
+    <servlet-name>updateSummary</servlet-name>
+    <servlet-class>javaFile.updateSummary</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>updateSummary</servlet-name>
+    <url-pattern>/updateSummary</url-pattern>
+  </servlet-mapping>
+  
+  
+  <servlet>
     <servlet-name>uploadToS3</servlet-name>
     <servlet-class>javaFile.uploadToS3</servlet-class>
   </servlet>
