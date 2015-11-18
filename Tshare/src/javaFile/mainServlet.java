@@ -41,9 +41,11 @@ import com.amazonaws.regions.Regions;
 
 
 public class mainServlet extends HttpServlet {
- 
+	static AmazonDynamoDB client = new AmazonDynamoDBClient(new ProfileCredentialsProvider());
+    static DynamoDB dynamoDB;   
  protected void doPost(HttpServletRequest request, 
 	      HttpServletResponse response) throws ServletException, IOException 
+	       
 	  {
 	    // reading the user input      
 	    response.setContentType("text/html");

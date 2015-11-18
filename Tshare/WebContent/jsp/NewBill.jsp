@@ -23,11 +23,11 @@
 </head>
 
 <body>
-<div id = "sign-box" class="container-fluid">
-	<div class="signin">
+<div id = "sign-box" class="container-fluid">  
+	 <p>&nbsp;</p>
+	<div>
   		<p>&nbsp;</p>
-  		<h2>Add a Bill</h2>
-  		<p>&nbsp;</p>
+  		<h2>Add a new bill</h2>
 	</div>
 	
 	<div>
@@ -55,10 +55,7 @@
 		</form>
 	</div>
 </div>
-<div id="credit" class="container_12">
-    	<p>&nbsp;</p>
-    	<p> @Copyright Titan</p>
-  	</div>
+
 <script src="../js/jquery-1.11.2.min.js" type="text/javascript"></script>
 <script src="../js/bootstrap-3.3.4.js" type="text/javascript"></script>
 </body>

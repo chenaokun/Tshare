@@ -69,42 +69,70 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <div id = "sign-box" class="container-fluid">
 	<div class="signin">
   		<p>&nbsp;</p>
+  		<label class="col-sm-2 control-label"></label>
+  		<div class="col-sm-10">
   		<h2>Sign Up</h2>
+  		</div>
   		<p>&nbsp;</p>
 	</div>
 	
 	<div class="signin">
 			<!-- <img src="https://s3-us-west-2.amazonaws.com/tshareavatar/youdidut@gmail.comfda" height="42" width="42"> -->
-			
-  			<div class="h5">*User Name</div>
-  			<input id="usrname" type="text" placeholder="mymail@mail.com"><br>
-  			<div class="h5">*Password</div>
-   			<input type="password" id="password1"><br>
-   			<div class="h5">*Re-enter Password</div>
-   			<input type="password" id="password2"><br>   	   			
-  			<div class="h5">*Full Name</div>
-  			<input id="fullName" type="text"><br>
-  			<div class="h5">Upload Photo</div>
+		<div class="form-group">	
+  			<label class="col-sm-2 control-label">*User Name</label>
+  			<div class="col-sm-10">
+  			<input class="form-control" id="usrname" type="text" placeholder="mymail@mail.com"><br>
+  			</div>
+  		</div>	
+  		<div class="form-group">	
+  			<label class="col-sm-2 control-label">*Password</label>
+   			<div class="col-sm-10">
+   			<input class="form-control" type="password" id="password1"><br>
+   			</div>
+   		</div>	
+   		<div class="form-group">	
+   			<label class="col-sm-2 control-label">*Re-enter Password</label>
+   			<div class="col-sm-10">
+   			<input class="form-control" type="password" id="password2"><br> 
+   			</div>
+   		</div>
+   		<div class="form-group">	  	   			
+  			<label class="col-sm-2 control-label">*Full Name</label>
+  			<div class="col-sm-10">
+  			<input class="form-control" id="fullName" type="text"><br>
+  			</div>
+  		 </div>	
+  			<label class="col-sm-2 control-label">Upload Photo</label>
+  			<div class="col-sm-10">
   			<div class="imageBox">
         <div class="thumbBox"></div>
         <div class="spinner" style="display: none">Loading...</div>
+        </div>
     </div>
-    <div class="action">
+    <label class="col-sm-2 control-label"></label>
+    <div class="col-sm-10">
+    <div class="action"> 
         <input type="file" id="file" style="float:left; width: 250px">       
     </div>
+    </div>
+    <label class="col-sm-2 control-label"></label>
+    <div class="col-sm-10">
     <div class="action">
-        <input type="button" id="btnZoomIn" value=" + " style="float: left">
-        <input type="button" id="btnZoomOut" value=" - " style="float: left">
+        <input type="button" id="btnZoomIn" value="  +  " class="btn btn-default" style="float: center">        
+        <input type="button" id="btnZoomOut" value="  -  " class="btn btn-default" style="float: center">
+    </div>
     </div>
     <div class="cropped">
 
     </div>
   			<script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
 		<script src="../js/cropbox.js"></script>
-			
-  			<div>&nbsp;</div>  			
-			<input type="submit" id="btnCrop" class="submit" value="Submit" >		      		
 		
+  			<div>&nbsp;</div>  	
+  			<label class="col-sm-2 control-label"></label>		
+  			<div class="col-sm-10">	
+			<input type="submit" id="btnCrop" class="btn btn-default"  value="Submit" >		      		
+		</div>
 	</div>
 </div>
 

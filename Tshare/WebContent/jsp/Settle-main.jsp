@@ -12,74 +12,76 @@
  %>
  	
 <div  id="bill">
-	<div class="row">
+<table class="table">	
+	<tr>
+    	<td>Optimized Plan</td>
+    	<td>     </td>
+    	<td>     </td>
+    	<td>     </td>
+    </tr>
+	<tr>
 	<%if(Double.parseDouble(balance)>=0){ %>
-    	<div style="height: 40px; border-width: 8px;" class="col-sm-3">You Owes  $<%=balance %></div>
+    	<td>You Owe</td>
+    	<td>     </td>
+    	<td>     </td>
+    	<td>$<%=balance %></td>
     <% } else {%>
-    	<div style="height: 40px; border-width: 8px;" class="col-sm-3">People Owe you  $<%=-Double.parseDouble(balance) %></div>
+    	<td>People Owe you</td>
+    	<td>     </td>
+    	<td>     </td>
+    	<td>$<%=-Double.parseDouble(balance) %></td>
     <%}%>
-    	<div class="col-sm-2"></div>
-    	<div class="col-sm-3"></div>
-    	<div class="col-sm-4"></div>
-    	<p>&nbsp;</p>
-	</div>
-<!--	<div class="row">
-    	<div class="col-sm-3">Basic Plan</div>
-    	<div class="col-sm-2"></div>
-    	<div class="col-sm-3"></div>
-    	<div class="col-sm-4"></div>
-    	<hr>
-	</div>-->
-	<!--<%for(int i=0;i<2;i++) {%>
-		<div class="row">
-    		<div class="col-sm-3">Mary pays You</div>
-    		<div class="col-sm-2">$40</div>
-    		<div class="col-sm-3"> Amount paid:    </div>
-    		<div class="col-sm-4">
-      			<form id="form1" name="form1" method="post">
-        			<input type="text" name="textfield" id="textfield" size="10">
-        			<input class="btn btn-info btn-xs" type="submit" value="Submit">
-      			</form>
-    		</div>
-    		<p>&nbsp;</p>
-		</div>-->
-	<!--<%} %>-->
-	<div class="row">
-    	<div class="col-sm-3">Optimized Plan</div>
-    	<div class="col-sm-2"></div>
-    	<div class="col-sm-3"></div>
-    	<div class="col-sm-4"></div>
-	</div>
-	<hr>
+    </tr>	
+
+		
+    </table>
+	<table class="table table-hover">
 	<% for (Entry<String[], Double> entry : optimized.entrySet()) { 
 		String[] key = entry.getKey();
 		System.out.println(userId+" "+key[1]);
-		if(!key[1].equals(userId)&&!key[0].equals(userId))
-			continue;
-	    Double value = entry.getValue();
+		Double value = entry.getValue();
+		if(!key[1].equals(userId)&&!key[0].equals(userId)||(value==0.0))
+			continue;	    
 	    if(key[1].equals(userId)){%>
-	<div class="row">
-    	<div class="col-sm-3"><%=key[0]%> pays You</div>
-    	<div class="col-sm-2"><%=Double.toString(-1*value)%></div>
-    	<div class="col-sm-3">Amount paid:</div>
-    	<div class="col-sm-4">
-    		<form action="../payToSettle" method="get">
+	
+	<tr>
+    	<td><%=key[0]%> pays You</td>
+    	<td><%=Double.toString(value)%></td>
+    	<td>Amount paid:</td> 
+    	<td>
+    	<%-- <form class="form-inline"action="../payToSettle?receiver=<%=key[0]%>&beingPaid=1" method="post">
+		  <div class="form-group">
+		    <label class="sr-only" for="exampleInputAmount">Amount (in dollars)</label>
+		    <div class="input-group">
+		      <div class="input-group-addon">$</div>
+		      <input type="text" class="form-control" name="amount" id="exampleInputAmount" placeholder="Amount">
+		      
+		    </div>
+		  </div>
+		  <button type="submit" class="btn btn-primary">paid</button>
+		</form> --%>
+    		<form action="../payToSettle?receiver=<%=key[0]%>&beingPaid=1" method="post">  		
+    		 	<input type="text" name="amount" id="textfield2" size="10">        		
+        		<input class="btn btn-info btn-xs" type="submit" value="Submit"> 
+     		</form> 
+     	</td>
+     	</tr> 	 <% } else {%>
+     	
+     	
+     	
+	<tr>
+    	<td>You pay <%=key[1]%></td>
+    	<td><%=Double.toString(value)%></td>
+    	<td>Amount paid:</td>
+    	<td>
+    		<form action="../payToSettle?receiver=<%=key[1]%>&&beingPaid=0" method="post">
         		<input type="text" name="amount" id="textfield2" size="10">
         		<input class="btn btn-info btn-xs" type="submit" value="Submit">
      		</form>
-     	</div>
-	</div> <% } else {%>
-	<div class="row">
-    	<div class="col-sm-3">You pay <%=key[1]%></div>
-    	<div class="col-sm-2"><%=Double.toString(value)%></div>
-    	<div class="col-sm-3">Amount paid:</div>
-    	<div class="col-sm-4">
-    		<form action="../payToSettle?receiver=<%=key[1]%>&before=<%=value%>" method="post">
-        		<input type="text" name="amount" id="textfield2" size="10">
-        		<input class="btn btn-info btn-xs" type="submit" value="Submit">
-     		</form>
-     	</div>
-	</div> 
+     	</td>
+     	</tr>
+	
 		<% } %>
 	<% } %>
+	</table>
 </div>

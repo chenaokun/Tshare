@@ -48,7 +48,7 @@
           					<a data-toggle="collapse"  data-parent="#accordion" href=#<%=i %>>
           					    
           						<h5 style="text-align:left">BillName: <%=a.billName %>&nbsp;&nbsp;&nbsp;&nbsp; 
-          							<%=a.payerId %> spent $<%=a.totalAmount %>; &nbsp; You owns $<%=amount %>&nbsp;&nbsp;
+          							<%=a.payerId %> spent $<%=a.totalAmount %>; &nbsp; You owe $<%=amount %>&nbsp;&nbsp;
           							<span title="Delete This Bill"  data-toggle="tooltip" data-placement="top">
           							<button  type="button" class="btn btn-info btn-xs" data-toggle="modal" data-target="#deleteBill" data-id="<%=a.billId%>">x</button></span>
           						</h5>
@@ -92,7 +92,7 @@
       							if(member[j].equals(a.payerId))
       								continue;
       					%>		
-      							<li class="list-group-item"><%=member[j] %> owns you $<%=a.amount.substring(1) %></li>     							
+      							<li class="list-group-item"><%=member[j] %> owes you $<%=a.amount.substring(1) %></li>     							
       					<%} %>        				
       					</div>
       				</div>

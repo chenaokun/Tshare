@@ -31,7 +31,11 @@ System.out.println(path);
     <div class="navbar-header">
       <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#defaultNavbar1"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button>
       <a class="navbar-brand" href="#">Tshare</a></div>
-    
+    <div class="collapse navbar-collapse" id="defaultNavbar1">
+<ul class="nav navbar-nav navbar-right">
+  <li><a href="register.jsp">Sign Up </a></li> 
+</ul>
+    </div>
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="defaultNavbar1">
 <ul class="nav navbar-nav navbar-right">
@@ -48,27 +52,46 @@ System.out.println(path);
 <div id = "sign-box" class="container-fluid">
 	<div class="signin">
   		<p>&nbsp;</p>
+  		<label class="col-sm-2 control-label"></label>
+  		<div class="col-sm-10">
   		<h2>Sign In</h2>
+  		</div>
   		<p>&nbsp;</p>
 	</div>
 	
 	<div class="signin">
-		<form action="../logIn" method="get" >
-  			<div class="h5">User Name</div>
-  			<input name="usrname" type="text"><br>
-  			<div class="h5">
-				<p class="h5">Password</p>
-   			</div>
-  			<input type="password" name="password"><br>
-  			<div>&nbsp;</div> 			
-			<input type="submit" class="submit" value="Submit" >				
-			<ul>			
-        		<li><a href="register.jsp">Sign Up</a> </li>
-      		</ul>
-      		
+		<form action="../logIn" method="get" class="form-horizontal">
+		<div class="form-group">
+  			<label class="col-sm-2 control-label">User Name</label>
+  			<div class="col-sm-10">
+  			<input name="usrname" type="text" class="form-control"><br>
+  			</div>
+  		</div>	
+  		<div class="form-group">
+  			<label class="col-sm-2 control-label">Password</label>
+  			<div class="col-sm-10">
+  			<input type="password" name="password" class="form-control">
+  			</div>
+  		</div>
+  		<div class="form-group">
+  			<div class="col-sm-offset-2 col-sm-10">
+		      <div class="checkbox">
+		        <label>
+		          <input type="checkbox"> Remember me
+		        </label>
+		      </div>
+		    </div>
+		 </div>
+		 <div class="form-group">
+  			<div class="col-sm-offset-2 col-sm-10">			
+			<input type="submit" class="btn btn-default" value="Submit" >	
+			</div>
+		</div>		
 		</form>
 	</div>
 </div>
+
+
 <div id="credit" class="container_12">
     	<p>&nbsp;</p>
     	<p> @Copyright Titan</p>

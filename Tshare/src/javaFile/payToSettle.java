@@ -42,15 +42,22 @@ public class payToSettle extends HttpServlet {
 	 groupId=group.groupId;
 	 
 	 client.setRegion(Region.getRegion(Regions.US_WEST_2));
-	 
-	 // reading the user input    
+	 String tableName="currentBalance";
+	 dynamoDB = new DynamoDB(client);
+	 User u=(User)request.getSession().getAttribute("userInfo");
+	 String userId=u.Id;
+	 Table table = dynamoDB.getTable(tableName);
+	   // reading the user input    
 	   response.setContentType("text/html");
 		response.setCharacterEncoding("utf-8");
 		Double amount=Double.parseDouble(request.getParameter("amount"));
-		Double before=Double.parseDouble(request.getParameter("before"));
+		Item item = table.getItem("groupId", groupId, "userId", userId); 
+		String balance=removeQuo.remove(item.getJSON("balance"));
+		Double before=Double.parseDouble(balance);		
 		String receiver=request.getParameter("receiver");
-		User u=(User)request.getSession().getAttribute("userInfo");
-		String userId=u.Id;
+		String beingPaid=request.getParameter("beingPaid");	
+		if(beingPaid.equals("1"))
+			amount*=-1;
 		Double after=before-amount;
 		System.out.println(after);
 		BigDecimal afterRound = new BigDecimal(after).setScale(2, BigDecimal.ROUND_HALF_UP);
@@ -70,11 +77,9 @@ public class payToSettle extends HttpServlet {
 		client.updateItem(updateItemRequest);
 		
 		//get receiver's balance from DB
-		String tableName="currentBalance";
-		dynamoDB = new DynamoDB(client);
-		Table table = dynamoDB.getTable(tableName);
-		Item item = table.getItem("groupId", groupId, "userId", receiver); 
-		String balance=removeQuo.remove(item.getJSON("balance"));
+		
+		item = table.getItem("groupId", groupId, "userId", receiver); 
+		balance=removeQuo.remove(item.getJSON("balance"));
 		Double receiverBefore=Double.parseDouble(balance);
 		Double receiverAfter=receiverBefore+amount;
 		BigDecimal newBalanceRound = new BigDecimal(receiverAfter).setScale(2, BigDecimal.ROUND_HALF_UP);
