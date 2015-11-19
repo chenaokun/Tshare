@@ -39,7 +39,7 @@
       		<h3>Hello! <%=us1.name%><%if(!us1.img.equals("0")) {    	%>
     			<img src="https://s3-us-west-2.amazonaws.com/tshareavatar/<%=us1.Id+us1.img%>" height="42" width="42" align="right">  
     	  		<%} else{%>
-    		<img src="../../images/avatar.jpg" height="42" width="42" align="right">   
+    		<img src="../images/avatar.jpg" height="42" width="42" align="right">   
     	  <%} %></h3>
       		
       		<ul>

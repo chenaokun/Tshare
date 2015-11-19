@@ -98,7 +98,7 @@ public class PutBillToDB extends HttpServlet {
 			System.out.println("Bill add for "+userId);			
 			
 		}
-		
+		request.getSession().setAttribute("billId",date+" "+paidUserId);
 		//Update the new balance
 		//payer first, then everyone
 		UpdateBalance(paidUserId, groupId, billAmt, length);
@@ -119,15 +119,16 @@ public class PutBillToDB extends HttpServlet {
 		
 		if(userId.equals(paidUserId)) billAmt =
 				String.valueOf(0-Double.parseDouble(billAmt)*((double)memCnt-1));
-
-		Item item = new Item().withPrimaryKey("billId",date+" "+paidUserId,"userId",userId)
+		String billId=date+" "+paidUserId;
+		Item item = new Item().withPrimaryKey("billId",billId,"userId",userId)
 				.withString("groupId", groupId)
 				.withString("billName", billName)
 				.withString("totalAmount", billTotalAmt)
 				.withString("amount", billAmt)
 				.withString("paidBy", paidUserId);
-		System.out.println("To put into expense table");
+		System.out.println("To put into expense table");		
 		PutItemOutcome outcome = table.putItem(item);
+		
 	}
 	
 
