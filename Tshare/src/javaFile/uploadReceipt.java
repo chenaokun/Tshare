@@ -24,7 +24,7 @@ public class uploadReceipt extends HttpServlet{
 	{
 		String base64Data=request.getParameter("canvasData");
 		byte[] bI = org.apache.commons.codec.binary.Base64.decodeBase64((base64Data.substring(base64Data.indexOf(",")+1)).getBytes());
-		System.out.println("uploadToS3");
+		System.out.println("uploadReceiptToS3");
 		InputStream fis = new ByteArrayInputStream(bI);
 		String billId=(String)request.getSession().getAttribute("billId");
 		AmazonS3 s3 = new AmazonS3Client();

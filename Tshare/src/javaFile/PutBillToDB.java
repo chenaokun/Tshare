@@ -46,12 +46,12 @@ public class PutBillToDB extends HttpServlet {
 		String billName = request.getParameter("billName");
 		String billDesc = request.getParameter("description");
 		String[] userList = request.getParameterValues("userList");
-		
+		String img = request.getParameter("img");
 		System.out.print("billAmt:"+billTotalAmt);
 		System.out.print("billName:"+billName);
 		System.out.print("billDesc:"+billDesc);
-		System.out.print("userList:"+userList);
-		
+		System.out.println("userList:"+userList);
+		System.out.println("img:"+img);
 		
 		int length = userList.length;
 		double billAmtDouble = Double.parseDouble(billTotalAmt)/length;
@@ -78,11 +78,15 @@ public class PutBillToDB extends HttpServlet {
 		System.out.print("groupId:"+groupId);*/
 		
 		//String memberGroup = request.getSession().getAttribute("UserAdd").toString();
-		String billImg = "image SRC";
-		
 		
 		Date date = new Date();
 		String dateStr = date.toString();
+		request.getSession().setAttribute("billId",date+" "+paidUserId);
+		String billImg = "";
+		if(img!=null&&img.length()!=0)			
+			billImg="https://s3-us-west-2.amazonaws.com/tsharebilling/"+date+" "+paidUserId;
+		else 
+			billImg="0";
 		
 		System.out.println("To add attribute to bill form");
 
@@ -98,10 +102,11 @@ public class PutBillToDB extends HttpServlet {
 			System.out.println("Bill add for "+userId);			
 			
 		}
-		request.getSession().setAttribute("billId",date+" "+paidUserId);
+		
 		//Update the new balance
 		//payer first, then everyone
 		UpdateBalance(paidUserId, groupId, billAmt, length);
+		
 		
 		
 		response.sendRedirect("/Tshare-test2/jsp/Main-page.jsp");

@@ -16,6 +16,16 @@
     <url-pattern>/logIn</url-pattern>
   </servlet-mapping>
   
+  
+   <servlet>
+    <servlet-name>uploadReceipt</servlet-name>
+    <servlet-class>javaFile.uploadReceipt</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>uploadReceipt</servlet-name>
+    <url-pattern>/uploadReceipt</url-pattern>
+  </servlet-mapping>
+  
   <servlet>
     <servlet-name>deleteMember</servlet-name>
     <servlet-class>javaFile.deleteMember</servlet-class>
