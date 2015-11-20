@@ -34,6 +34,7 @@
     			<img src="https://s3-us-west-2.amazonaws.com/tshareavatar/<%=us1.Id+us1.img%>" height="42" width="42" align="right">  
     	  		<%} else{%>
     		<img src="/Tshare-test2/images/avatar.jpg" height="42" width="42" align="right">   
+
     	  <%} %></h3>
       		
       		<ul>

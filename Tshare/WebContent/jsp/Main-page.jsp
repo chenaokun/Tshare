@@ -24,4 +24,21 @@
 	
 	<%@ include file="Footer.html" %>
 </body>
+<script type='text/javascript'>
+function saveImg(){
+	if(sessionStorage.uploaded==null||sessionStorage.uploaded==false)
+		return;
+	
+	if(sessionStorage.uploaded){
+	sessionStorage.uploaded=false;
+	img=sessionStorage.img;
+	var ajax = new XMLHttpRequest();
+	var postData = "canvasData="+encodeURIComponent(img);		    
+	ajax.open("POST",'../uploadReceipt',true);
+	ajax.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+	ajax.send(postData); 
+	}	
+}
+window.onload = saveImg;
+</script>
 </html>

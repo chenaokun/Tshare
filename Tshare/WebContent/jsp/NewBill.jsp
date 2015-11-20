@@ -3,6 +3,9 @@
 <%
 	HashMap<String, String> groupToMember1=(HashMap<String, String>)session.getAttribute("groupToMember");
 %>
+ <% User uu=(User)session.getAttribute("userInfo");
+   Boolean changed=false;
+ 	 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -49,14 +52,35 @@
    			<div class="h5">Description:</div>
    			<textarea class="form-control" rows="5" cols="3" name="description"></textarea>
   			<div class="h5">Upload Photo</div>
-  			<input type="file" name="img">
+  			<input id="inputFileToLoad" name="img" type="file" onchange="encodeImageFileAsURL();" />
   			<div>&nbsp;</div>  			
 			<input type="submit" class="submit" value="Submit" >	      		
 		</form>
 	</div>
 </div>
 
+
+<script type='text/javascript'>
+function encodeImageFileAsURL(){
+    var filesSelected = document.getElementById("inputFileToLoad").files;
+    if (filesSelected.length > 0)
+    {
+        var fileToLoad = filesSelected[0];
+        var fileReader = new FileReader();
+		sessionStorage.uploaded=false;
+        fileReader.onload = function(fileLoadedEvent) {
+            var srcData = fileLoadedEvent.target.result; // <--- data: base64  
+            sessionStorage.img=srcData;
+            sessionStorage.uploaded="true";
+        }
+        fileReader.readAsDataURL(fileToLoad);
+    }
+}
+
+
+</script>
 <script src="../js/jquery-1.11.2.min.js" type="text/javascript"></script>
 <script src="../js/bootstrap-3.3.4.js" type="text/javascript"></script>
+
 </body>
 </html>
