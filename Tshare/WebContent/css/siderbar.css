@@ -115,20 +115,47 @@ a:active, a:focus {
 /* 960 Grid System Containers
 ----------------------------------------------------------------------------------------------------*/
 .container_12 {
-	margin-left: auto;
+	/*margin-left: auto;
 	margin-right: auto;
-	width: 1280px;
+	width: 1280px;*/
+	width:95%;
+	margin:15px 0;
+	background: repeat-y top left;
 }
 
 /* Grid >> 960 Grid System Global
 ----------------------------------------------------------------------------------------------------*/
-.grid_1, .grid_2, .grid_3, .grid_4, .grid_5, .grid_6, .grid_7, .grid_8, .grid_9, .grid_10, .grid_11, .grid_12 {
-	display:inline;
+.grid_1, .grid_2, .grid_3, .grid_5, .grid_6, .grid_7, .grid_9, .grid_10, .grid_11, .grid_12 {
+	/*display:inline;*/
 	float: left;
 	position: relative;
 	margin-left: 15px;
 	margin-right: 15px;
 }
+
+.grid_4 {
+	/*display:inline;*/
+	float: left;
+	position: absolute;
+	margin-left: 15px;
+	/*background-color: #336699;
+	margin-right: 15px;*/
+}
+.grid_8 {
+	/*display:inline;*/
+	float: left;
+	position: relative;
+	margin-left: 5px;
+	/*margin-right: 15px;*/
+}
+.grid_3 {
+	/*display:inline;*/
+	float: right;
+	position: absolute;
+	/*margin-left: 15px;*/
+	margin-right: 15px;
+}
+
 .grid_13 {
 	display:inline;
 	float: center;
@@ -156,9 +183,16 @@ a:active, a:focus {
 }
 .container_12 .grid_3 {
 	width:200px;
+	float: right;
+	right: 0px;
 }
 .container_12 .grid_4 {
-	width:270px;
+	/*width:270px;
+	right: 700px;
+	background: #152840;*/
+	width: 22%;	
+	float: left;
+
 }
 .container_12 .grid_5 {
 	width:370px;
@@ -170,7 +204,9 @@ a:active, a:focus {
 	width:600px;
 }
 .container_12 .grid_8 {
-	width:670px;
+	/*width:670px;*/
+	width: 60%;	
+	left:290px;
 }
 .container_12 .grid_9 {
 	width:690px;
@@ -262,7 +298,8 @@ a:active, a:focus {
 /* Push Space >> 2 Columns
 ----------------------------------------------------------------------------------------------------*/
 .container_12 .push_0 {
-	left:8px;
+	/*left:8px;*/
+
 }
 .container_12 .push_1 {
 	left:80px;
@@ -274,7 +311,7 @@ a:active, a:focus {
 	left:240px;
 }
 .container_12 .push_4 {
-	left:320px;
+	left:290px;
 }
 .container_12 .push_5 {
 	left:400px;
@@ -321,7 +358,7 @@ a:active, a:focus {
 	right:560px;
 }
 .container_12 .pull_8 {
-	right:700px;
+	/*right:700px;*/
 }
 .container_12 .pull_9 {
 	right:720px;
@@ -363,6 +400,7 @@ h2 {
 	font-weight: bold;
 }
 h4 {
+	color: #56CCC8;
 	margin-bottom: 8px;
 	font-family: 'Yanone Kaffeesatz', Arial, Helvetica, sans-serif;
 	font-size: 28px;
@@ -406,11 +444,12 @@ h3 {
 	padding-right: 1px;
 	padding-bottom: 0px;
 	padding-left: 1px;
-	background-color: #FF9DA0;
+	background-color: #003366;
 }
 .sidebarbox ul li {
 	list-style: none;
 	display: inline;
+	text-align: center;
 }
 .sidebarbox ul li a {
 	display: block;
@@ -419,7 +458,7 @@ h3 {
 	font-family: Arial, Helvetica, sans-serif;
 	font-weight:bold;
 	color: #FFF;
-	background-color: #999;
+	/*background-color: #999;*/
 	border-bottom-width: 1px;
 	border-bottom-style: solid;
 	border-bottom-color: #666;
@@ -438,7 +477,7 @@ h3 {
 }
 .sidebarbox h3 {
 	font-weight: normal;
-	color: #EA196E;
+	color: #56CCC8;
 	font-size: 21px;
 	line-height: normal;
 	margin-bottom: 0px;
@@ -452,7 +491,7 @@ h3 {
 	padding-left: 8px;
 	border-top-width: 1px;
 	border-right-width: 1px;
-	border-bottom-width: 0px;
+	border-bottom-width: 1px;
 	border-left-width: 1px;
 	border-top-style: solid;
 	border-right-style: solid;
@@ -462,16 +501,31 @@ h3 {
 	border-right-color: #666;
 	border-bottom-color: #666;
 	border-left-color: #666;
-	background-color: #53FFDB;
+	background-color: #152840;
 }
 .simple {
 	margin-bottom: 15px;
-	background-color: #ADFFEE;
+	background-color: #152840;
+	text-align: center;
+	height: 490px;
 	
 }
 .simple ul li a {
-	
-	display: block;
+	/*font-family: 'Open Sans', sans-serif;*/
+	padding: 2.4px 0;
+	line-height: 1.8em;
+	display:inline-block;
+	font-size: 0.925em;
+	color:#CFD9E0;
+	font-family: 'Open Sans', sans-serif;
+	-webkit-transition: all 0.2s ease-in-out;
+	-moz-transition: all 0.2s ease-in-out;
+	-o-transition: all 0.2s ease-in-out;
+	transition: all 0.2s ease-in-out;
+
+	text-transform: capitalize;
+
+	/*display: block;
 	line-height: 18px;
 	text-decoration:none;
 	font-family: Arial, Helvetica, sans-serif;
@@ -479,7 +533,7 @@ h3 {
 	border-bottom-width: 1px;
 	border-bottom-style: solid;
 	border-bottom-color: #999;
-	color: #333;
+	/*color: #333;*/
 	padding-top: 5px;
 	padding-right: 4px;
 	padding-bottom: 4px;
@@ -488,7 +542,7 @@ h3 {
 .simple ul li a:hover {
 	text-decoration: none;
 	
-	color: #FFF;
+	color: #56CCC8;
 	background-color: #125AE5;
 }
 
@@ -498,7 +552,9 @@ h3 {
 body {
 	z-index: -100;
 	font: 12px Arial, Helvetica, sans-serif;
-	background-image: images/bgrepeat.png;
+	/*background-color: #6699CC;*/
+	background-color: #465e78;
+	background-image: url("http://www.pulsarwallpapers.com/data/media/3/Alien%20Ink%202560X1600%20Abstract%20Background.jpg");
 	background-repeat: repeat;
 }
 #pageshadow {
@@ -506,32 +562,36 @@ body {
 	background-repeat: no-repeat;
 	background-position: center top;
 }
-header {
-	z-index: 2;
-	height: 160px;
-	border-right-width: 1px;
-	border-left-width: 1px;
-	border-right-style: solid;
-	border-left-style: solid;
-	border-right-color: #000;
-	border-left-color: #000;
+#header {
+	/*z-index: 2;*/
+	height: 120px;
+
+	background-image: url("http://progamesmaster.ru/wp-content/uploads/2015/01/floral-abstract-header-progamesmaster-13.jpg");
+	
+	border-top:3px solid #003366;
+	border-left:3px solid #003366;
+	/*border-right:1px solid #465E78;
+	border-bottom:1px solid #465E78;*/
+
 	background-repeat: no-repeat;
 	background-position: center top;
-	background-color: #0F4BC1;
-	background-image: url(images/Library-banner.jpg);
-        background-size:100% 100%;
+	/*background-color: #152840;
+	background-color:#99CCCC;*/
+    background-size:100% 100%;
+
 }
 #content {
-	clear: both;
+	/*clear: both;
 	padding-top: 15px;
 	padding-bottom: 15px;
 	border-right: 1px solid #000;
-	border-left: 1px solid #000;
+	border-left: 1px solid #000;*/
 	font: 12px/18px Arial, Helvetica, sans-serif;
+	background-color: #666699;
 }
 
 nav {
-	z-index: 10;
+	/*z-index: 10;*/
 	position: relative;
 	background: #333 url(images/nav-bg.jpg) repeat-x bottom;
 	font: 12px Arial, Helvetica, sans-serif;
@@ -549,11 +609,12 @@ nav {
 	padding-bottom: 15px;
 	border-left: 1px solid #000;
 	border-right: 1px solid #000;
+	/*background-color: #FFF;
 	padding-right: 15px;
  	padding-left: 15px;
   	margin-right: 20px;
-  	margin-left: auto;
-  	height: 430px
+  	margin-left: auto;*/
+  	height: 440px;
 }
 
 
@@ -565,19 +626,23 @@ nav {
 
 .title {
 	color: #ffffff;
+
 	font-family: 'Yanone Kaffeesatz', Arial, Helvetica, sans-serif;
-	font-size: 70px;
+	font-size: 65px;
 	line-height: 120%;
 	font-weight: normal;
-	text-shadow: 4px 4px 4px #000;
+	text-shadow: 4px 4px 4px #263A54;
+	text-align: center;
 	padding-top: 5px;
 	
 
 }
 .title a {
 	text-decoration:none;
-	color: #A60002;
-	padding-left:30px;
+	/*color: #A60002;
+	color: #56CCC8;*/
+	color: #003366;
+	
 }
 .tagline {
 	color: #7F3B0E;
@@ -661,9 +726,11 @@ ul.sf-menu li li li:hover ul, ul.sf-menu li li li.sfHover ul {
 	position: relative;
 	float:			left;
 	margin-bottom:	0em;
-	top: 15px;
-	width: 650px;
-	background-color:#333;
+	top: 0px;
+	/*width: 670px;*/
+	width: 100%;
+	/*background-color:#333;*/
+	background-color: #003366;
 }
 .sf-menu a { /* top level menu items */
 	padding: 		14px 12px;

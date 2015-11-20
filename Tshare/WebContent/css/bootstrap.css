@@ -98,6 +98,7 @@ hr {
   -webkit-box-sizing: content-box;
      -moz-box-sizing: content-box;
           box-sizing: content-box;
+  color: #006699;
 }
 pre {
   overflow: auto;
@@ -1153,6 +1154,7 @@ hr {
   margin-bottom: 20px;
   border: 0;
   border-top: 1px solid #eee;
+
 }
 .sr-only {
   position: absolute;
@@ -1604,8 +1606,9 @@ pre code {
   margin-left: auto;
 }
 .row {
-  margin-right: -15px;
-  margin-left: -15px;
+  margin-right: 0px;
+  margin-left: 0px;
+
 }
 .col-xs-1, .col-sm-1, .col-md-1, .col-lg-1, .col-xs-2, .col-sm-2, .col-md-2, .col-lg-2, .col-xs-3, .col-sm-3, .col-md-3, .col-lg-3, .col-xs-4, .col-sm-4, .col-md-4, .col-lg-4, .col-xs-5, .col-sm-5, .col-md-5, .col-lg-5, .col-xs-6, .col-sm-6, .col-md-6, .col-lg-6, .col-xs-7, .col-sm-7, .col-md-7, .col-lg-7, .col-xs-8, .col-sm-8, .col-md-8, .col-lg-8, .col-xs-9, .col-sm-9, .col-md-9, .col-lg-9, .col-xs-10, .col-sm-10, .col-md-10, .col-lg-10, .col-xs-11, .col-sm-11, .col-md-11, .col-lg-11, .col-xs-12, .col-sm-12, .col-md-12, .col-lg-12 {
   position: relative;
@@ -4068,8 +4071,8 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
 }
 .navbar {
   position: relative;
-  min-height: 50px;
-  margin-bottom: 20px;
+  min-height: 25px;
+  margin-bottom: 40px;
   border: 1px solid transparent;
 }
 @media (min-width: 768px) {
@@ -4133,6 +4136,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
 .container-fluid > .navbar-collapse {
   margin-right: -15px;
   margin-left: -15px;
+
 }
 @media (min-width: 768px) {
   .container > .navbar-header,
@@ -4177,7 +4181,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
 .navbar-brand {
   float: left;
   height: 50px;
-  padding: 15px 15px;
+  padding: 8px 15px;
   font-size: 18px;
   line-height: 20px;
 }
@@ -4396,11 +4400,11 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
   }
 }
 .navbar-default {
-  background-color: #f8f8f8;
-  border-color: #e7e7e7;
+  background-color: #152840;
+  /*border-color: #e7e7e7;*/
 }
 .navbar-default .navbar-brand {
-  color: #777;
+  color: #5e5e5e;
 }
 .navbar-default .navbar-brand:hover,
 .navbar-default .navbar-brand:focus {
@@ -5305,8 +5309,15 @@ a.list-group-item-danger.active:focus {
   line-height: 1.3;
 }
 .panel {
+  margin-bottom: 5px;
+  border: 0px solid transparent;
+  border-radius: 4px;
+  -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, .05);
+          box-shadow: 0 1px 1px rgba(0, 0, 0, .05);
+}
+.panel2 {
   margin-bottom: 20px;
-  background-color: #fff;
+  height: 600px;
   border: 1px solid transparent;
   border-radius: 4px;
   -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, .05);
@@ -5314,20 +5325,37 @@ a.list-group-item-danger.active:focus {
 }
 .panel-body {
   padding: 15px;
+  font: 15px Arial, bold, Helvetica, sans-serif;
 }
 .panel-heading {
+  padding: 8px 8px;
+  border-bottom: 1px solid transparent;
+  border-top-left-radius: 3px;
+  border-top-right-radius: 3px;
+  text-align: center;
+}
+.panel-heading2 {
   padding: 10px 15px;
   border-bottom: 1px solid transparent;
   border-top-left-radius: 3px;
   border-top-right-radius: 3px;
+  text-align: center;
 }
 .panel-heading > .dropdown .dropdown-toggle {
   color: inherit;
 }
 .panel-title {
+  text-align: center;
   margin-top: 0;
   margin-bottom: 0;
-  font-size: 16px;
+  font:12px Arial, Helvetica, sans-serif;
+  color: inherit;
+}
+.panel-title2 {
+  text-align: center;
+  margin-top: 0;
+  margin-bottom: 0;
+  font:25px Arial, Helvetica, sans-serif;
   color: inherit;
 }
 .panel-title > a,
@@ -5511,6 +5539,7 @@ a.list-group-item-danger.active:focus {
 .panel > .table-responsive {
   margin-bottom: 0;
   border: 0;
+
 }
 .panel-group {
   margin-bottom: 20px;
@@ -5536,12 +5565,28 @@ a.list-group-item-danger.active:focus {
   border-bottom: 1px solid #ddd;
 }
 .panel-default {
-  border-color: #ddd;
+  border-color: #99CCCC;
+  border-width: 1px;
+  /*height: 600px;
+  background-color: #263A54;*/
+
+}
+.panel-default2 {
+  border-color: #99CCCC;
+  border-width: 1px;
+  height: 600px;
+  /*background-color: #263A54;*/
+
 }
 .panel-default > .panel-heading {
   color: #333;
   background-color: #f5f5f5;
   border-color: #ddd;
+}
+.panel-default2 > .panel-heading2 {
+  color: #333;
+  /*background-color: #f5f5f5;
+  border-color: #ddd;*/
 }
 .panel-default > .panel-heading + .panel-collapse > .panel-body {
   border-top-color: #ddd;

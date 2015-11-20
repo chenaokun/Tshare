@@ -1,45 +1,39 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" import="java.util.*,javaFile.*"%>
     
-<!-- <head>
-<script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css">
-</head> -->
-<head><meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
 
-<script src="/Tshare-test2/js/jquery-1.11.2.min.js" type="text/javascript"></script>
-<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>-->
-<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-<script src="/scripts/jquery.min.js"></script> 
-<script src="/bootstrap/js/bootstrap.min.js"></script>
-
-<style type="text/css"> 
-
- #menu {
-    float: left;
-    margin: 0;
-    width:80%;
-}   
- #menu1 {
-    float: left;
-    margin: 0;
-    width:20%;
-}     
-    </style>
+	<script src="/Tshare-test2/js/jquery-1.11.2.min.js" type="text/javascript"></script>
+	<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>-->
+	<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+	<script src="/scripts/jquery.min.js"></script> 
+	<script src="/bootstrap/js/bootstrap.min.js"></script>
+	<style type="text/css"> 
+ 		#menu {
+    		float: left;
+   	 		margin: 0;
+    		width:80%;
+		}   
+ 		#menu1 {
+    		float: left;
+    		margin: 0;
+    		width:20%;
+		}     
+	</style>
 </head>
 
  <% User us1=(User)session.getAttribute("userInfo");
     ArrayList<groupInfo> group2 = (ArrayList<groupInfo>)session.getAttribute("groupInfo");
  %>
  	
-	<div class="grid_4 pull_8">
+	<div class="grid_4">
     	<div class="sidebarbox">
       		<h3>Hello! <%=us1.name%><%if(!us1.img.equals("0")) {    	%>
     			<img src="https://s3-us-west-2.amazonaws.com/tshareavatar/<%=us1.Id+us1.img%>" height="42" width="42" align="right">  
     	  		<%} else{%>
-    		<img src="../../images/avatar.jpg" height="42" width="42" align="right">   
+    		<img src="/Tshare-test2/images/avatar.jpg" height="42" width="42" align="right">   
     	  <%} %></h3>
       		
       		<ul>
@@ -47,9 +41,9 @@
         		<li><a href="#">Setting</a></li>
       		</ul>
     	</div>
-   	 	<div class="simple" id = "test">
+   	 	<div class="simple">
 			<h4>Groups 
-				<a data-toggle="modal" data-target="#myaddGroup" data-rel="popup" data-position-to="window" 
+				<a data-toggle="modal" style="float:right;margin:5px; " data-target="#myaddGroup" data-rel="popup" data-position-to="window" 
 				data-transition="fade" class="btn btn-info btn-xs">Add group</a> 
 			</h4>
 			<ul id = "group">
@@ -65,11 +59,7 @@
 			<%}%>
 			
     		</ul>
-		   
-    		<h4>Friends</h4>
-			<ul id = "friend">
-    			
-    		</ul>
+		 
 		</div>
 	</div> 
 	
@@ -160,7 +150,7 @@
 			
 	<script>
 	
-		for(var i=1; i<8; i++) {
+		/*for(var i=1; i<8; i++) {
 			var li = document.createElement("li");
 			var a = document.createElement("a");
 			var text = document.createTextNode("friend"+i);
@@ -169,7 +159,7 @@
 			li.appendChild(a);	
 			var element = document.getElementById("friend");
 			element.appendChild(li);
-		}
+		}*/
 		
 		function saveGroupName(a) {
 			var name = a.getAttribute("groupName");

@@ -48,8 +48,8 @@ public class activityServlet extends HttpServlet {
 			String activityOption=request.getParameter("activityOption");
 			User u=(User)request.getSession().getAttribute("userInfo");
 			groupInfo g=(groupInfo)request.getSession().getAttribute("curr_group");
-			System.out.println("POST Success! actrivityServlet");
-			System.out.println("option: "+ activityOption+" user: "+u.Id);
+			//System.out.println("POST Success! actrivityServlet");
+			//System.out.println("option: "+ activityOption+" user: "+u.Id);
 			
 			if(activityOption.equals("a")){		
 				ArrayList<activityInfo> user_activity = getActivity.allActivity(u.Id, g.groupId);

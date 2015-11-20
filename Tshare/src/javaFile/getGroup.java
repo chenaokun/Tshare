@@ -38,7 +38,7 @@ public class getGroup {
 	 static DynamoDB dynamoDB;
 	 
   public groupInfo searchGroup(String groupId) {
-		 System.out.println("invoke method grouId is "+groupId);
+		 //System.out.println("invoke method grouId is "+groupId);
 		 
 		 client.setRegion(Region.getRegion(Regions.US_WEST_2));
 		 dynamoDB = new DynamoDB(client);
@@ -141,7 +141,7 @@ public class getGroup {
 		 ArrayList<String> memberList=new ArrayList<String>();
 		 for (Item item: col) {
 			 memberList.add(item.getJSON("userId"));
-			 System.out.println(item.getJSON("userId"));
+			 //System.out.println(item.getJSON("userId"));
 		 }
 		 HashMap<String,String> groupToMember=new HashMap<String,String>();
 		 HashMap<String,String> groupToImg=new HashMap<String,String>();

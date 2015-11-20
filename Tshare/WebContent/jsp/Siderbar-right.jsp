@@ -9,7 +9,7 @@
 	HashMap<String, String> groupToImg=(HashMap<String, String>)session.getAttribute("groupToImg");
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
+
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
@@ -26,12 +26,12 @@
 </style>
 <title>right bar</title>
 </head>
-<body>
-<div class="grid_3 push_0">
-  <div class="panel panel-default">
-    <div class="panel-heading">
+
+<div class="grid_3">
+  <div class="panel2 panel-default2">
+    <div class="panel-heading2">
     <div class="row">
-      <div class="col-sm-8"><h3 class="panel-title" align="right" id="groupname"><%=current_group.groupName%></h3></div>
+      <div class="col-sm-8"><h3 class="panel-title2" align="right" id="groupname"><%=current_group.groupName%></h3></div>
       <div class="col-sm-1" id="afterThis">
   		<input align="right" type="image" src="../images/edit.svg" id="editname" width="20" height="20">
 	  </div>	  
@@ -178,8 +178,6 @@ $('#editname').click(function() {
 	  
 	});
 	
-
 </script>
-</body>
-</html>
+
 

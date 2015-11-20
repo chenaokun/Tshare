@@ -44,8 +44,8 @@ public class logIn extends HttpServlet {
 	response.setCharacterEncoding("utf-8");
 	String u=request.getParameter("usrname");
 	String p=request.getParameter("password");
-	System.out.println("username:"+u);
-	System.out.println("input password:"+p);
+	/*System.out.println("username:"+u);
+	System.out.println("input password:"+p);*/
 	
 	Item user=getPW(u,"Usr_info");
 	if(user==null)

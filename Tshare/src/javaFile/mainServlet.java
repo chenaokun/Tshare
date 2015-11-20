@@ -52,8 +52,8 @@ public class mainServlet extends HttpServlet {
 		response.setCharacterEncoding("utf-8");
 		String groupId=request.getParameter("groupId");
 		String groupName=request.getParameter("groupName");
-		System.out.println("POST Success! mainServlet");
-		System.out.println("groupId: "+ groupId+" name:"+groupName);
+		//System.out.println("POST Success! mainServlet");
+		//System.out.println("groupId: "+ groupId+" name:"+groupName);
 		getGroup gg = new getGroup();
 		
 		User u=(User)request.getSession().getAttribute("userInfo");
@@ -81,7 +81,7 @@ public class mainServlet extends HttpServlet {
 		 ArrayList<String> memberList=new ArrayList<String>();
 		 for (Item item: col) {
 			 memberList.add(item.getJSON("userId"));
-			 System.out.println(item.getJSON("userId"));
+			 //System.out.println(item.getJSON("userId"));
 		 }
 		 HashMap<String,String> groupToMember=new HashMap<String,String>();
 		 HashMap<String,String> groupToImg=new HashMap<String,String>();

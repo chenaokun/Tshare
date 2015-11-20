@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" import="java.util.*,javaFile.*"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>bill activity</title>
@@ -9,17 +8,14 @@
 <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 
 </head>
-
-<body>
 	
 	<div id ="bill">
 		<div class="panel-group" id="accordion">	
 		<% 		
-    	System.out.println("Attention!!!!-------------");
 		ArrayList<activityInfo> activity = (ArrayList<activityInfo>)session.getAttribute("all_activity");
 		int i=0;
     	for(activityInfo a : activity) {
-    		System.out.println(a.billId+" "+a.flag);
+    		//System.out.println(a.billId+" "+a.flag);
     		i++;
     		if(a.flag == false){%>
     			<div class="panel panel-default">
@@ -28,7 +24,7 @@
           					<a data-toggle="collapse" data-parent="#accordion" >
           					    <h5 style="text-align:left">BillName: <%=a.billName %> &nbsp;&nbsp;&nbsp;&nbsp;You are not involved.&nbsp;&nbsp;
           					    	<span title="Delete This Bill"  data-toggle="tooltip" data-placement="top">
-          							<button  type="button" class="btn btn-info btn-xs" data-toggle="modal" 
+          							<button  style="float:right;margin-top:-4px;" type="button" class="btn btn-info btn-xs" data-toggle="modal" 
           							data-target="#deleteBill" data-id="<%=a.billId%>">x</button></span>
           					    </h5>
           					</a>
@@ -50,7 +46,7 @@
           						<h5 style="text-align:left">BillName: <%=a.billName %>&nbsp;&nbsp;&nbsp;&nbsp; 
           							<%=a.payerId %> spent $<%=a.totalAmount %>; &nbsp; You owe $<%=amount %>&nbsp;&nbsp;
           							<span title="Delete This Bill"  data-toggle="tooltip" data-placement="top">
-          							<button  type="button" class="btn btn-info btn-xs" data-toggle="modal" data-target="#deleteBill" data-id="<%=a.billId%>">x</button></span>
+          							<button  style="float:right;margin-top:-4px;" type="button" class="btn btn-info btn-xs" data-toggle="modal" data-target="#deleteBill" data-id="<%=a.billId%>">x</button></span>
           						</h5>
           						
           					</a>
@@ -74,16 +70,15 @@
     			<%} else{%>
     				<div class="panel panel-default">
         				<div class="panel-heading">
-        				<h4 class="panel-title">
-          					<a data-toggle="collapse"  data-parent="#accordion" href="#<%=i %>">
-          					    
+        				<div class="panel-title">
+          					<a data-toggle="collapse"  data-parent="#accordion" href="#<%=i %>">  					    
           						<h5 style="text-align:left">BillName: <%=a.billName %>  
           							&nbsp;&nbsp;&nbsp;&nbsp; You spent $<%=a.totalAmount%> &nbsp;&nbsp;
           							<span title="Delete This Bill"  data-toggle="tooltip" data-placement="top">
-          							<button  type="button" class="btn btn-info btn-xs" data-toggle="modal" data-target="#deleteBill" data-id="<%=a.billId%>">x</button></span>
+          							<button  style="float:right;margin-top:-4px;" type="button" class="btn btn-info btn-xs" data-toggle="modal" data-target="#deleteBill" data-id="<%=a.billId%>">x</button></span>
           						</h5>
           					</a>
-       		 			</h4>
+       		 			</div>
       					</div>
       				
       					<div id=<%=i %> class="panel-collapse collapse">
@@ -154,5 +149,3 @@
 	}
 	</script>		
 	
-</body>
-</html>

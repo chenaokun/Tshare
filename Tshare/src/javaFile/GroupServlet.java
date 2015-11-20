@@ -53,16 +53,25 @@ public class GroupServlet extends HttpServlet {
 		String d=request.getParameter("groupDescription");
 		User u=(User)request.getSession().getAttribute("userInfo");
 		String userId = u.Id;
-		System.out.println("groupName:"+g);
+		/*System.out.println("groupName:"+g);
 		System.out.println("member:"+m);
-		System.out.println("user:"+userId);
+		System.out.println("user:"+userId);*/
 		if(g!="" && m!=""){
 			LoadGroup(g, m, d, userId);
-			System.out.println("add group successfully!");
+			//System.out.println("add group successfully!");
 			
 		}else{
-			System.out.println("please complete the form");
+			//System.out.println("please complete the form");
 		}
+		getGroup gg = new getGroup();
+		HashMap<String, String> groupBalance =new HashMap<String, String>();
+		ArrayList<String> group=gg.getGroupSet(u.Id, groupBalance);
+		ArrayList<groupInfo> all_groups = new ArrayList<groupInfo>();
+		for(String tempgroup : group) {
+			groupInfo gi = gg.searchGroup(tempgroup);
+			all_groups.add(gi);
+		}
+		request.getSession().setAttribute("groupInfo", all_groups);
 		response.sendRedirect("/Tshare-test2/jsp/Welcome.jsp");
 		
 	  }
@@ -123,10 +132,9 @@ public class GroupServlet extends HttpServlet {
          AmazonDynamoDB client = new AmazonDynamoDBClient(new ProfileCredentialsProvider());
     	 client.setRegion(Region.getRegion(Regions.US_WEST_2));
 
-         System.out.println("Issuing CreateTable request for " + tableName);
+         //System.out.println("Issuing CreateTable request for " + tableName);
          Table table = dynamoDB.createTable(request);
-         System.out.println("Waiting for " + tableName
-             + " to be created...this may take a while...");
+         //System.out.println("Waiting for " + tableName+ " to be created...this may take a while...");
          table.waitForActive();
 
      } catch (Exception e) {
@@ -147,7 +155,7 @@ public class GroupServlet extends HttpServlet {
      
      try {
 
-         System.out.println("Adding data to groupDecription & currentBalance");
+         //System.out.println("Adding data to groupDecription & currentBalance");
 
          Item item1 = new Item()
              .withPrimaryKey("groupId", groupId)
