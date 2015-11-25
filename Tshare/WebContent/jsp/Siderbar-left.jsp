@@ -30,18 +30,27 @@
  	
 	<div class="grid_4">
     	<div class="sidebarbox">
-      		<h3>Hello! <%=us1.name%><%if(!us1.img.equals("0")) {    	%>
+   
+      		<h3>Hello! <%=us1.name%>
+      		</h3>
+      		
+      		<div style="width:30%; float:right; margin:8px;">
+      		<%if(!us1.img.equals("0")) {%>
     			<img src="https://s3-us-west-2.amazonaws.com/tshareavatar/<%=us1.Id+us1.img%>" height="42" width="42" align="right">  
     	  		<%} else{%>
     		<img src="/Tshare-test2/images/avatar.jpg" height="42" width="42" align="right">   
 
-    	  <%} %></h3>
-      		
-      		<ul>
+    	   <%} %>
+    	   </div>
+    	   
+      		<ul >
         		<li><a href="/Tshare-test2/jsp/profile/Profile-Main.jsp">My profile</a> </li>
         		<li><a href="#">Setting</a></li>
       		</ul>
+      		
+      		
     	</div>
+    	
    	 	<div class="simple">
 			<h4>Groups 
 				<a data-toggle="modal" style="float:right;margin:5px; " data-target="#myaddGroup" data-rel="popup" data-position-to="window" 

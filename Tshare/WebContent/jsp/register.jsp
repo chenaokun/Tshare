@@ -14,7 +14,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <title>Sign-up Page</title>
 <!-- <link href="css/bootstrap.css" rel="stylesheet" type="text/css"> -->
 <link rel="stylesheet" href="../styles/style.css" type="text/css" />
-<link href="../css/bootstrap-3.3.4.css" rel="stylesheet" type="text/css">
+<link href="../css/bootstrap.css" rel="stylesheet" type="text/css">
 <link href="../css/Sign-in.css" rel="stylesheet" type="text/css">
 <link href="../css/siderbar.css" rel="stylesheet" type="text/css">
 <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
@@ -46,35 +46,25 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 
 <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+
 <nav class="navbar navbar-default">
-  <div class="container-fluid">
-    <!-- Brand and toggle get grouped for better mobile display -->
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#defaultNavbar1"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button>
-      <a class="navbar-brand" href="#">Tshare</a></div>
-      <div class="collapse navbar-collapse" id="defaultNavbar1">
-		<ul class="nav navbar-nav navbar-right">
-      <li><a href="sign_in.jsp">Sign In </a></li> 
-      </ul>
-    </div>
-    <!-- Collect the nav links, forms, and other content for toggling -->
-    <div class="collapse navbar-collapse" id="defaultNavbar1">
-<ul class="nav navbar-nav navbar-right">
-  <li></li>
-  <li>      </li>
-  <li></li>
-</ul>
-    </div>
-</div>
-    <div>
-    </div>    
-  <!-- /.container-fluid -->
+  
+    	<div class="navbar-header">     		
+      		<a class="navbar-brand" href="#">Tshare</a>
+      	</div>
+    	<div class="collapse navbar-collapse" id="defaultNavbar1">
+			<ul class="nav navbar-nav navbar-right">
+  				<li><a href="sign_in.jsp">Sign In </a></li> 
+			</ul>
+    	</div>    
+
 </nav>
+
 <div id = "sign-box" class="container-fluid">
 	<div class="signin">
   		<p>&nbsp;</p>
   		<label class="col-sm-2 control-label"></label>
-  		<div class="col-sm-10">
+  		<div class="col-sm-12">
   		<h2>Sign Up</h2>
   		</div>
   		<p>&nbsp;</p>
@@ -82,61 +72,61 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	
 	<div class="signin">
 			<!-- <img src="https://s3-us-west-2.amazonaws.com/tshareavatar/youdidut@gmail.comfda" height="42" width="42"> -->
-		<div class="form-group">	
-  			<label class="col-sm-2 control-label">*User Name</label>
-  			<div class="col-sm-10">
-  			<input class="form-control" id="usrname" type="text" placeholder="mymail@mail.com"><br>
+		<div class="my-form-group">	
+  			<label class="my-col-sm-3">*User Name</label>
+  			<div class="my-col-sm-3">
+  				<input class="form-control" id="usrname" type="text" placeholder="mymail@mail.com"><br>
   			</div>
-  		</div>	
-  		<div class="form-group">	
-  			<label class="col-sm-2 control-label">*Password</label>
-   			<div class="col-sm-10">
-   			<input class="form-control" type="password" id="password1"><br>
+  			
+  			<label class="my-col-sm-3">*Password</label>
+   			<div class="my-col-sm-3">
+   				<input class="form-control" type="password" id="password1"><br>
    			</div>
-   		</div>	
-   		<div class="form-group">	
-   			<label class="col-sm-2 control-label">*Re-enter Password</label>
-   			<div class="col-sm-10">
-   			<input class="form-control" type="password" id="password2"><br> 
+   		
+   			<label class="my-col-sm-3">*Re-enter Password</label>
+   			<div class="my-col-sm-3">
+   				<input class="form-control" type="password" id="password2"><br> 
    			</div>
-   		</div>
-   		<div class="form-group">	  	   			
-  			<label class="col-sm-2 control-label">*Full Name</label>
-  			<div class="col-sm-10">
-  			<input class="form-control" id="fullName" type="text"><br>
+   			  	   			
+  			<label class="my-col-sm-3">*Full Name</label>
+  			<div class="my-col-sm-3">
+  				<input class="form-control" id="fullName" type="text"><br>
   			</div>
+  			
+  			<label class="my-col-sm-3">Upload Photo</label>
+  			<div class="my-col-sm-3">
+  				<div class="imageBox">
+        			<div class="thumbBox"></div>
+       				 <div class="spinner" style="display: none">Loading...</div>
+        		</div>
+    		</div>
+    		
+    		<label class="my-col-sm-3"></label>
+    		<div class="my-col-sm-3">
+    			<div class="action"> 
+        			<input type="file" id="file" style="float:left; width: 250px">       
+    			</div>
+   			</div>
+   			
+    		<div class="my-col-sm-3">
+    			<div class="action">
+        			<input type="button" id="btnZoomIn" value="  +  " class="btn btn-default">        
+        			<input type="button" id="btnZoomOut" value="  -  " class="btn btn-default">
+    			</div>
+    		</div>
   		 </div>	
-  			<label class="col-sm-2 control-label">Upload Photo</label>
-  			<div class="col-sm-10">
-  			<div class="imageBox">
-        <div class="thumbBox"></div>
-        <div class="spinner" style="display: none">Loading...</div>
-        </div>
-    </div>
-    <label class="col-sm-2 control-label"></label>
-    <div class="col-sm-10">
-    <div class="action"> 
-        <input type="file" id="file" style="float:left; width: 250px">       
-    </div>
-    </div>
-    <label class="col-sm-2 control-label"></label>
-    <div class="col-sm-10">
-    <div class="action">
-        <input type="button" id="btnZoomIn" value="  +  " class="btn btn-default" style="float: center">        
-        <input type="button" id="btnZoomOut" value="  -  " class="btn btn-default" style="float: center">
-    </div>
-    </div>
-    <div class="cropped">
-
-    </div>
+  			
+    
+    	<div class="cropped">
+   	 	</div>
   			<script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
-		<script src="../js/cropbox.js"></script>
+			<script src="../js/cropbox.js"></script>
 		
   			<div>&nbsp;</div>  	
   			<label class="col-sm-2 control-label"></label>		
-  			<div class="col-sm-10">	
-			<input type="submit" id="btnCrop" class="btn btn-default"  value="Submit" >		      		
-		</div>
+  			<div class="col-sm-offset-2 my-col-sm-3">	
+				<input type="submit" id="btnCrop" class="btn btn-default"  value="Submit" >		      		
+			</div>
 	</div>
 </div>
 

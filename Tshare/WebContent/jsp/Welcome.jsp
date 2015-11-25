@@ -15,8 +15,14 @@
 	<%@ include file="Header.html" %>
 	
 	<div id="content" class="container_12 lsb_grid_4">
-		<div class="grid_8 push_4">
-			<h1>Welcome To Tshare! <%=u.name%></h1>
+		<div class="grid_8">
+			<div id="pageshadow">
+				<div id="header"> 
+					<div class="title">
+                		<a id = "gg" href="#">Welcome To Tshare! <%=u.name%></a>
+              		</div>
+				</div>
+			</div>
         	<%@ include file="summary.jsp" %>
 		</div>
 		<%@ include file="Siderbar-left.jsp" %>

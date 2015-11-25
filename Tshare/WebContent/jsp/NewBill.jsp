@@ -14,7 +14,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title> Add Bill </title>
 <!-- <link href="css/bootstrap.css" rel="stylesheet" type="text/css"> -->
-<link href="../css/bootstrap-3.3.4.css" rel="stylesheet" type="text/css">
+<link href="../css/bootstrap.css" rel="stylesheet" type="text/css">
 <link href="../css/Sign-in.css" rel="stylesheet" type="text/css">
 <link href="../css/siderbar.css" rel="stylesheet" type="text/css">
 <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
@@ -26,19 +26,19 @@
 </head>
 
 <body>
-<div id = "sign-box" class="container-fluid">  
-	 <p>&nbsp;</p>
-	<div>
-  		<p>&nbsp;</p>
-  		<h2>Add a new bill</h2>
+<div id = "bill" class="container-fluid">  
+	 
+	<div style="text-align:center">  		
+  		<h3>Add a new bill</h3>
 	</div>
 	
-	<div>
+	
 		<form action="../PutBillToDB" method="post" >
+		<div class="grid_bill1">
   			<div class="h5">Bill Name: </div>
-  			<input name="billName" type="text"><br>
+  			<input name="billName" class="form-control-bill" type="text"><br>
   			<div class="h5">You Paid: </div>
-  			<input name="amount" type="text"><br>
+  			<input name="amount" class="form-control-bill" type="text"><br>
   			<div class="h5">
 				<p class="h5">Add User:</p>
    			</div>
@@ -49,14 +49,21 @@
 			%>			
    			<input type="checkbox" name="userList" value="<%=Id%>"> <%=option%><br>
   			<% } %>
+  		
+  	</div>
+  	
+  	<div class="grid_bill2">
    			<div class="h5">Description:</div>
-   			<textarea class="form-control" rows="5" cols="3" name="description"></textarea>
-  			<div class="h5">Upload Photo</div>
-  			<input id="inputFileToLoad" name="img" type="file" onchange="encodeImageFileAsURL();" />
-  			<div>&nbsp;</div>  			
-			<input type="submit" class="submit" value="Submit" >	      		
-		</form>
+   			<textarea class="form-control-bill"  name="description"></textarea>
+  			<div class="h5">Upload Photo:</div>
+  			<div>&nbsp;</div>
+  			<input id="inputFileToLoad" name="img" type="file" onchange="encodeImageFileAsURL();" />  	
+  			<div class="grid_5">  			 
+  				<input type="submit" class="btn btn-info btn" value="Submit" >
+			</div>		 			   				
 	</div>
+	  			
+	</form>	   
 </div>
 
 

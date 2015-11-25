@@ -9,31 +9,31 @@
  	ArrayList<groupInfo> group3 = (ArrayList<groupInfo>)session.getAttribute("groupInfo");
  %>
  	
-<div  id="bill">
-<table class="table">	
-	<tr>
-    	<td>You total balance:</td>
-    	<td>$<%=sum%></td>
-    </tr>
-	<tr>
-	<td>Details:</td>
-	<td></td>
-	</tr>
-		
+<div  id="summary">
+	<table class="table">	
+		<div>
+    		<h4>You total balance:&nbsp;&nbsp;$<%=sum%></h4>
+    		<div>&nbsp;</div>
+    		
+    	</div>
+    	
+		<tr>
+			<td>Details:</td>
+			<td></td>
+		</tr>		
     </table>
+    
 	<table class="table table-hover">
 	<%for (groupInfo g:group3){
 		String groupId=g.groupId;
 		if(gb.containsKey(groupId)&&!gb.get(groupId).equals("0.0")){
-	%>
-	
-	<tr>
-    	<td><%=g.groupName%></td>
-    	<td></td>
-    	<td></td>
-    	<td>$<%=gb.get(groupId)%></td> 
-   </tr>  	
-	
+	%>	
+		<tr>
+    		<td><%=g.groupName%></td>
+    		<td></td>
+    		<td></td>
+    		<td>$<%=gb.get(groupId)%></td> 
+   		</tr>  		
 		<% } %>
 	<% } %>
 	</table>

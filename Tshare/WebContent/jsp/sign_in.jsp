@@ -13,7 +13,7 @@ System.out.println(path);
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Sign-In Page</title>
 <!-- <link href="css/bootstrap.css" rel="stylesheet" type="text/css"> -->
-<link href="../css/bootstrap-3.3.4.css" rel="stylesheet" type="text/css">
+<link href="../css/bootstrap.css" rel="stylesheet" type="text/css">
 <link href="../css/Sign-in.css" rel="stylesheet" type="text/css">
 <link href="../css/siderbar.css" rel="stylesheet" type="text/css">
 <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
@@ -25,68 +25,59 @@ System.out.println(path);
 </head>
 
 <body>
+
 <nav class="navbar navbar-default">
-  <div class="container-fluid">
-    <!-- Brand and toggle get grouped for better mobile display -->
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#defaultNavbar1"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button>
-      <a class="navbar-brand" href="#">Tshare</a></div>
-    <div class="collapse navbar-collapse" id="defaultNavbar1">
-<ul class="nav navbar-nav navbar-right">
-  <li><a href="register.jsp">Sign Up </a></li> 
-</ul>
-    </div>
-    <!-- Collect the nav links, forms, and other content for toggling -->
-    <div class="collapse navbar-collapse" id="defaultNavbar1">
-<ul class="nav navbar-nav navbar-right">
-  <li></li>
-  <li>      </li>
-  <li></li>
-</ul>
-    </div>
-</div>
-    <div>
-    </div>    
-  <!-- /.container-fluid -->
+  
+    	<div class="navbar-header">     		
+      		<a class="navbar-brand" href="#">Tshare</a>
+      	</div>
+    	<div class="collapse navbar-collapse" id="defaultNavbar1">
+			<ul class="nav navbar-nav navbar-right">
+  				<li><a href="register.jsp">Sign Up </a></li> 
+			</ul>
+    	</div>    
+
 </nav>
-<div id = "sign-box" class="container-fluid">
+
+<div id = "sign-box" class="container-fluid1">
 	<div class="signin">
   		<p>&nbsp;</p>
   		<label class="col-sm-2 control-label"></label>
-  		<div class="col-sm-10">
-  		<h2>Sign In</h2>
+  		<div class="col-sm-12">
+  			<h2>Sign In</h2>
   		</div>
   		<p>&nbsp;</p>
 	</div>
 	
 	<div class="signin">
 		<form action="../logIn" method="get" class="form-horizontal">
-		<div class="form-group">
-  			<label class="col-sm-2 control-label">User Name</label>
-  			<div class="col-sm-10">
-  			<input name="usrname" type="text" class="form-control"><br>
+		<div class="my-form-group">
+  			<label class="my-col-sm-3">User Name</label>
+  			<div class="my-col-sm-3">
+  				<input name="usrname" type="text" class="form-control"><br>
   			</div>
-  		</div>	
-  		<div class="form-group">
-  			<label class="col-sm-2 control-label">Password</label>
-  			<div class="col-sm-10">
-  			<input type="password" name="password" class="form-control">
+  		
+  			<label class="my-col-sm-3">Password</label>
+  			<div class="my-col-sm-3">
+  				<input type="password" name="password" class="form-control"><br>
   			</div>
-  		</div>
-  		<div class="form-group">
-  			<div class="col-sm-offset-2 col-sm-10">
-		      <div class="checkbox">
+  		
+  			<div class="col-sm-offset-2 my-col-sm-10">
+		      <div id ="check" class="checkbox">
 		        <label>
 		          <input type="checkbox"> Remember me
 		        </label>
 		      </div>
 		    </div>
-		 </div>
-		 <div class="form-group">
-  			<div class="col-sm-offset-2 col-sm-10">			
-			<input type="submit" class="btn btn-default" value="Submit" >	
-			</div>
-		</div>		
+		
+  			<div class="col-sm-offset-2 col-sm-10">	
+  				<div class="checkbox">
+		        	<label>
+		          		<input id ="check" type="submit" class="btn btn-default" value="Submit" >	
+			
+		       	 	</label>		
+				</div>
+			</div>		
 		</form>
 	</div>
 </div>
@@ -95,7 +86,7 @@ System.out.println(path);
 <div id="credit" class="container_12">
     	<p>&nbsp;</p>
     	<p> @Copyright Titan</p>
-  	</div>
+</div>
 <script src="../js/jquery-1.11.2.min.js" type="text/javascript"></script>
 <script src="../js/bootstrap-3.3.4.js" type="text/javascript"></script>
 </body>

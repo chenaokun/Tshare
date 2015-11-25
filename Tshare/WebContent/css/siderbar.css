@@ -125,7 +125,7 @@ a:active, a:focus {
 
 /* Grid >> 960 Grid System Global
 ----------------------------------------------------------------------------------------------------*/
-.grid_1, .grid_2, .grid_3, .grid_5, .grid_6, .grid_7, .grid_9, .grid_10, .grid_11, .grid_12 {
+.grid_1, .grid_2, .grid_3, .grid_6, .grid_7, .grid_9, .grid_10, .grid_11, .grid_12 {
 	/*display:inline;*/
 	float: left;
 	position: relative;
@@ -141,6 +141,17 @@ a:active, a:focus {
 	/*background-color: #336699;
 	margin-right: 15px;*/
 }
+
+.grid_5 {
+	/*display:inline;*/
+	margin-top:10%;
+	float: right;
+	position: absolute;
+	margin-left: 15px;
+	/*background-color: #336699;
+	margin-right: 15px;*/
+}
+
 .grid_8 {
 	/*display:inline;*/
 	float: left;
@@ -156,12 +167,32 @@ a:active, a:focus {
 	margin-right: 15px;
 }
 
-.grid_13 {
-	display:inline;
-	float: center;
+.grid_bill1 {
+	/*display:inline;*/
+	float: left;
+	position: absolute;
+	margin-left: 20%;
+	width: 50%;	
+	/*background-color: #336699;
+	margin-right: 15px;*/
+}
+
+.grid_bill2 {
+	/*display:inline;*/
+	float: right;
 	position: relative;
-	margin-left: 15px;
-	margin-right: 15px;
+	
+	right: -10%;
+	width: 50%;	
+	/*background-color: #336699;
+	margin-right: 15px;*/
+}
+
+.grid_bill2 .form-control{	
+	float: right;
+	position: relative;	
+	right: -10%;
+	width: 50%;	
 }
 
 /* Grid >> Children (Alpha ~ First, Omega ~ Last)
@@ -429,6 +460,8 @@ h3 {
 	-webkit-border-radius: 5px;
 	margin-bottom:15px;
 	background-color: #FFF;
+	
+	
 }
 .sidebarbox p {
 	padding:8px;
@@ -504,6 +537,7 @@ h3 {
 	background-color: #152840;
 }
 .simple {
+	
 	margin-bottom: 15px;
 	background-color: #152840;
 	text-align: center;
@@ -553,7 +587,7 @@ body {
 	z-index: -100;
 	font: 12px Arial, Helvetica, sans-serif;
 	/*background-color: #6699CC;*/
-	background-color: #465e78;
+	/*background-color: #F5F5F5;*/
 	background-image: url("http://www.pulsarwallpapers.com/data/media/3/Alien%20Ink%202560X1600%20Abstract%20Background.jpg");
 	background-repeat: repeat;
 }
@@ -607,14 +641,29 @@ nav {
 	clear: both;
 	padding-top: 20px;
 	padding-bottom: 15px;
-	border-left: 1px solid #000;
-	border-right: 1px solid #000;
+	border-left: 1px solid #003366;
+	border-right: 1px solid #003366;
 	/*background-color: #FFF;
 	padding-right: 15px;
  	padding-left: 15px;
   	margin-right: 20px;
   	margin-left: auto;*/
   	height: 440px;
+}
+
+#summary {
+	clear: both;
+	padding-top: 20px;
+	padding-bottom: 15px;
+	border-top: 2px solid #003366;
+	border-left: 2px solid #003366;
+	border-right: 2px solid #003366;
+	/*background-color: #FFF;
+	padding-right: 15px;
+ 	padding-left: 15px;
+  	margin-right: 20px;
+  	margin-left: auto;*/
+  	height: 540px;
 }
 
 
@@ -625,7 +674,7 @@ nav {
 ----------------------------------------------------------------------------------------------------*/
 
 .title {
-	color: #ffffff;
+	color: #003366;
 
 	font-family: 'Yanone Kaffeesatz', Arial, Helvetica, sans-serif;
 	font-size: 65px;

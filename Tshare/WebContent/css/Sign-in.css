@@ -1,15 +1,78 @@
 @CHARSET "UTF-8";
-.container-fluid {
+.container-fluid1 {
   padding-right: 15px;
   padding-left: 15px;
   margin-right: auto;
   margin-left: auto;
 }
-.container-fluid .signin {
+.container-fluid1 .signin {
 	float: center;
-	margin-left: 500px;
+	/*margin-left: 500px;*/
 }
 
 #sign-box {
 	height: 550px;
 }
+
+.my-form-group {
+  margin-right: 0px;
+  margin-left: 0px;
+  text-align: center;
+  
+}
+
+.my-form-group2 {
+  margin-right: 0px;
+  margin-left: 0px;
+  
+}
+
+.my-col-sm-3{	
+  	float: left;	
+  	min-height: 1px;  	
+  	width: 100%;
+}
+.my-col-sm-4 {
+  	min-height: 1px;  	
+  	width: 100%;
+  	left: 20%;
+}
+.my-col-sm-10 {	
+  	float: left;	
+  	min-height: 1px;  	
+  	width: 83.33333333%;
+  	height: 100px;
+}
+
+.my-col-sm-3 input{	
+  	min-height: 1px;  	
+  	width: 20%;
+  	position: relative;
+    left: 40%;
+}
+
+.my-col-sm-4 input{	
+  	min-height: 1px;  	
+  	width: 20%;
+  	position: relative;
+    left: 20%;
+}
+
+.my-col-sm-3 .action{	
+  	min-height: 1px;  	
+  	width: 20%;
+  	position: relative;
+    left: 40%;
+}
+
+.imageBox {
+	min-height: 1px;  	
+  	width: 20%;
+  	position: relative;
+    left: 40%;
+}
+
+#check {
+	top: 80px;
+}
+
