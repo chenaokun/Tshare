@@ -34,12 +34,11 @@ import com.amazonaws.services.dynamodbv2.model.UpdateItemResult;
 public class payToSettle extends HttpServlet {
 	 static AmazonDynamoDB client = new AmazonDynamoDBClient(new ProfileCredentialsProvider());
 	 static DynamoDB dynamoDB;
-	 static String groupId="";
  protected void doGet(HttpServletRequest request, 
      HttpServletResponse response) throws ServletException, IOException 
    {
 	 groupInfo group=(groupInfo)request.getSession().getAttribute("curr_group");
-	 groupId=group.groupId;
+	 String groupId=group.groupId;
 	 
 	 client.setRegion(Region.getRegion(Regions.US_WEST_2));
 	 String tableName="currentBalance";
@@ -59,7 +58,7 @@ public class payToSettle extends HttpServlet {
 		if(beingPaid.equals("1"))
 			amount*=-1;
 		Double after=before-amount;
-		System.out.println(after);
+		System.out.println("after:"+after+" current userId "+u.Id+" current receiver "+receiver);
 		BigDecimal afterRound = new BigDecimal(after).setScale(2, BigDecimal.ROUND_HALF_UP);
 		Map<String, AttributeValueUpdate> updateItems = new HashMap<String, AttributeValueUpdate>();
 
@@ -84,7 +83,7 @@ public class payToSettle extends HttpServlet {
 		Double receiverAfter=receiverBefore+amount;
 		BigDecimal newBalanceRound = new BigDecimal(receiverAfter).setScale(2, BigDecimal.ROUND_HALF_UP);
 		updateItems.put("balance", new AttributeValueUpdate().withValue(new AttributeValue(String.valueOf(newBalanceRound))).withAction("PUT"));
-		System.out.println("updating "+receiver+"'s balance: "+ String.valueOf(newBalanceRound));
+		System.out.println("updating "+receiver+"'s balance: "+ String.valueOf(newBalanceRound) );
 		itemKeys.put("userId", new AttributeValue(receiver));
 		updateItemRequest
         .withTableName("currentBalance")

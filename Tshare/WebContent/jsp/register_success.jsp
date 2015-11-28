@@ -65,6 +65,7 @@
 function saveImg(){
 	
 	if(sessionStorage.haveImage){
+	sessionStorage.haveImage=false;	
 	usrname=sessionStorage.usrname;
 	img=sessionStorage.img;
 	var ajax = new XMLHttpRequest();

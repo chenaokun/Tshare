@@ -23,13 +23,12 @@ import com.amazonaws.services.dynamodbv2.document.Table;
 public class addBill extends HttpServlet{
 	 static AmazonDynamoDB client = new AmazonDynamoDBClient(new ProfileCredentialsProvider());
 	 static DynamoDB dynamoDB;
-	 static String groupId="";
 	 
 	 protected void doGet(HttpServletRequest request, 
 		      HttpServletResponse response) throws ServletException, IOException 
 	{
 		groupInfo group=(groupInfo)request.getSession().getAttribute("curr_group");
-		groupId=group.groupId;
+		String groupId=group.groupId;
 		 client.setRegion(Region.getRegion(Regions.US_WEST_2));
 		 dynamoDB = new DynamoDB(client);
 		 Table table = dynamoDB.getTable("currentBalance");

@@ -26,7 +26,7 @@
 	<table class="table table-hover">
 	<%for (groupInfo g:group3){
 		String groupId=g.groupId;
-		if(gb.containsKey(groupId)&&!gb.get(groupId).equals("0.0")){
+		if(gb.containsKey(groupId)&&Double.parseDouble(gb.get(groupId))!=0.0){
 	%>	
 		<tr>
     		<td><%=g.groupName%></td>
