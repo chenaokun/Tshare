@@ -70,23 +70,26 @@ System.out.println(path);
 		      </div>
 		    </div>
 		
-  			<div class="col-sm-offset-2 col-sm-10">	
+  			<div class="col-sm-offset-2 my-col-sm-10">	
   				<div class="checkbox">
 		        	<label>
 		          		<input id ="check" type="submit" class="btn btn-default" value="Submit" >	
 			
 		       	 	</label>		
 				</div>
+			</div>
 			</div>		
 		</form>
+	</div>
+	
+	<div id="credit" class="container_12">
+    	<p>&nbsp;</p>
+    	<p> @Copyright Titan</p>
 	</div>
 </div>
 
 
-<div id="credit" class="container_12">
-    	<p>&nbsp;</p>
-    	<p> @Copyright Titan</p>
-</div>
+
 <script src="../js/jquery-1.11.2.min.js" type="text/javascript"></script>
 <script src="../js/bootstrap-3.3.4.js" type="text/javascript"></script>
 </body>

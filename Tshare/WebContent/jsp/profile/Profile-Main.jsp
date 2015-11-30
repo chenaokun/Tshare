@@ -15,7 +15,14 @@
 	<%@ include file="../Header.html" %>
 	
 	<div id="content" class="container_12 lsb_grid_4">
-		<div class="grid_8 push_4">
+		<div class="grid_8">
+			<div id="pageshadow">
+				<div id="header"> 
+					<div class="title-wel">
+                		<a>Update Profile Info</a>
+              		</div>
+				</div>
+			</div>
 			<%@ include file="profile.jsp" %>
 		</div>
 		<%@ include file="../Siderbar-left.jsp" %>

@@ -663,9 +663,12 @@ nav {
  	padding-left: 15px;
   	margin-right: 20px;
   	margin-left: auto;*/
-  	height: 540px;
+  	height: 480px;
 }
 
+.sum-body {
+	font: 15px Arial, bold, Helvetica, sans-serif;
+}
 
 
 
@@ -686,7 +689,20 @@ nav {
 	
 
 }
-.title a {
+.title-wel {
+	color: #003366;
+
+	font-family: 'Yanone Kaffeesatz', Arial, Helvetica, sans-serif;
+	font-size: 50px;
+	line-height: 170%;
+	font-weight: normal;
+	text-shadow: 4px 4px 4px #263A54;
+	text-align: center;
+	padding-top: 5px;
+	
+
+}
+.title a , .title-wel a{
 	text-decoration:none;
 	/*color: #A60002;
 	color: #56CCC8;*/

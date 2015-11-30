@@ -14,22 +14,22 @@
 <div  id="bill">
 <table class="table">	
 	<tr>
-    	<td>Optimized Plan</td>
+    	<td class="sum-body">Optimized Plan</td>
     	<td>     </td>
     	<td>     </td>
     	<td>     </td>
     </tr>
 	<tr>
 	<%if(Double.parseDouble(balance)>=0){ %>
-    	<td>You Owe</td>
+    	<td class="sum-body">You Owe</td>
     	<td>     </td>
     	<td>     </td>
-    	<td>$<%=balance %></td>
+    	<td class="sum-body">$<%=balance %></td>
     <% } else {%>
-    	<td>People Owe you</td>
+    	<td class="sum-body">People Owe you</td>
     	<td>     </td>
     	<td>     </td>
-    	<td>$<%=-Double.parseDouble(balance) %></td>
+    	<td class="sum-body">$<%=-Double.parseDouble(balance) %></td>
     <%}%>
     </tr>	
 
@@ -45,9 +45,9 @@
 	    if(key[1].equals(userId)){%>
 	
 	<tr>
-    	<td><%=key[0]%> pays You</td>
-    	<td><%=Double.toString(value)%></td>
-    	<td>Amount paid:</td> 
+    	<td class="sum-body"><%=key[0]%> pays You</td>
+    	<td class="sum-body"><%=Double.toString(value)%></td>
+    	<td class="sum-body">Amount paid:</td> 
     	<td>
     	<%-- <form class="form-inline"action="../payToSettle?receiver=<%=key[0]%>&beingPaid=1" method="post">
 		  <div class="form-group">

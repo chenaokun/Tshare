@@ -10,7 +10,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <!-- <script src="/Tshare-test2/js/jquery-1.11.2.min.js" type="text/javascript"></script> -->
-<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>-->
 <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
  
 
@@ -33,29 +32,35 @@
     ArrayList<groupInfo> group2 = (ArrayList<groupInfo>)session.getAttribute("groupInfo");
  %>
  	
-	<div class="grid_4 pull_8">
+	<div class="grid_4">
     	<div class="sidebarbox">
-      		<h3>Hello! <%=us1.name%><%if(!us1.img.equals("0")) {    	%>
+   
+      		<h3>Hello! <%=us1.name%>
+      		</h3>
+      		
+      		<div style="width:30%; float:right; margin:8px;">
+      		<%if(!us1.img.equals("0")) {%>
     			<img src="https://s3-us-west-2.amazonaws.com/tshareavatar/<%=us1.Id+us1.img%>" height="42" width="42" align="right">  
     	  		<%} else{%>
-    		<img src="../../images/avatar.jpg" height="42" width="42" align="right">   
-    	  <%} %></h3>
-      		
-      		<ul>
+    		<img src="/Tshare-test2/images/avatar.jpg" height="42" width="42" align="right">   
+
+    	   <%} %>
+    	   </div>
+    	   
+      		<ul >
         		<li><a href="/Tshare-test2/jsp/profile/Profile-Main.jsp">My profile</a> </li>
         		<li><a href="#">Setting</a></li>
       		</ul>
+      		
+      		
     	</div>
-   	 	<div class="simple" id = "test">
+    	
+   	 	<div class="simple">
 			<h4>Groups 
-				<a data-toggle="modal" data-target="#myaddGroup" data-rel="popup" data-position-to="window" 
+				<a data-toggle="modal" style="float:right;margin:5px; " data-target="#myaddGroup" data-rel="popup" data-position-to="window" 
 				data-transition="fade" class="btn btn-info btn-xs">Add group</a> 
 			</h4>
 			<ul id = "group">
-    			<!--<li><a href="#">group1</a></li>
-  				<li><a href="#">group2</a></li>
-				<li><a href="#">group3</a></li>
-				<li><a href="#">group4</a></li> -->
 			<%
 			for(groupInfo g : group2) {
 				String gn = g.groupName;%>
@@ -68,16 +73,10 @@
 			<%}%>
 			
     		</ul>
-		   
-    		<h4>Friends</h4>
-			<ul id = "friend">
-    			<!--<li><a href="#">friend1</a></li>
-  				<li><a href="#">friend2</a></li>
-				<li><a href="#">friend</a></li>
-				<li><a href="#">friend</a></li> -->
-    		</ul>
+		 
 		</div>
 	</div> 
+	
 	<div  class="modal fade"  id="myaddGroup" role="dialog">
     	<div class="modal-dialog">   
       		<div class="modal-content">
@@ -165,7 +164,7 @@
 			
 	<script>
 	
-		for(var i=1; i<8; i++) {
+		/*for(var i=1; i<8; i++) {
 			var li = document.createElement("li");
 			var a = document.createElement("a");
 			var text = document.createTextNode("friend"+i);
@@ -174,7 +173,7 @@
 			li.appendChild(a);	
 			var element = document.getElementById("friend");
 			element.appendChild(li);
-		}
+		}*/
 		
 		function saveGroupName(a) {
 			var name = a.getAttribute("groupName");

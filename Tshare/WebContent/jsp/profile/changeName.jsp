@@ -7,13 +7,15 @@
 <title>changeName</title>
 </head>
 <body>
-<div id="bill">
-	<div>Please Enter Your New User Name</div>
-	<form action="../../updateProfile?subject=name" method="post" >
-  			<input name="username" type="text"><br>
-  			<div>&nbsp;</div>  			
-			<input type="submit" value="submit">	      		
-		</form>	
+<div id="summary">
+	<div style="text-align:center">
+		<h4>Please Enter Your New User Name</h4>
+			<form action="../../updateProfile?subject=name" method="post" >
+  				<input name="username" type="text"><br>
+  				<div>&nbsp;</div>  			
+				<input type="submit" value="submit">	      		
+			</form>	
+	</div>
 </div>	
 </body>
 </html>

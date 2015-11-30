@@ -23,9 +23,12 @@
         				<h4 class="panel-title">    				       				
           					<a data-toggle="collapse" data-parent="#accordion" >
           					    <h5 style="text-align:left">BillName: <%=a.billName %> &nbsp;&nbsp;&nbsp;&nbsp;You are not involved.&nbsp;&nbsp;
-          					    	<span title="Delete This Bill"  data-toggle="tooltip" data-placement="top">
+          					    	         							      					    	   					    	
           							<button  style="float:right;margin-top:-4px;" type="button" class="btn btn-info btn-xs" data-toggle="modal" 
-          							data-target="#deleteBill" data-id="<%=a.billId%>">x</button></span>
+          							data-target="#deleteBill" data-id="<%=a.billId%>">x</button>
+          							
+          							<button style="float:right;margin-top:-4px;margin-right:4px;" type="button" class="btn btn-info btn-xs" data-toggle="modal" 
+          							data-target="#showreceipt" data-id="<%=a.photoPath%>"><img src="../images/img.png" width="20" height="20"></button>
           					    </h5>
           					</a>
           				</h4>
@@ -45,8 +48,10 @@
           					    
           						<h5 style="text-align:left">BillName: <%=a.billName %>&nbsp;&nbsp;&nbsp;&nbsp; 
           							<%=a.payerId %> spent $<%=a.totalAmount %>; &nbsp; You owe $<%=amount %>&nbsp;&nbsp;
-          							<span title="Delete This Bill"  data-toggle="tooltip" data-placement="top">
-          							<button  style="float:right;margin-top:-4px;" type="button" class="btn btn-info btn-xs" data-toggle="modal" data-target="#deleteBill" data-id="<%=a.billId%>">x</button></span>
+          							
+          							<button  style="float:right;margin-top:-4px;" type="button" class="btn btn-info btn-xs" data-toggle="modal" data-target="#deleteBill" data-id="<%=a.billId%>">x</button>
+          							<button style="float:right;margin-top:-4px;margin-right:4px;" type="button" class="btn btn-info btn-xs" data-toggle="modal" 
+          							data-target="#showreceipt" data-id="<%=a.photoPath%>"><img src="../images/img.png" width="20" height="20"></button>
           						</h5>
           						
           					</a>
@@ -74,8 +79,11 @@
           					<a data-toggle="collapse"  data-parent="#accordion" href="#<%=i %>">  					    
           						<h5 style="text-align:left">BillName: <%=a.billName %>  
           							&nbsp;&nbsp;&nbsp;&nbsp; You spent $<%=a.totalAmount%> &nbsp;&nbsp;
-          							<span title="Delete This Bill"  data-toggle="tooltip" data-placement="top">
-          							<button  style="float:right;margin-top:-4px;" type="button" class="btn btn-info btn-xs" data-toggle="modal" data-target="#deleteBill" data-id="<%=a.billId%>">x</button></span>
+          							
+          							<button  style="float:right;margin-top:-4px;" type="button" class="btn btn-info btn-xs" data-toggle="modal" 
+          							data-target="#deleteBill" data-id="<%=a.billId%>">x</button>
+          							<button style="float:right;margin-top:-4px;margin-right:4px;" class="btn btn-info btn-xs" type="button"  data-toggle="modal" 
+          							data-target="#showreceipt" data-path="<%=a.photoPath%>"><img src="../images/img.png" width="20" height="20"></button>
           						</h5>
           					</a>
        		 			</div>
@@ -117,8 +125,39 @@
   		</div>
 	</div>
 	
+	<div class="modal fade" id="showreceipt">
+  		<div class="modal-dialog">
+    		<div class="modal-content">
+      			<div class="modal-header">
+        			<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        			<h4 class="modal-title"></h4>
+      			</div>
+      			<div class="modal-body">
+        			<img>
+     	 		</div>			
+    		</div>
+  		</div>
+	</div>
+	
 	<script>
 	
+	$('#showreceipt').on('show.bs.modal', function (event) {
+		  var button = $(event.relatedTarget); // Button that triggered the modal
+		  var receipt = button.data('path'); // Extract info from data-* attributes		  		  
+		  var modal = $(this);
+		  //alert(receipt);
+		  if(receipt == undefined){
+			  modal.find(".modal-title").text("This bill has no picture");
+			  modal.find("img").attr("src","../images/proj_no_photo.png");
+			  modal.find("img").attr("width","500px");
+			  modal.find("img").attr("length","200px");
+		  }else{
+			  modal.find(".modal-title").text("Bill Receipt");
+			  modal.find("img").attr("src",receipt);
+		  }	  
+		  
+		})
+		
 	$('#deleteBill').on('show.bs.modal', function (event) {
 		  var button = $(event.relatedTarget); // Button that triggered the modal
 		  bill = button.data('id'); // Extract info from data-* attributes		  

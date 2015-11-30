@@ -47,6 +47,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
 
+<script src="../js/cropbox.js"></script>
+
 <nav class="navbar navbar-default">
   
     	<div class="navbar-header">     		
@@ -108,24 +110,20 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     			</div>
    			</div>
    			
-    		<div class="my-col-sm-3">
+    		<div class="col-sm-offset-4 my-col-sm-10">
     			<div class="action">
         			<input type="button" id="btnZoomIn" value="  +  " class="btn btn-default">        
         			<input type="button" id="btnZoomOut" value="  -  " class="btn btn-default">
     			</div>
     		</div>
   		 </div>	
-  			
-    
-    	<div class="cropped">
-   	 	</div>
-  			<script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
-			<script src="../js/cropbox.js"></script>
-		
-  			<div>&nbsp;</div>  	
-  			<label class="col-sm-2 control-label"></label>		
-  			<div class="col-sm-offset-2 my-col-sm-3">	
-				<input type="submit" id="btnCrop" class="btn btn-default"  value="Submit" >		      		
+  				
+  			<div class="col-sm-offset-5-plus my-col-sm-10">
+  				<div class="checkbox">	
+  					<label>
+						<input type="submit" id="btnCrop" class="btn btn-default"  value="Submit" >
+					</label>
+				</div>		      		
 			</div>
 	</div>
 </div>

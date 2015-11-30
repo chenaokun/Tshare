@@ -6,7 +6,6 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
 	<script src="/Tshare-test2/js/jquery-1.11.2.min.js" type="text/javascript"></script>
-	<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>-->
 	<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 	<script src="/scripts/jquery.min.js"></script> 
 	<script src="/bootstrap/js/bootstrap.min.js"></script>
@@ -152,7 +151,7 @@
 	
 	function deleteThisGroup(){
 		var f = document.createElement("form");
-		f.setAttribute('method',"post")
+		f.setAttribute('method',"post");
 		f.setAttribute('action',"../deleteGroup?groupId="+sessionStorage.id+"&curPath="+window.location.href);
 		f.submit();
 	}
