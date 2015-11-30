@@ -22,7 +22,8 @@ import com.amazonaws.services.dynamodbv2.model.DeleteItemRequest;
 
 public class deleteGroup extends HttpServlet{
 	
-	static DynamoDB dynamoDB= get.dynamoDB;
+	static AmazonDynamoDB client = new AmazonDynamoDBClient(new ProfileCredentialsProvider());
+	static DynamoDB dynamoDB;
 	
 	protected void doGet(HttpServletRequest request, 
 		      HttpServletResponse response) throws ServletException, IOException 
@@ -31,7 +32,8 @@ public class deleteGroup extends HttpServlet{
 		String groupId=request.getParameter("groupId");
 		groupInfo group=(groupInfo) request.getSession().getAttribute("curr_group");
 		ArrayList<groupInfo> groupList = (ArrayList<groupInfo>)request.getSession().getAttribute("groupInfo");
-	
+		client.setRegion(Region.getRegion(Regions.US_WEST_2));
+		dynamoDB = new DynamoDB(client);
 		System.out.println("In deleteGroup.java: "+groupId);
 		getGroup g=new getGroup();
 		HashMap<String,String> memberList=g.getGroupMember(groupId);
@@ -50,7 +52,7 @@ public class deleteGroup extends HttpServlet{
 		}
 		request.getSession().setAttribute("groupInfo", newList);		
 		
-		response.sendRedirect("/jsp/groupDeleted.jsp");
+		response.sendRedirect("/Tshare-test2/jsp/groupDeleted.jsp");
 		
 		
 		

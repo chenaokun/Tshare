@@ -5,8 +5,7 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
-	<script src="/js/jquery-1.11.2.min.js" type="text/javascript"></script>
-	<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>-->
+	<script src="/Tshare-test2/js/jquery-1.11.2.min.js" type="text/javascript"></script>
 	<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 	<script src="/scripts/jquery.min.js"></script> 
 	<script src="/bootstrap/js/bootstrap.min.js"></script>
@@ -38,13 +37,13 @@
       		<%if(!us1.img.equals("0")) {%>
     			<img src="https://s3-us-west-2.amazonaws.com/tshareavatar/<%=us1.Id+us1.img%>" height="42" width="42" align="right">  
     	  		<%} else{%>
-    		<img src="/images/avatar.jpg" height="42" width="42" align="right">   
+    		<img src="/Tshare-test2/images/avatar.jpg" height="42" width="42" align="right">   
 
     	   <%} %>
     	   </div>
     	   
       		<ul >
-        		<li><a href="/jsp/profile/Profile-Main.jsp">My profile</a> </li>
+        		<li><a href="/Tshare-test2/jsp/profile/Profile-Main.jsp">My profile</a> </li>
         		<li><a href="#">Setting</a></li>
       		</ul>
       		
@@ -152,7 +151,7 @@
 	
 	function deleteThisGroup(){
 		var f = document.createElement("form");
-		f.setAttribute('method',"post")
+		f.setAttribute('method',"post");
 		f.setAttribute('action',"../deleteGroup?groupId="+sessionStorage.id+"&curPath="+window.location.href);
 		f.submit();
 	}
@@ -175,7 +174,7 @@
 			var name = a.getAttribute("groupName");
 			var Id = a.getAttribute("groupId");			
 			localStorage.setItem("groupname", name);
-			var postFormStr = "<form id='hidden_form' method='POST' action='/main-page'>\n";
+			var postFormStr = "<form id='hidden_form' method='POST' action='/Tshare-test2/main-page'>\n";
 			postFormStr += "<input type='hidden' name='groupId' value='" + Id + "'></input>";
 			postFormStr += "<input type='hidden' name='groupName' value='" + name + "'></input>";
 			postFormStr += "</form>";

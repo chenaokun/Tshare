@@ -18,7 +18,8 @@ import com.amazonaws.services.dynamodbv2.document.DynamoDB;
 import com.amazonaws.services.dynamodbv2.document.Table;
 
 public class deleteMember extends HttpServlet{
-	static DynamoDB dynamoDB= get.dynamoDB;
+	static AmazonDynamoDB client = new AmazonDynamoDBClient(new ProfileCredentialsProvider());
+	static DynamoDB dynamoDB;
 	
 	protected void doGet(HttpServletRequest request, 
 		      HttpServletResponse response) throws ServletException, IOException 
@@ -29,7 +30,8 @@ public class deleteMember extends HttpServlet{
 		ArrayList<groupInfo> groupList = (ArrayList<groupInfo>)request.getSession().getAttribute("groupInfo");
 		String groupId=group.groupId;
 		HashMap<String,String> members=(HashMap<String, String>) request.getSession().getAttribute("groupToMember");
-		
+		client.setRegion(Region.getRegion(Regions.US_WEST_2));
+		dynamoDB = new DynamoDB(client);
 		Table table = dynamoDB.getTable("currentBalance");
 		boolean in=false;
 		
@@ -52,6 +54,6 @@ public class deleteMember extends HttpServlet{
 			request.getSession().setAttribute("groupToMember", members);
 		}
 
-		response.sendRedirect("/jsp/memberDeleted.jsp");
+		response.sendRedirect("/Tshare-test2/jsp/memberDeleted.jsp");
 	}
 }

@@ -24,15 +24,15 @@ import com.amazonaws.services.s3.model.CannedAccessControlList;
 import com.amazonaws.services.s3.model.ObjectMetadata;
 
 public class signUp extends HttpServlet{
-	static DynamoDB dynamoDB;
+	static AmazonDynamoDB client = new AmazonDynamoDBClient(new ProfileCredentialsProvider());
+	 static DynamoDB dynamoDB;
 	 
 	 protected void doGet(HttpServletRequest request, 
 		      HttpServletResponse response) throws ServletException, IOException 
 	{
-		 
+		 client.setRegion(Region.getRegion(Regions.US_WEST_2));
+		 dynamoDB = new DynamoDB(client);
 		 String tableName="Usr_info";
-		 get ge=new get();
-		  dynamoDB= get.dynamoDB;
 		 Table table = dynamoDB.getTable(tableName);
 		 String userId=request.getParameter("usrname");
 		 String password1=request.getParameter("password1");
@@ -49,7 +49,7 @@ public class signUp extends HttpServlet{
 		 
 		 if(errors[0]){
 			 request.getSession().setAttribute("registerErrors", errors);
-			 response.sendRedirect("/jsp/register_error.jsp");
+			 response.sendRedirect("/Tshare-test2/jsp/register_error.jsp");
 			 return;
 		 }
 		 
@@ -72,7 +72,7 @@ public class signUp extends HttpServlet{
 		 
 		 if(errors[1]||errors[2]){
 			 request.getSession().setAttribute("registerErrors", errors);
-			 response.sendRedirect("/jsp/register_error.jsp");
+			 response.sendRedirect("/Tshare-test2/jsp/register_error.jsp");
 			 return;
 		 }
 		 
@@ -85,7 +85,7 @@ public class signUp extends HttpServlet{
 		 PutItemOutcome outcome = table.putItem(item);	 	 
 		 
 			
-		 response.sendRedirect("/jsp/register_success.jsp");
+		 response.sendRedirect("/Tshare-test2/jsp/register_success.jsp");
 		 
 	}
 	 public void doPost(HttpServletRequest request, HttpServletResponse response)

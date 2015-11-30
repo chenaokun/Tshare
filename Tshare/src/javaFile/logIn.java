@@ -7,8 +7,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.amazonaws.auth.AWSCredentials;
-import com.amazonaws.auth.PropertiesCredentials;
 import com.amazonaws.auth.profile.ProfileCredentialsProvider;
 import com.amazonaws.regions.Region;
 import com.amazonaws.regions.Regions;
@@ -35,15 +33,14 @@ import java.util.List;
 import java.util.Map;
 public class logIn extends HttpServlet { 
 	
-	static DynamoDB dynamoDB;
+	 static AmazonDynamoDB client = new AmazonDynamoDBClient(new ProfileCredentialsProvider());
+	 static DynamoDB dynamoDB;
 	
   protected void doGet(HttpServletRequest request, 
       HttpServletResponse response) throws ServletException, IOException 
   {
-    // reading the user input     
-	  get ge=new get();
-	  dynamoDB= get.dynamoDB;
-	  response.setContentType("text/html");
+    // reading the user input      
+    response.setContentType("text/html");
 	response.setCharacterEncoding("utf-8");
 	String u=request.getParameter("usrname");
 	String p=request.getParameter("password");
@@ -52,14 +49,14 @@ public class logIn extends HttpServlet {
 	
 	Item user=getPW(u,"Usr_info");
 	if(user==null)
-		response.sendRedirect("/jsp/sign_in.jsp");
+		response.sendRedirect("/Tshare-test2/jsp/sign_in.jsp");
 	String pwDB=user.getJSON("password");
 	if(pwDB!=null&&pwDB.length()>2&&p.equals(pwDB.substring(1, pwDB.length()-1))){			
 		User StoredUser=new User(user);		
 		request.getSession().setAttribute("userInfo", StoredUser);
-		response.sendRedirect("/jsp/Welcome.jsp");
+		response.sendRedirect("/Tshare-test2/jsp/Welcome.jsp");
 	}
-	else response.sendRedirect("/jsp/sign_in.jsp");
+	else response.sendRedirect("/Tshare-test2/jsp/sign_in.jsp");
 	HashMap<String, String> groupBalance =new HashMap<String, String>();
 	getGroup gg = new getGroup();
 	ArrayList<String> group=gg.getGroupSet(u,groupBalance);
@@ -73,7 +70,8 @@ public class logIn extends HttpServlet {
   }
   
   private static Item getPW(String userId, String tableName){
-	 
+	  client.setRegion(Region.getRegion(Regions.US_WEST_2));
+	  dynamoDB = new DynamoDB(client);
 	  Table table = dynamoDB.getTable(tableName);
 	  
 	  try {

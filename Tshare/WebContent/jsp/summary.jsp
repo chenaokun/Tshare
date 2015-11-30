@@ -15,10 +15,9 @@
     		<h4>You total balance:&nbsp;&nbsp;$<%=sum%></h4>
     		<div>&nbsp;</div>
     		
-    	</div>
-    	
+    	</div>    	
 		<tr>
-			<td>Details:</td>
+			<td class="sum-body">Details:</td>
 			<td></td>
 		</tr>		
     </table>
@@ -29,10 +28,10 @@
 		if(gb.containsKey(groupId)&&Double.parseDouble(gb.get(groupId))!=0.0){
 	%>	
 		<tr>
-    		<td><%=g.groupName%></td>
+    		<td class="sum-body"><%=g.groupName%></td>
     		<td></td>
     		<td></td>
-    		<td>$<%=gb.get(groupId)%></td> 
+    		<td class="sum-body">$<%=gb.get(groupId)%></td> 
    		</tr>  		
 		<% } %>
 	<% } %>

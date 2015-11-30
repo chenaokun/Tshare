@@ -29,7 +29,8 @@ import com.amazonaws.services.dynamodbv2.model.QueryResult;
 
 public class settleUp extends HttpServlet { 
 	
-	static DynamoDB dynamoDB= get.dynamoDB;
+	 static AmazonDynamoDB client = new AmazonDynamoDBClient(new ProfileCredentialsProvider());
+	 static DynamoDB dynamoDB;
 	 
   protected void doGet(HttpServletRequest request, 
       HttpServletResponse response) throws ServletException, IOException 
@@ -38,7 +39,8 @@ public class settleUp extends HttpServlet {
 	  User u=(User)request.getSession().getAttribute("userInfo");
 	  String userId=u.Id;
 	  System.out.println("userid="+userId);
-	 
+	  client.setRegion(Region.getRegion(Regions.US_WEST_2));
+	  dynamoDB = new DynamoDB(client);
 	  //to be modified
 	  groupInfo group=(groupInfo)request.getSession().getAttribute("curr_group");
 	  String groupId=group.groupId;
@@ -60,7 +62,7 @@ public class settleUp extends HttpServlet {
 	        		  withAttributeValueList(new AttributeValue().withS(groupId)));
 	         QueryRequest queryRequest = new QueryRequest().withTableName(tableName);
 	         queryRequest.setKeyConditions(keyConditions);
-	         QueryResult queryResult = get.client.query(queryRequest);
+	         QueryResult queryResult = client.query(queryRequest);
 	         System.out.println(queryResult.toString()+" test");
 	         List<Map<String, AttributeValue>> items = queryResult.getItems();
 	         System.out.println("list!");
@@ -102,7 +104,7 @@ public class settleUp extends HttpServlet {
 			    int value = entry.getValue();
 			    System.out.println(key[0]+" pays "+key[1]+" $"+Integer.toString(value));				    
 			}*/
-	         response.sendRedirect("/jsp/Settle-up.jsp");
+	         response.sendRedirect("/Tshare-test2/jsp/Settle-up.jsp");
 	     } catch (Exception e) {
 	         System.err.println("Failed to fetch item in " + tableName);
 	         System.err.println(e.getMessage());

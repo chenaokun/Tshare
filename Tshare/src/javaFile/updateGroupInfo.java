@@ -20,11 +20,13 @@ import com.amazonaws.services.dynamodbv2.model.AttributeValueUpdate;
 import com.amazonaws.services.dynamodbv2.model.UpdateItemRequest;
 
 public class updateGroupInfo extends HttpServlet{
-	static DynamoDB dynamoDB= get.dynamoDB;
+	static AmazonDynamoDB client = new AmazonDynamoDBClient(new ProfileCredentialsProvider());
+	static DynamoDB dynamoDB;
 	protected void doGet(HttpServletRequest request, 
 		     HttpServletResponse response) throws ServletException, IOException 
 	{
-		
+		client.setRegion(Region.getRegion(Regions.US_WEST_2));
+		dynamoDB = new DynamoDB(client);
 		groupInfo group=(groupInfo)request.getSession().getAttribute("curr_group");
 		String groupId=group.groupId;
 		String description=request.getParameter("des");
@@ -57,7 +59,7 @@ public class updateGroupInfo extends HttpServlet{
 		                                          .withKey(itemKeys)
 		                                          .withAttributeUpdates(updateItems);
 
-		get.client.updateItem(updateItemRequest);
+		client.updateItem(updateItemRequest);
 	}
 	
 	public void doPost(HttpServletRequest request, HttpServletResponse response)

@@ -20,14 +20,17 @@ import com.amazonaws.services.dynamodbv2.document.ItemCollection;
 import com.amazonaws.services.dynamodbv2.document.QueryOutcome;
 import com.amazonaws.services.dynamodbv2.document.Table;
 
-public class addBill extends HttpServlet{	 
-	 static DynamoDB dynamoDB= get.dynamoDB;
+public class addBill extends HttpServlet{
+	 static AmazonDynamoDB client = new AmazonDynamoDBClient(new ProfileCredentialsProvider());
+	 static DynamoDB dynamoDB;
 	 
 	 protected void doGet(HttpServletRequest request, 
 		      HttpServletResponse response) throws ServletException, IOException 
 	{
 		groupInfo group=(groupInfo)request.getSession().getAttribute("curr_group");
-		String groupId=group.groupId;	
+		String groupId=group.groupId;
+		 client.setRegion(Region.getRegion(Regions.US_WEST_2));
+		 dynamoDB = new DynamoDB(client);
 		 Table table = dynamoDB.getTable("currentBalance");
 		 ItemCollection<QueryOutcome> col = table.query("groupId","1");
 		 ArrayList<String> memberList=new ArrayList<String>();
@@ -45,6 +48,6 @@ public class addBill extends HttpServlet{
 			 groupToMember.put(Id, removeQuo.remove(name));
 		 }
 		 request.getSession().setAttribute("groupToMember", groupToMember);
-		 response.sendRedirect("/jsp/AddBill.jsp");
+		 response.sendRedirect("/Tshare-test2/jsp/AddBill.jsp");
 	}
 }

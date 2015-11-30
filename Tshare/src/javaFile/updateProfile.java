@@ -21,12 +21,14 @@ import com.amazonaws.services.dynamodbv2.model.AttributeValueUpdate;
 import com.amazonaws.services.dynamodbv2.model.UpdateItemRequest;
 
 public class updateProfile extends HttpServlet{
-	static DynamoDB dynamoDB= get.dynamoDB;
+	static AmazonDynamoDB client = new AmazonDynamoDBClient(new ProfileCredentialsProvider());
+	static DynamoDB dynamoDB;
 	
 	protected void doGet(HttpServletRequest request, 
 		     HttpServletResponse response) throws ServletException, IOException 
 	{
-		
+		client.setRegion(Region.getRegion(Regions.US_WEST_2));
+		dynamoDB = new DynamoDB(client);
 		String tableName="Usr_info";
 		User user=(User)request.getSession().getAttribute("userInfo");
 		String userId=user.Id;		
@@ -45,7 +47,7 @@ public class updateProfile extends HttpServlet{
 			String password1=request.getParameter("password1");
 			String password2=request.getParameter("password2");
 			if(!password1.equals(password2)){
-				response.sendRedirect("/jsp/profile/passwordError.jsp");
+				response.sendRedirect("/Tshare-test2/jsp/profile/passwordError.jsp");
 				return;
 			}
 			updateTable(tableName, userId, "password", password1);			
@@ -56,7 +58,7 @@ public class updateProfile extends HttpServlet{
 			user.img=Integer.toString(Integer.parseInt(user.img)+1);
 			request.getSession().setAttribute("userInfo", user);
 		}
-		response.sendRedirect("/jsp/profile/updateImgSuccess.jsp");	
+		response.sendRedirect("/Tshare-test2/jsp/profile/updateImgSuccess.jsp");	
 	}
 	
 	void updateTable(String tableName, String userId, String attribute, String value){
@@ -73,7 +75,7 @@ public class updateProfile extends HttpServlet{
 		                                          .withKey(itemKeys)
 		                                          .withAttributeUpdates(updateItems);
 
-		get.client.updateItem(updateItemRequest);
+		client.updateItem(updateItemRequest);
 	}
 	
 	 public void doPost(HttpServletRequest request, HttpServletResponse response)
