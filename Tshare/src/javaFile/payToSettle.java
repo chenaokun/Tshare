@@ -191,7 +191,7 @@ public class payToSettle extends HttpServlet {
 			    System.out.println(key[0]+" pays "+key[1]+" $"+Integer.toString(value));				    
 			}*/
 
-	         response.sendRedirect("/Tshare-test2/jsp/Settle-up.jsp");
+	         response.sendRedirect("/jsp/Settle-up.jsp");
 	         DynamoDBLock.ReleaseLock(groupId, userId, dateSecStr);
 
 	     } catch (Exception e) {
