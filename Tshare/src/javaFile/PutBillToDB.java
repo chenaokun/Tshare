@@ -5,6 +5,8 @@ import java.math.BigDecimal;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Random;
+import java.util.concurrent.TimeUnit;
 import java.io.*;
 
 import javax.servlet.ServletException;
@@ -25,6 +27,7 @@ import com.amazonaws.services.dynamodbv2.document.Table;
 import com.amazonaws.services.dynamodbv2.model.AttributeValue;
 import com.amazonaws.services.dynamodbv2.model.AttributeValueUpdate;
 import com.amazonaws.services.dynamodbv2.model.UpdateItemRequest;
+import javaFile.DynamoDBLock;
 
 /**
  * Servlet implementation class AddBill
@@ -61,24 +64,17 @@ public class PutBillToDB extends HttpServlet {
 		String userID=u.Id;
  		String body=userID+" paid "+billTotalAmt+" for "+ billName+". You owe "+userID+" "+billAmt+".";
 		AmazonSES.sendNotice(userList, body, "New Bill Added at Tshare", userID);
-		
-		//Test Data
-		/*String billAmt = "123";
-		String billName = "Test Bill";
-		String billDesc = "Test Bill Description";
-		String[] userList = {"Ann ann@mail.com", "Kate kate@mail.com", "Jack jack@mail.com"};*/
+		TimeUnit timeUnit = null;
 		
 		
 		User StoredUser = (User) request.getSession().getAttribute("userInfo");
 		String paidUserId = StoredUser.Id;
 		System.out.println("paidUserId:"+paidUserId);
 		
-		/*String groupId = request.getSession().getAttribute("groupId").toString();
-		System.out.print("groupId:"+groupId);*/
-		
-		//String memberGroup = request.getSession().getAttribute("UserAdd").toString();
 		
 		Date date = new Date();
+		long dateSec = date.getTime();
+		String dateSecStr = Long.toString(dateSec);
 		String dateStr = date.toString();
 		request.getSession().setAttribute("billId",date+" "+paidUserId);
 		String billImg = "";
@@ -89,24 +85,49 @@ public class PutBillToDB extends HttpServlet {
 		
 		System.out.println("To add attribute to bill form");
 
-		AddBillForm(dateStr, paidUserId, billDesc, billImg, groupId);
-
+		//Acquire the lock first
+		boolean lock = false;
+		int count = 0;
+		while(!lock)
+		{
+			lock = DynamoDBLock.AcquireLock(groupId, userID, dateSecStr, "PutBill");
+			if(lock == false)
+			{
+				//on acquiring lock failed
+				count ++;
+				Random randomGenerator = new Random();
+				int randomInt = randomGenerator.nextInt(500);
+				try {
+					timeUnit.MILLISECONDS.sleep(randomInt);
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				if(count > 2000)
+				{
+					//resolve the possible deadlock situation, usually not to be used
+					DynamoDBLock.ResolveDeadlock(groupId, dateSecStr);
+				}
+			}
+		}
 		
+		//Add new item to the billForm 
+		AddBillForm(dateStr, paidUserId, billDesc, billImg, groupId);//Add bill for the payer
+
 		for( String userId : userList)
 		{
-			
-			System.out.println("To add bill");
+			//Add new item to the expense of the payer and update their currentBalance
+			//System.out.println("To add bill");
 			AddExpense(dateStr, billName, billTotalAmt, billAmt, groupId, userId, paidUserId, length);
 			UpdateBalance(userId, groupId, billAmt, paidUserId);
-			System.out.println("Bill add for "+userId);			
+			//System.out.println("Bill add for "+userId);			
 			
 		}
 		
-		//Update the new balance
-		//payer first, then everyone
+		//update the currentBalance for the payer
 		UpdateBalance(paidUserId, groupId, billAmt, length);
 		
-		
+		DynamoDBLock.ReleaseLock(groupId, userID, dateSecStr);
 		
 		response.sendRedirect("/jsp/Main-page.jsp");
 	}
@@ -115,6 +136,7 @@ public class PutBillToDB extends HttpServlet {
 	
 	protected static void AddExpense(String date, String billName,
 			String billTotalAmt, String billAmt, String groupId, String userId, String paidUserId, int memCnt)
+	//Add new bill information into the expense table
 	{		
 		
 		Table table = dynamoDB.getTable("expense");
@@ -136,7 +158,7 @@ public class PutBillToDB extends HttpServlet {
 	
 
 	protected static void AddBillForm(String date, String userId, String billDesc, String billImg, String groupId )
-
+	//Add new item to the bill table
 	{
 		
 		Table table = dynamoDB.getTable("bill");
@@ -151,6 +173,7 @@ public class PutBillToDB extends HttpServlet {
 		
 	}
 	
+
 	protected static Item FindObject(
 			String tableName, String primaryKey, String primaryValue, String rangeKey, String rangeValue)
 	{
@@ -171,14 +194,20 @@ public class PutBillToDB extends HttpServlet {
 	     }
 		return null;
 	}
+
 	
 	protected static void UpdateBalance(
 			String userId, String groupId, String billAmt, String payer)
+	//Update information for the currentbalance table
+	//For all the people involved in the group, inculding the payer
 	{
 		
 		Table table = dynamoDB.getTable("currentBalance");
 		Item item;
 		String newBalance = null;
+		
+		//Get the current balance information in the currentBalance table
+		//If not success, create a new one
 		try
 		{
 			item = table.getItem("userId",userId, "groupId", groupId);
@@ -194,7 +223,8 @@ public class PutBillToDB extends HttpServlet {
 			newBalance = billAmt;
 			System.out.println("no previous record found, create a new one");
 		}
-		
+				
+		//Update the currentBalance table
 		Map<String, AttributeValueUpdate> updateItems = new HashMap<String, AttributeValueUpdate>();
 			
 		updateItems.put("balance", new AttributeValueUpdate().withValue(new AttributeValue(newBalance)).withAction("PUT"));
@@ -210,22 +240,21 @@ public class PutBillToDB extends HttpServlet {
 
 		get.client.updateItem(updateItemRequest);
 		
-		/*Item newItem = new Item()
-				.withPrimaryKey("userId",userId,"groupId",groupId)
-				.withString("balance", newBalance);
-		PutItemOutcome outcome = table.putItem(newItem);*/
 		
 		
 	}
 	
 	protected static void UpdateBalance(
 			String payer, String groupId, String billAmt, int memCnt)
+	//Update information for the currentbalance table
+	//For the payer
 	{
 		
 		Table table = dynamoDB.getTable("currentBalance");
 		Item item;
 		String newBalance = null;
-		
+		//Get the current balance information in the currentBalance table
+		//If not success, create a new one
 		try
 		{
 			item = table.getItem("groupId", groupId,"userId", payer);
@@ -245,6 +274,7 @@ public class PutBillToDB extends HttpServlet {
 		
 		Map<String, AttributeValueUpdate> updateItems = new HashMap<String, AttributeValueUpdate>();
 		
+		//Update the currentBalance table
 		updateItems.put("balance", new AttributeValueUpdate().withValue(new AttributeValue(newBalance)).withAction("PUT"));
 		
 		Map<String, AttributeValue> itemKeys = new HashMap<String, AttributeValue>();
@@ -258,10 +288,6 @@ public class PutBillToDB extends HttpServlet {
 
 		get.client.updateItem(updateItemRequest);
 		
-		/*Item newItem = new Item()
-				.withPrimaryKey("groupId",groupId, "userId",payer)
-				.withString("balance", newBalance);
-		PutItemOutcome outcome = table.putItem(newItem);*/
 	}
 
 	/**

@@ -7,16 +7,18 @@
 <title>changeName</title>
 </head>
 <body>
-<div id="bill">
-	<div>Passwords do not match.</div>
-	<div>Please Enter Your New Password</div>
-	<form action="../../updateProfile?subject=password" method="post" >
+<div id="summary">
+	<div style="text-align:center">
+		<h4>Passwords do not match.</h4>
+		<div>Please Enter Your New Password</div>
+		<form action="../../updateProfile?subject=password" method="post" >
   			<input name="password1" type="password"><br>
   			<div>Re-enter</div>
   			<input name="password2" type="password"><br>
   			<div>&nbsp;</div>  			
 			<input type="submit" value="submit">	      		
-		</form>	
+		</form>
+	</div>	
 </div>	
 </body>
 </html>

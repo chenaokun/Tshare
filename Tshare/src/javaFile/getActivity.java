@@ -152,7 +152,7 @@ public class getActivity {
 		        	       } else if (attr.equals("photoPath")) {
 		        	    	   String photoPath = currentItem.get(attr).getS();   
 		        	           //System.out.println("photoPath : "+photoPath);
-		        	           curr_activity.setTotal(photoPath);
+		        	           curr_activity.setPath(photoPath);
 		        	       }
 		        	  		        	       
 		        	   }  

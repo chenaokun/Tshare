@@ -10,7 +10,7 @@
 <!-- <link href="css/bootstrap.css" rel="stylesheet" type="text/css"> -->
 <script src="/Tshare-test2/js/jquery-1.11.2.min.js" type="text/javascript"></script>
 <link rel="stylesheet" href="../../styles/style.css" type="text/css" />
-<link href="../../css/bootstrap-3.3.4.css" rel="stylesheet" type="text/css">
+<link href="../../css/bootstrap.css" rel="stylesheet" type="text/css">
 <link href="../../css/siderbar.css" rel="stylesheet" type="text/css">
 <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
 <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -36,29 +36,25 @@
 
 
 
-<div id = "sign-box" class="container-fluid">
-	
-  			<div class="h5">Upload Photo</div>
-  			<div class="imageBox">
-        <div class="thumbBox"></div>
-        <div class="spinner" style="display: none">Loading...</div>
-    </div>
-    <div class="action">
-        <input type="file" id="file" style="float:left; width: 250px">       
-    </div>
-    <div class="action">
-        <input type="button" id="btnZoomIn" value=" + " style="float: left">
-        <input type="button" id="btnZoomOut" value=" - " style="float: left">
-    </div>
-    <div class="cropped">
-
-    </div>
-  			
-			
-  			<div>&nbsp;</div>  			
-			<input type="submit" id="btnCrop" class="submit" value="Submit" >		      		
-		
-	</div>
+<div id = "summary" class="container-fluid">
+	<div style="text-align:center">
+  		<h4>Upload Photo</h4>
+  		<div class="imageBox" style="left:35%">
+        	<div class="thumbBox" ></div>
+        	<div class="spinner" >Loading...</div>
+    	</div>
+    	<div class="action" style="position:relative; left:35%" >
+        	<input type="file" id="file" style=" width: 250px">       
+    	
+        	<input type="button" id="btnZoomIn" value=" + " style="float: left">
+        	<input type="button" id="btnZoomOut" value=" - " style="float: left">
+    	</div>
+    	<div class="cropped"></div>
+  						
+  		<div>&nbsp;</div>  			
+		<input type="submit" id="btnCrop" class="submit" value="Submit" >		      		
+	</div>	
+</div>
 
 
 <script src="../../js/cropbox.js"></script>

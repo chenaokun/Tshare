@@ -8,8 +8,9 @@
 <title>updateSuccess</title>
 </head>
 <body>
-<div>Your profile has been successfully updated!</div>
-<div id="bill">
+
+<div id="summary">
+	<h4>Your profile has been successfully updated!</h4>
 	<div class="row">
     	<div class="col-sm-3">User ID</div>
     	<div class="col-sm-2"><%=userP.Id %></div>

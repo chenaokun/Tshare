@@ -40,7 +40,7 @@
 .my-col-sm-10 {	
   	float: left;	
   	min-height: 1px;  	
-  	width: 83.33333333%;
+  	width: 65%;
   	height: 100px;
 }
 
@@ -74,5 +74,10 @@
 
 #check {
 	top: 80px;
+}
+
+#credit {
+	position: relative;
+	top: 250px;
 }
 

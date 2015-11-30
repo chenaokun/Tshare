@@ -1917,6 +1917,12 @@ pre code {
   .col-sm-offset-6 {
     margin-left: 50%;
   }
+  .col-sm-offset-5-plus {
+    margin-left: 45%;
+  }
+   .col-sm-offset-right {
+    margin-right: 100px;
+  }
   .col-sm-offset-5 {
     margin-left: 41.66666667%;
   }
@@ -4212,6 +4218,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
 .navbar-brand:hover,
 .navbar-brand:focus {
   text-decoration: none;
+  
 }
 .navbar-brand > img {
   display: block;
@@ -4428,22 +4435,23 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
   /*border-color: #e7e7e7;*/
 }
 .navbar-default .navbar-brand {
-  color: #5e5e5e;
+  color: #666666;
 }
 .navbar-default .navbar-brand:hover,
 .navbar-default .navbar-brand:focus {
-  color: #5e5e5e;
+  /*color: #5e5e5e;*/
+  color: #fff;
   background-color: transparent;
 }
 .navbar-default .navbar-text {
-  color: #777;
+  color: #7d7d7d;
 }
 .navbar-default .navbar-nav > li > a {
-  color: #777;
+  color: #7d7d7d;
 }
 .navbar-default .navbar-nav > li > a:hover,
 .navbar-default .navbar-nav > li > a:focus {
-  color: #333;
+  color: #fff;
   background-color: transparent;
 }
 .navbar-default .navbar-nav > .active > a,

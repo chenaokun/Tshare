@@ -18,8 +18,8 @@
 		<div class="grid_8">
 			<div id="pageshadow">
 				<div id="header"> 
-					<div class="title">
-                		<a id = "gg" href="#">Welcome To Tshare! <%=u.name%></a>
+					<div class="title-wel">
+                		<a>Welcome To Tshare! <%=u.name%></a>
               		</div>
 				</div>
 			</div>
