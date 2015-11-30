@@ -8,7 +8,7 @@
 <head>
 <title>Sign-up Page</title>
 <!-- <link href="css/bootstrap.css" rel="stylesheet" type="text/css"> -->
-<script src="/Tshare-test2/js/jquery-1.11.2.min.js" type="text/javascript"></script>
+<script src="/js/jquery-1.11.2.min.js" type="text/javascript"></script>
 <link rel="stylesheet" href="../../styles/style.css" type="text/css" />
 <link href="../../css/bootstrap.css" rel="stylesheet" type="text/css">
 <link href="../../css/siderbar.css" rel="stylesheet" type="text/css">

@@ -11,6 +11,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.TimeZone;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -39,8 +40,7 @@ import com.amazonaws.regions.Regions;
 
 public class GroupServlet extends HttpServlet {
 
- static AmazonDynamoDB client = new AmazonDynamoDBClient(new ProfileCredentialsProvider());
- static DynamoDB dynamoDB;
+	static DynamoDB dynamoDB= get.dynamoDB;
  
  protected void doGet(HttpServletRequest request, 
 	      HttpServletResponse response) throws ServletException, IOException 
@@ -72,7 +72,7 @@ public class GroupServlet extends HttpServlet {
 			all_groups.add(gi);
 		}
 		request.getSession().setAttribute("groupInfo", all_groups);
-		response.sendRedirect("/Tshare-test2/jsp/Welcome.jsp");
+		response.sendRedirect("/jsp/Welcome.jsp");
 		
 	  }
  
@@ -145,8 +145,6 @@ public class GroupServlet extends HttpServlet {
 
  private static void LoadGroup(String groupName, String memberList, String description, String user) {
 	 
-	 client.setRegion(Region.getRegion(Regions.US_WEST_2));
-	 dynamoDB = new DynamoDB(client);
      Table table1 = dynamoDB.getTable("groupDescription");
      Table table2 = dynamoDB.getTable("currentBalance");
      Date date = new Date();
@@ -185,8 +183,6 @@ public class GroupServlet extends HttpServlet {
  
  public groupInfo searchGroup(String groupId) {
 	 
-	 client.setRegion(Region.getRegion(Regions.US_WEST_2));
-	 dynamoDB = new DynamoDB(client);
      Table table = dynamoDB.getTable("groupDescription");
      //Table table2 = dynamoDB.getTable("currentBalance");
      //Date date = new Date();
@@ -201,7 +197,7 @@ public class GroupServlet extends HttpServlet {
 			        .withFilterExpression("groupId = :u")
 			        .withExpressionAttributeValues(expressionAttributeValues);
 		  			
-			    ScanResult result = client.scan(scanRequest);
+			    ScanResult result = get.client.scan(scanRequest);
 		  		List<Map<String, AttributeValue>> items = result.getItems(); 
 			    
 	         Iterator<Map<String, AttributeValue>> itemsIter = items.iterator();	         

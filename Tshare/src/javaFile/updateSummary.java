@@ -24,6 +24,6 @@ public class updateSummary extends HttpServlet{
 		getGroup gg = new getGroup();
 		ArrayList<String> group=gg.getGroupSet(u,groupBalance);
 		request.getSession().setAttribute("groupBalance", groupBalance);
-		response.sendRedirect("/Tshare-test2/jsp/Welcome.jsp");
+		response.sendRedirect("/jsp/Welcome.jsp");
 	}
 }

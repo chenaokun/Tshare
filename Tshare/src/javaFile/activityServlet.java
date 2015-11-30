@@ -36,9 +36,7 @@ import com.amazonaws.services.dynamodbv2.model.ScanResult;
 import com.amazonaws.regions.Region;
 import com.amazonaws.regions.Regions;
 
-public class activityServlet extends HttpServlet {
-	static AmazonDynamoDB client = new AmazonDynamoDBClient(new ProfileCredentialsProvider());
-	static DynamoDB dynamoDB;
+public class activityServlet extends HttpServlet {	
 	protected void doPost(HttpServletRequest request, 
 		      HttpServletResponse response) throws ServletException, IOException 
 		  {
@@ -54,11 +52,11 @@ public class activityServlet extends HttpServlet {
 			if(activityOption.equals("a")){		
 				ArrayList<activityInfo> user_activity = getActivity.allActivity(u.Id, g.groupId);
 				request.getSession().setAttribute("all_activity", user_activity);
-				response.sendRedirect("/Tshare-test2/jsp/All_activity.jsp");
+				response.sendRedirect("/jsp/All_activity.jsp");
 			} else {
 				ArrayList<activityInfo> user_activity = getActivity.userActivity(u.Id, g.groupId);
 				request.getSession().setAttribute("my_activity", user_activity);
-				response.sendRedirect("/Tshare-test2/jsp/My_activity.jsp");
+				response.sendRedirect("/jsp/My_activity.jsp");
 			}		
 		  }
 }

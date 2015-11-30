@@ -33,15 +33,11 @@ import java.util.List;
 import java.util.Map;
 
 public class getGroup { 
-	
-	 static AmazonDynamoDB client = new AmazonDynamoDBClient(new ProfileCredentialsProvider());
-	 static DynamoDB dynamoDB;
+	static DynamoDB dynamoDB= get.dynamoDB;
 	 
   public groupInfo searchGroup(String groupId) {
 		 //System.out.println("invoke method grouId is "+groupId);
-		 
-		 client.setRegion(Region.getRegion(Regions.US_WEST_2));
-		 dynamoDB = new DynamoDB(client);
+		
 	     
 	     Map<String, AttributeValue> expressionAttributeValues = 
 				    new HashMap<String, AttributeValue>();
@@ -53,7 +49,7 @@ public class getGroup {
 				        .withFilterExpression("groupId = :g")
 				        .withExpressionAttributeValues(expressionAttributeValues);
 			  			
-				ScanResult result = client.scan(scanRequest);
+				ScanResult result = get.client.scan(scanRequest);
 			  	List<Map<String, AttributeValue>> items = result.getItems(); 
 				    
 		         Iterator<Map<String, AttributeValue>> itemsIter = items.iterator();	         
@@ -87,8 +83,7 @@ public class getGroup {
 	 }
 
   public ArrayList<String> getGroupSet(String userId, HashMap<String, String> groupBalance){
-	  client.setRegion(Region.getRegion(Regions.US_WEST_2));
-	  dynamoDB = new DynamoDB(client);
+	  
 	  //Table table = dynamoDB.getTable(tableName);
 	  Map<String, AttributeValue> expressionAttributeValues = 
 			    new HashMap<String, AttributeValue>();
@@ -100,7 +95,7 @@ public class getGroup {
 			        .withFilterExpression("userId = :u")
 			        .withExpressionAttributeValues(expressionAttributeValues);
 		  			
-			    ScanResult result = client.scan(scanRequest);
+			    ScanResult result = get.client.scan(scanRequest);
 		  		List<Map<String, AttributeValue>> items = result.getItems(); 
 			    
 	         Iterator<Map<String, AttributeValue>> itemsIter = items.iterator();	         
@@ -134,8 +129,7 @@ public class getGroup {
   }
   
   public HashMap<String,String> getGroupMember(String groupId){
-	  client.setRegion(Region.getRegion(Regions.US_WEST_2));
-		 dynamoDB = new DynamoDB(client);
+	  
 		 Table table = dynamoDB.getTable("currentBalance");
 		 ItemCollection<QueryOutcome> col = table.query("groupId",groupId);
 		 ArrayList<String> memberList=new ArrayList<String>();
