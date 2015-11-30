@@ -23,12 +23,10 @@ import com.amazonaws.services.dynamodbv2.model.ScanRequest;
 import com.amazonaws.services.dynamodbv2.model.ScanResult;
 
 public class getActivity {
-	static AmazonDynamoDB client = new AmazonDynamoDBClient(new ProfileCredentialsProvider());
-	static DynamoDB dynamoDB;
+	static DynamoDB dynamoDB= get.dynamoDB;
 	
 	public static ArrayList<activityInfo> userActivity(String userId, String groupId){
-		client.setRegion(Region.getRegion(Regions.US_WEST_2));
-		 dynamoDB = new DynamoDB(client);
+		
 		 List<Map<String, AttributeValue>> User_activity = new ArrayList<Map<String, AttributeValue>>();
 		 Map<String, AttributeValue> lastKeyEvaluated = null;
 		 int size = 0;
@@ -49,7 +47,7 @@ public class getActivity {
 					        .withExpressionAttributeValues(expressionAttributeValues)
 				  			.withExclusiveStartKey(lastKeyEvaluated);
 				  			
-					ScanResult result = client.scan(scanRequest);
+					ScanResult result = get.client.scan(scanRequest);
 					lastKeyEvaluated = result.getLastEvaluatedKey();
 				  	List<Map<String, AttributeValue>> items = result.getItems();  
 				  	for(Map<String, AttributeValue> item : items){
@@ -102,8 +100,7 @@ public class getActivity {
 	}
 	
 	public static ArrayList<activityInfo> allActivity(String userId, String groupId){
-		 client.setRegion(Region.getRegion(Regions.US_WEST_2));
-		 dynamoDB = new DynamoDB(client);
+		 
 		 List<Map<String, AttributeValue>> All_activity = new ArrayList<Map<String, AttributeValue>>();
 		 Map<String, AttributeValue> lastKeyEvaluated = null;
 		 int size = 0;
@@ -124,7 +121,7 @@ public class getActivity {
 					        .withExpressionAttributeValues(expressionAttributeValues)
 				  			.withExclusiveStartKey(lastKeyEvaluated);
 				  			
-					ScanResult result = client.scan(scanRequest);
+					ScanResult result = get.client.scan(scanRequest);
 					lastKeyEvaluated = result.getLastEvaluatedKey();
 				  	List<Map<String, AttributeValue>> items = result.getItems();  
 				  	for(Map<String, AttributeValue> item : items){
@@ -175,7 +172,7 @@ public class getActivity {
 		 			        .withFilterExpression("billId = :b")
 		 			        .withExpressionAttributeValues(expressionAttributeValues2);
 		 		  			
-		 			 ScanResult result2 = client.scan(scanRequest2);
+		 			 ScanResult result2 = get.client.scan(scanRequest2);
 		 		     List<Map<String, AttributeValue>> items2 = result2.getItems(); 
 		 			    
 		 	         Iterator<Map<String, AttributeValue>> itemsIter2 = items2.iterator();	         

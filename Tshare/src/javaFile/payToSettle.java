@@ -32,17 +32,15 @@ import com.amazonaws.services.dynamodbv2.model.UpdateItemRequest;
 import com.amazonaws.services.dynamodbv2.model.UpdateItemResult;
 
 public class payToSettle extends HttpServlet {
-	 static AmazonDynamoDB client = new AmazonDynamoDBClient(new ProfileCredentialsProvider());
-	 static DynamoDB dynamoDB;
+	static DynamoDB dynamoDB= get.dynamoDB;
  protected void doGet(HttpServletRequest request, 
      HttpServletResponse response) throws ServletException, IOException 
    {
 	 groupInfo group=(groupInfo)request.getSession().getAttribute("curr_group");
 	 String groupId=group.groupId;
-	 
-	 client.setRegion(Region.getRegion(Regions.US_WEST_2));
+	
 	 String tableName="currentBalance";
-	 dynamoDB = new DynamoDB(client);
+
 	 User u=(User)request.getSession().getAttribute("userInfo");
 	 String userId=u.Id;
 	 Table table = dynamoDB.getTable(tableName);
@@ -73,7 +71,7 @@ public class payToSettle extends HttpServlet {
 		                                          .withKey(itemKeys)
 		                                          .withAttributeUpdates(updateItems);
 
-		client.updateItem(updateItemRequest);
+		get.client.updateItem(updateItemRequest);
 		
 		//get receiver's balance from DB
 		
@@ -89,7 +87,7 @@ public class payToSettle extends HttpServlet {
         .withTableName("currentBalance")
         .withKey(itemKeys)
         .withAttributeUpdates(updateItems);
-		client.updateItem(updateItemRequest);
+		get.client.updateItem(updateItemRequest);
 		
 		//reload sessions for settle-up
 		try {	         
@@ -106,7 +104,7 @@ public class payToSettle extends HttpServlet {
 	        		  withAttributeValueList(new AttributeValue().withS(groupId)));
 	         QueryRequest queryRequest = new QueryRequest().withTableName(tableName);
 	         queryRequest.setKeyConditions(keyConditions);
-	         QueryResult queryResult = client.query(queryRequest);
+	         QueryResult queryResult = get.client.query(queryRequest);
 	         System.out.println(queryResult.toString()+" test");
 	         List<Map<String, AttributeValue>> items = queryResult.getItems();
 	         System.out.println("list!");
@@ -147,7 +145,7 @@ public class payToSettle extends HttpServlet {
 			    int value = entry.getValue();
 			    System.out.println(key[0]+" pays "+key[1]+" $"+Integer.toString(value));				    
 			}*/
-	         response.sendRedirect("/Tshare-test2/jsp/Settle-up.jsp");
+	         response.sendRedirect("/jsp/Settle-up.jsp");
 	     } catch (Exception e) {
 	         System.err.println("Failed to fetch item in " + tableName);
 	         System.err.println(e.getMessage());

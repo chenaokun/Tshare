@@ -18,8 +18,7 @@ import com.amazonaws.services.dynamodbv2.document.Item;
 import com.amazonaws.services.dynamodbv2.document.Table;
 
 public class addMember extends HttpServlet{
-	static AmazonDynamoDB client = new AmazonDynamoDBClient(new ProfileCredentialsProvider());
-	static DynamoDB dynamoDB;
+	static DynamoDB dynamoDB= get.dynamoDB;
 	
 	protected void doGet(HttpServletRequest request, 
 		      HttpServletResponse response) throws ServletException, IOException 
@@ -31,8 +30,7 @@ public class addMember extends HttpServlet{
 		HashMap<String,String> members=(HashMap<String, String>) request.getSession().getAttribute("groupToMember");
 		HashMap<String,String> groupToImg=(HashMap<String, String>) request.getSession().getAttribute("groupToImg");
 		System.out.println("addMember.java: "+groupId);
-		client.setRegion(Region.getRegion(Regions.US_WEST_2));
-		dynamoDB = new DynamoDB(client);
+		
 	    Table table= dynamoDB.getTable("currentBalance");
 	    String[] member = list.split(";");
 	    for(int i=0; i < member.length; i++){

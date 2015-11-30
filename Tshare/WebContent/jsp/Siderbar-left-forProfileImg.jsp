@@ -9,7 +9,7 @@
 <head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<!-- <script src="/Tshare-test2/js/jquery-1.11.2.min.js" type="text/javascript"></script> -->
+<!-- <script src="/js/jquery-1.11.2.min.js" type="text/javascript"></script> -->
 <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>-->
 <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
  
@@ -42,7 +42,7 @@
     	  <%} %></h3>
       		
       		<ul>
-        		<li><a href="/Tshare-test2/jsp/profile/Profile-Main.jsp">My profile</a> </li>
+        		<li><a href="/jsp/profile/Profile-Main.jsp">My profile</a> </li>
         		<li><a href="#">Setting</a></li>
       		</ul>
     	</div>
@@ -180,7 +180,7 @@
 			var name = a.getAttribute("groupName");
 			var Id = a.getAttribute("groupId");			
 			localStorage.setItem("groupname", name);
-			var postFormStr = "<form id='hidden_form' method='POST' action='/Tshare-test2/main-page'>\n";
+			var postFormStr = "<form id='hidden_form' method='POST' action='/main-page'>\n";
 			postFormStr += "<input type='hidden' name='groupId' value='" + Id + "'></input>";
 			postFormStr += "<input type='hidden' name='groupName' value='" + name + "'></input>";
 			postFormStr += "</form>";

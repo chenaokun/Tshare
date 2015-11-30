@@ -3,7 +3,7 @@ input.saveButton {
   cursor: pointer;
   display: inline-block;
   text-indent: -3000px;
-  background: url(/Tshare-test2/images/save.png) no-repeat 50% 50%;
+  background: url(/images/save.png) no-repeat 50% 50%;
   width: 20%; 
   height: 5%;
 }

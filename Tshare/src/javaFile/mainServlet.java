@@ -41,8 +41,7 @@ import com.amazonaws.regions.Regions;
 
 
 public class mainServlet extends HttpServlet {
-	static AmazonDynamoDB client = new AmazonDynamoDBClient(new ProfileCredentialsProvider());
-    static DynamoDB dynamoDB;   
+	static DynamoDB dynamoDB= get.dynamoDB;
  protected void doPost(HttpServletRequest request, 
 	      HttpServletResponse response) throws ServletException, IOException 
 	       
@@ -74,8 +73,7 @@ public class mainServlet extends HttpServlet {
 			}
 		}
 		
-		client.setRegion(Region.getRegion(Regions.US_WEST_2));
-		 dynamoDB = new DynamoDB(client);
+		
 		 Table table = dynamoDB.getTable("currentBalance");
 		 ItemCollection<QueryOutcome> col = table.query("groupId",groupId);
 		 ArrayList<String> memberList=new ArrayList<String>();
@@ -98,7 +96,7 @@ public class mainServlet extends HttpServlet {
 		 
 		request.getSession().setAttribute("groupToMember",groupToMember);
 		request.getSession().setAttribute("groupToImg",groupToImg);
-		response.sendRedirect("/Tshare-test2/jsp/Main-page.jsp");
+		response.sendRedirect("/jsp/Main-page.jsp");
 		
 	  }
 

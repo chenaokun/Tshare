@@ -27,9 +27,7 @@ import com.amazonaws.services.dynamodbv2.model.DeleteItemRequest;
 import com.amazonaws.services.dynamodbv2.model.UpdateItemRequest;
 
 public class deleteBill extends HttpServlet{
-	
-	static AmazonDynamoDB client = new AmazonDynamoDBClient(new ProfileCredentialsProvider());
-	static DynamoDB dynamoDB;
+	static DynamoDB dynamoDB= get.dynamoDB;
 	
 	protected void doGet(HttpServletRequest request, 
 		      HttpServletResponse response) throws ServletException, IOException 
@@ -39,8 +37,7 @@ public class deleteBill extends HttpServlet{
 		groupInfo g=(groupInfo)request.getSession().getAttribute("curr_group");
 		String groupId = g.groupId;
 		ArrayList<activityInfo> activity = (ArrayList<activityInfo>)request.getSession().getAttribute("all_activity");
-		client.setRegion(Region.getRegion(Regions.US_WEST_2));
-		dynamoDB = new DynamoDB(client);
+		
 		Table table1 = dynamoDB.getTable("expense");
 		Table table2 = dynamoDB.getTable("bill");
 		
@@ -83,7 +80,7 @@ public class deleteBill extends HttpServlet{
 		User u=(User)request.getSession().getAttribute("userInfo");
 		ArrayList<activityInfo> user_activity = getActivity.allActivity(u.Id, groupId);
 		request.getSession().setAttribute("all_activity", user_activity);
-		response.sendRedirect("/Tshare-test2/jsp/All_activity.jsp");	
+		response.sendRedirect("/jsp/All_activity.jsp");	
 	}
 	
 	public void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -95,8 +92,7 @@ public class deleteBill extends HttpServlet{
 	protected static void UpdateBalance(
 			String userId, String groupId, Double amount)
 	{
-		client.setRegion(Region.getRegion(Regions.US_WEST_2));
-		dynamoDB = new DynamoDB(client);
+		
 		Table table = dynamoDB.getTable("currentBalance");
 		Item item;
 		String newBalance = null;
@@ -132,7 +128,7 @@ public class deleteBill extends HttpServlet{
                 .withKey(itemKeys)
                 .withAttributeUpdates(updateItems);
 
-		client.updateItem(updateItemRequest);
+		get.client.updateItem(updateItemRequest);
 		
 	}
 }

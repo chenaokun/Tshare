@@ -31,8 +31,7 @@ import com.amazonaws.services.dynamodbv2.model.UpdateItemRequest;
  */
 public class PutBillToDB extends HttpServlet {
 
-	static AmazonDynamoDB client = new AmazonDynamoDBClient(new ProfileCredentialsProvider());
-	static DynamoDB dynamoDB;
+	static DynamoDB dynamoDB= get.dynamoDB;
        
 
 	/**
@@ -109,7 +108,7 @@ public class PutBillToDB extends HttpServlet {
 		
 		
 		
-		response.sendRedirect("/Tshare-test2/jsp/Main-page.jsp");
+		response.sendRedirect("/jsp/Main-page.jsp");
 	}
 	
 	
@@ -117,8 +116,7 @@ public class PutBillToDB extends HttpServlet {
 	protected static void AddExpense(String date, String billName,
 			String billTotalAmt, String billAmt, String groupId, String userId, String paidUserId, int memCnt)
 	{		
-		client.setRegion(Region.getRegion(Regions.US_WEST_2));
-		dynamoDB = new DynamoDB(client);
+		
 		Table table = dynamoDB.getTable("expense");
 		String key = userId ;
 		
@@ -140,8 +138,7 @@ public class PutBillToDB extends HttpServlet {
 	protected static void AddBillForm(String date, String userId, String billDesc, String billImg, String groupId )
 
 	{
-		client.setRegion(Region.getRegion(Regions.US_WEST_2));
-		dynamoDB = new DynamoDB(client);
+		
 		Table table = dynamoDB.getTable("bill");
 		Item item = new Item()
 				.withPrimaryKey("billId", date+" "+userId)
@@ -157,8 +154,7 @@ public class PutBillToDB extends HttpServlet {
 	protected static Item FindObject(
 			String tableName, String primaryKey, String primaryValue, String rangeKey, String rangeValue)
 	{
-		client.setRegion(Region.getRegion(Regions.US_WEST_2));
-		dynamoDB = new DynamoDB(client);
+		
 		Table table = dynamoDB.getTable(tableName);
 		
 		try {
@@ -179,8 +175,7 @@ public class PutBillToDB extends HttpServlet {
 	protected static void UpdateBalance(
 			String userId, String groupId, String billAmt, String payer)
 	{
-		client.setRegion(Region.getRegion(Regions.US_WEST_2));
-		dynamoDB = new DynamoDB(client);
+		
 		Table table = dynamoDB.getTable("currentBalance");
 		Item item;
 		String newBalance = null;
@@ -213,7 +208,7 @@ public class PutBillToDB extends HttpServlet {
                 .withKey(itemKeys)
                 .withAttributeUpdates(updateItems);
 
-		client.updateItem(updateItemRequest);
+		get.client.updateItem(updateItemRequest);
 		
 		/*Item newItem = new Item()
 				.withPrimaryKey("userId",userId,"groupId",groupId)
@@ -226,8 +221,7 @@ public class PutBillToDB extends HttpServlet {
 	protected static void UpdateBalance(
 			String payer, String groupId, String billAmt, int memCnt)
 	{
-		client.setRegion(Region.getRegion(Regions.US_WEST_2));
-		dynamoDB = new DynamoDB(client);
+		
 		Table table = dynamoDB.getTable("currentBalance");
 		Item item;
 		String newBalance = null;
@@ -262,7 +256,7 @@ public class PutBillToDB extends HttpServlet {
                 .withKey(itemKeys)
                 .withAttributeUpdates(updateItems);
 
-		client.updateItem(updateItemRequest);
+		get.client.updateItem(updateItemRequest);
 		
 		/*Item newItem = new Item()
 				.withPrimaryKey("groupId",groupId, "userId",payer)
