@@ -3,10 +3,13 @@ package javaFile;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
+import java.util.concurrent.TimeUnit;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -30,15 +33,25 @@ import com.amazonaws.services.dynamodbv2.model.QueryRequest;
 import com.amazonaws.services.dynamodbv2.model.QueryResult;
 import com.amazonaws.services.dynamodbv2.model.UpdateItemRequest;
 import com.amazonaws.services.dynamodbv2.model.UpdateItemResult;
+import javaFile.DynamoDBLock;
 
 public class payToSettle extends HttpServlet {
 	 static AmazonDynamoDB client = new AmazonDynamoDBClient(new ProfileCredentialsProvider());
 	 static DynamoDB dynamoDB;
+	 static String groupId="";
  protected void doGet(HttpServletRequest request, 
      HttpServletResponse response) throws ServletException, IOException 
    {
 	 groupInfo group=(groupInfo)request.getSession().getAttribute("curr_group");
-	 String groupId=group.groupId;
+	 groupId=group.groupId;
+	 
+
+	 Date date = new Date();
+	 long dateSec = date.getTime();
+	 String dateSecStr = Long.toString(dateSec);
+	 String dateStr = date.toString();
+	 TimeUnit timeUnit = null;
+	 
 	 
 	 client.setRegion(Region.getRegion(Regions.US_WEST_2));
 	 String tableName="currentBalance";
@@ -47,9 +60,37 @@ public class payToSettle extends HttpServlet {
 	 String userId=u.Id;
 	 Table table = dynamoDB.getTable(tableName);
 	   // reading the user input    
-	   response.setContentType("text/html");
-		response.setCharacterEncoding("utf-8");
-		Double amount=Double.parseDouble(request.getParameter("amount"));
+	 response.setContentType("text/html");
+	 response.setCharacterEncoding("utf-8");
+	 Double amount=Double.parseDouble(request.getParameter("amount"));
+		
+		
+	 boolean lock = false;
+	 int count = 0;
+	 while(!lock)
+	 {
+		 lock = DynamoDBLock.AcquireLock(groupId, userId, dateSecStr, "Settle");
+		 if(lock == false)
+		 {
+			 count ++;
+			 Random randomGenerator = new Random();
+			 int randomInt = randomGenerator.nextInt(500);
+			 try 
+			 {
+				 timeUnit.MILLISECONDS.sleep(randomInt);
+			 } catch (Exception e) {
+					// TODO Auto-generated catch block
+				 e.printStackTrace();
+			 }
+			 if(count > 2000)
+			 {
+				 DynamoDBLock.ResolveDeadlock(groupId, dateSecStr);
+			 }
+		 }
+	 }
+
+		
+		
 		Item item = table.getItem("groupId", groupId, "userId", userId); 
 		String balance=removeQuo.remove(item.getJSON("balance"));
 		Double before=Double.parseDouble(balance);		
@@ -58,7 +99,7 @@ public class payToSettle extends HttpServlet {
 		if(beingPaid.equals("1"))
 			amount*=-1;
 		Double after=before-amount;
-		System.out.println("after:"+after+" current userId "+u.Id+" current receiver "+receiver);
+		System.out.println(after);
 		BigDecimal afterRound = new BigDecimal(after).setScale(2, BigDecimal.ROUND_HALF_UP);
 		Map<String, AttributeValueUpdate> updateItems = new HashMap<String, AttributeValueUpdate>();
 
@@ -83,7 +124,7 @@ public class payToSettle extends HttpServlet {
 		Double receiverAfter=receiverBefore+amount;
 		BigDecimal newBalanceRound = new BigDecimal(receiverAfter).setScale(2, BigDecimal.ROUND_HALF_UP);
 		updateItems.put("balance", new AttributeValueUpdate().withValue(new AttributeValue(String.valueOf(newBalanceRound))).withAction("PUT"));
-		System.out.println("updating "+receiver+"'s balance: "+ String.valueOf(newBalanceRound) );
+		System.out.println("updating "+receiver+"'s balance: "+ String.valueOf(newBalanceRound));
 		itemKeys.put("userId", new AttributeValue(receiver));
 		updateItemRequest
         .withTableName("currentBalance")
@@ -110,7 +151,7 @@ public class payToSettle extends HttpServlet {
 	         System.out.println(queryResult.toString()+" test");
 	         List<Map<String, AttributeValue>> items = queryResult.getItems();
 	         System.out.println("list!");
-	         
+	         	         
 	         Iterator<Map<String, AttributeValue>> itemsIter = items.iterator();
 	         String totalBalance = null;
 	         String user=null;
@@ -148,10 +189,13 @@ public class payToSettle extends HttpServlet {
 			    System.out.println(key[0]+" pays "+key[1]+" $"+Integer.toString(value));				    
 			}*/
 	         response.sendRedirect("/Tshare-test2/jsp/Settle-up.jsp");
+	         DynamoDBLock.ReleaseLock(groupId, userId, dateSecStr);
 	     } catch (Exception e) {
 	         System.err.println("Failed to fetch item in " + tableName);
 	         System.err.println(e.getMessage());
+	         DynamoDBLock.ReleaseLock(groupId, userId, dateSecStr);
 	     }
+		 
  }
 
  
