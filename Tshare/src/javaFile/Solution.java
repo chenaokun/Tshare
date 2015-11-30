@@ -17,17 +17,18 @@ public class Solution {
     	userBalance ubReceive=null;
     	HashMap<String[], Double> plan=new HashMap<String[], Double>();
     	
-    	int check=0;
+    	double check=0;
     	
     	for(int i=0;i<ubList.size();i++){
     		ub=ubList.get(i);
     		System.out.println(ub.userId+" "+Double.toString(ub.balance));
+    		
     		pqMax.add(ub);
     		pqMin.add(ub);
     		check+=ub.balance;
     	}
     	
-    	if(check!=0){
+    	if(check>=0.01){
     		System.out.println("ERROR IN DATABASE. Total balance within group is "+ check);
     		return plan;
     	}
