@@ -18,8 +18,8 @@
 <body>
 	<%@ include file="Header.html" %>
 	
-	<div id="content" class="container_12 lsb_grid_4">
-		<div class="grid_8 push_4">
+	<div id="content" class="container_12">
+		<div class="grid_8">
 			<div id="MyEdit" class="h4">
     Group has been successfully deleted.
 		</div>

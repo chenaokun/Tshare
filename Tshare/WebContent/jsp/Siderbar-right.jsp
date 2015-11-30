@@ -40,7 +40,7 @@
     
     <div class="panel-body" align="center" id="groupdes"> Group Members</div>
     <div align="center">
-    <span title="addMember"  data-toggle="tooltip" data-placement="top"><button id="button1"  data-toggle="modal" data-target="#addMember" ><img src="../images/addMember.png" width="20" height="20"></button></span>
+    <span title="addMember"  data-toggle="tooltip" data-placement="top"><button id="button1"  data-toggle="modal" data-target="#addMember" ><img src="../images/User_add.png" width="20" height="20"></button></span>
     <span title="deleteMember"  data-toggle="tooltip" data-placement="top"><button id="button1" data-toggle="modal" data-target="#deleteMember"><img src="../images/deleteMember.png" width="25" height="25"></button></span>
     </div>
     <% for (Entry<String, String> entry : groupToMember.entrySet()) { 		

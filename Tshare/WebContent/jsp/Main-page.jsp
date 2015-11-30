@@ -16,7 +16,7 @@
 	<div id="content" class="container_12">
 		<div class="grid_8">		
 			<%@ include file="Group-single.html" %>
-			<%@ include file="Bill.html" %>
+			<%@ include file="group-home.jsp" %>
 		</div>
 		<%@ include file="Siderbar-left.jsp" %>	
 		<%@ include file="Siderbar-right.jsp" %>

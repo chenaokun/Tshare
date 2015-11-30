@@ -14,7 +14,7 @@
 <body>
 	<%@ include file="../Header.html" %>
 	
-	<div id="content" class="container_12 lsb_grid_4">
+	<div id="content" class="container_12">
 		<div class="grid_8">
 			<div id="pageshadow">
 				<div id="header"> 
