@@ -2,6 +2,7 @@ package javaFile;
 
 import java.io.IOException;
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -129,6 +130,12 @@ public class PutBillToDB extends HttpServlet {
 		UpdateBalance(paidUserId, groupId, billAmt, length);
 		
 		DynamoDBLock.ReleaseLock(groupId, userID, dateSecStr);
+		
+		HashMap<String, String> groupBalance =new HashMap<String, String>();
+		
+		getGroup gg = new getGroup();
+		gg.getGroupSet(userID,groupBalance);
+		request.getSession().setAttribute("groupBalance", groupBalance);
 		
 		response.sendRedirect("/jsp/Main-page.jsp");
 	}
