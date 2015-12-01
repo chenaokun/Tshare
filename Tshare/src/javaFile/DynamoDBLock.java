@@ -27,8 +27,7 @@ import com.amazonaws.services.dynamodbv2.model.ResourceNotFoundException;
 
 public class DynamoDBLock {
 	
-	static AmazonDynamoDB client = new AmazonDynamoDBClient(new ProfileCredentialsProvider());
-	static DynamoDB dynamoDB;
+	static DynamoDB dynamoDB= get.dynamoDB;
 	
 	public static boolean AcquireLock(String groupID, String userID, String date, String action)
 	//Acquire lock with the groupID, userID and accessTime in seconds after 1970. 
@@ -42,8 +41,8 @@ public class DynamoDBLock {
 		//false for lock not exist, true for lock exists
 		
 		
-		client.setRegion(Region.getRegion(Regions.US_WEST_2));
-		dynamoDB = new DynamoDB(client);
+		get.client.setRegion(Region.getRegion(Regions.US_WEST_2));
+		dynamoDB = new DynamoDB(get.client);
 		Table table = dynamoDB.getTable("locks");
 		
 		QuerySpec spec1 = new QuerySpec()
@@ -95,8 +94,8 @@ public class DynamoDBLock {
 	//Delete the coordinate item in locks table to release lock
 	{
 		System.out.println("To Release Lock");
-		client.setRegion(Region.getRegion(Regions.US_WEST_2));
-		dynamoDB = new DynamoDB(client);
+		get.client.setRegion(Region.getRegion(Regions.US_WEST_2));
+		dynamoDB = new DynamoDB(get.client);
 		Table table = dynamoDB.getTable("locks");
 		
 		DeleteItemOutcome deleteItemOutcome = 

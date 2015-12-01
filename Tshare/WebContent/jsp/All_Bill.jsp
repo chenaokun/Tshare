@@ -145,7 +145,7 @@
 		  var button = $(event.relatedTarget); // Button that triggered the modal
 		  var receipt = button.data('path'); // Extract info from data-* attributes		  		  
 		  var modal = $(this);
-		  //alert(receipt);
+		  alert(receipt);
 		  if(receipt == undefined){
 			  modal.find(".modal-title").text("This bill has no picture");
 			  modal.find("img").attr("src","../images/proj_no_photo.png");

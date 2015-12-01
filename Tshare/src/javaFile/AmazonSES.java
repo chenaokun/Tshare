@@ -2,8 +2,11 @@ package javaFile;
 
 import java.io.IOException;
 
+import com.amazonaws.auth.AWSCredentials;
+import com.amazonaws.auth.PropertiesCredentials;
 import com.amazonaws.regions.Region;
 import com.amazonaws.regions.Regions;
+import com.amazonaws.services.dynamodbv2.AmazonDynamoDB;
 import com.amazonaws.services.simpleemail.AmazonSimpleEmailServiceClient;
 import com.amazonaws.services.simpleemail.model.Body;
 import com.amazonaws.services.simpleemail.model.Content;
@@ -12,7 +15,7 @@ import com.amazonaws.services.simpleemail.model.Message;
 import com.amazonaws.services.simpleemail.model.SendEmailRequest;
 
 public class AmazonSES {
-	static final String FROM = "youdidut@gmail.com";  // Replace with your "From" address. This address must be verified.
+	static final String FROM = "tshare.titan@gmail.com";  // Replace with your "From" address. This address must be verified.
     static String TO = ""; // Replace with a "To" address. If your account is still in the
                                                       // sandbox, this address must be verified.
     static String BODY = "";
@@ -58,14 +61,16 @@ public class AmazonSES {
 	        
 	        try
 	        {        
-	            System.out.println("Attempting to send an email through Amazon SES by using the AWS SDK for Java...");
+	        	AWSCredentials credentials = new PropertiesCredentials(
+	   	             AmazonDynamoDB.class.getResourceAsStream("/AwsCredentials.properties"));
+	        	System.out.println("Attempting to send an email through Amazon SES by using the AWS SDK for Java...");
 	        
 	            // Instantiate an Amazon SES client, which will make the service call. The service call requires your AWS credentials. 
 	            // Because we're not providing an argument when instantiating the client, the SDK will attempt to find your AWS credentials 
 	            // using the default credential provider chain. The first place the chain looks for the credentials is in environment variables 
 	            // AWS_ACCESS_KEY_ID and AWS_SECRET_KEY. 
 	            // For more information, see http://docs.aws.amazon.com/AWSSdkDocsJava/latest/DeveloperGuide/credentials.html
-	            AmazonSimpleEmailServiceClient client = new AmazonSimpleEmailServiceClient();
+	            AmazonSimpleEmailServiceClient client = new AmazonSimpleEmailServiceClient(credentials);
 	               
 	            // Choose the AWS region of the Amazon SES endpoint you want to connect to. Note that your sandbox 
 	            // status, sending limits, and Amazon SES identity-related settings are specific to a given AWS 
