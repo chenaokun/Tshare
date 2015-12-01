@@ -63,20 +63,17 @@ System.out.println(path);
   			</div>
   		
   			<div class="col-sm-offset-2 my-col-sm-10">
-		      <div id ="check" class="checkbox">
-		        <label>
+		      <div class="checkbox">
+		       
 		          <input type="checkbox"> Remember me
-		        </label>
+		        
 		      </div>
 		    </div>
 		
   			<div class="col-sm-offset-2 my-col-sm-10">	
-  				<div class="checkbox">
-		        	<label>
-		          		<input id ="check" type="submit" class="btn btn-default" value="Submit" >	
-			
-		       	 	</label>		
-				</div>
+  						        	
+		          		<input type="submit" class="btn btn-default" value="Submit" >						       	 			
+				
 			</div>
 			</div>		
 		</form>

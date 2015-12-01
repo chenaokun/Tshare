@@ -53,20 +53,20 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <div class="carousel-inner" role="listbox">
       <div class="item active"><img src="images/header-3.jpg" alt="First slide image" class="center-block">
         <div class="carousel-caption">
-          <h3>First slide Heading</h3>
-          <p>First slide Caption</p>
+          <h3>We do the math for you</h3>
+          <p>Tshare keeps a running total over time, so you can pay each other back in one big payment, instead of a bunch of small ones.</p>
         </div>
       </div>
       <div class="item"><img src="images/header-1.jpg" alt="Second slide image" class="center-block">
         <div class="carousel-caption">
-          <h3>Second slide Heading</h3>
-          <p>Second slide Caption</p>
+          <h3>Simplify your settling-up process</h3>
+          <p>Your transaction times to settle up your bills are minimized.</p>
         </div>
       </div>
       <div class="item"><img src="images/header-2.jpg" alt="Third slide image" class="center-block">
         <div class="carousel-caption">
-          <h3>Third slide Heading</h3>
-          <p>Third slide Caption</p>
+          <h3>Friendly email reminders</h3>
+          <p>Get a notification when your Tshare account is updated.</p>
         </div>
       </div>
     </div>
