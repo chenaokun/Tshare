@@ -29,7 +29,7 @@
     	<td class="sum-body">People Owe you</td>
     	<td>     </td>
     	<td>     </td>
-    	<td class="sum-body">$<%=-Double.parseDouble(balance) %></td>
+    	<td class="sum-body">$<%= ((int)((-Double.parseDouble(balance))*100))/(double)100%></td>
     <%}%>
     </tr>	
 
@@ -46,7 +46,7 @@
 	
 	<tr>
     	<td class="sum-body"><%=key[0]%> pays You</td>
-    	<td class="sum-body"><%=Double.toString(value)%></td>
+    	<td class="sum-body"><%=  ((int)(value*100))/(double)100%></td>
     	<td class="sum-body">Amount paid:</td> 
     	<td>
     	<%-- <form class="form-inline"action="../payToSettle?receiver=<%=key[0]%>&beingPaid=1" method="post">
