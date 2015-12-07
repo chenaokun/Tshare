@@ -23,7 +23,11 @@ import com.amazonaws.services.dynamodbv2.AmazonDynamoDB;
 import com.amazonaws.services.dynamodbv2.AmazonDynamoDBClient;
 import com.amazonaws.services.dynamodbv2.document.DynamoDB;
 import com.amazonaws.services.dynamodbv2.document.Item;
+import com.amazonaws.services.dynamodbv2.document.ItemCollection;
+import com.amazonaws.services.dynamodbv2.document.QueryOutcome;
+import com.amazonaws.services.dynamodbv2.document.RangeKeyCondition;
 import com.amazonaws.services.dynamodbv2.document.Table;
+import com.amazonaws.services.dynamodbv2.document.spec.QuerySpec;
 import com.amazonaws.services.dynamodbv2.model.AttributeAction;
 import com.amazonaws.services.dynamodbv2.model.AttributeValue;
 import com.amazonaws.services.dynamodbv2.model.AttributeValueUpdate;
@@ -83,15 +87,21 @@ public class payToSettle extends HttpServlet {
 			 }
 			 if(count > 2000)
 			 {
-				 DynamoDBLock.ResolveDeadlock(groupId, dateSecStr);
+				 //DynamoDBLock.ResolveDeadlock(groupId, dateSecStr);
 			 }
 		 }
 	 }
 
 		
+		QuerySpec querySpec = new QuerySpec()
+		.withHashKey("groupId", groupId)
+		.withRangeKeyCondition(new RangeKeyCondition("userId").eq(userId))
+		.withConsistentRead(true);
 		
-		Item item = table.getItem("groupId", groupId, "userId", userId); 
-		String balance=removeQuo.remove(item.getJSON("balance"));
+		ItemCollection<QueryOutcome> items = table.query(querySpec);
+
+		Iterator<Item> iterator = items.iterator();
+		String balance=removeQuo.remove(iterator.next().getJSON("balance"));
 		Double before=Double.parseDouble(balance);		
 		String receiver=request.getParameter("receiver");
 		String beingPaid=request.getParameter("beingPaid");	
@@ -116,9 +126,17 @@ public class payToSettle extends HttpServlet {
 		get.client.updateItem(updateItemRequest);
 		
 		//get receiver's balance from DB
+		querySpec = new QuerySpec()
+		.withHashKey("groupId", groupId)
+		.withRangeKeyCondition(new RangeKeyCondition("userId").eq(receiver))
+		.withConsistentRead(true);
 		
-		item = table.getItem("groupId", groupId, "userId", receiver); 
-		balance=removeQuo.remove(item.getJSON("balance"));
+		items = table.query(querySpec);
+
+		iterator = items.iterator();
+		
+		
+		balance=removeQuo.remove(iterator.next().getJSON("balance"));
 		Double receiverBefore=Double.parseDouble(balance);
 		Double receiverAfter=receiverBefore+amount;
 		BigDecimal newBalanceRound = new BigDecimal(receiverAfter).setScale(2, BigDecimal.ROUND_HALF_UP);
@@ -132,12 +150,20 @@ public class payToSettle extends HttpServlet {
 		get.client.updateItem(updateItemRequest);
 		
 		//reload sessions for settle-up
-		try {	         
-	         item = table.getItem("groupId", groupId, "userId", userId); 
-	         System.out.println(item.toString());
-	         balance=removeQuo.remove(item.getJSON("balance"));
+		try {	       
+			querySpec = new QuerySpec()
+			.withHashKey("groupId", groupId)
+			.withRangeKeyCondition(new RangeKeyCondition("userId").eq(userId))
+			.withConsistentRead(true);
+			
+			items = table.query(querySpec);
+
+			iterator = items.iterator();
+	         
+	         //System.out.println(iterator.next().toString());
+	         balance=removeQuo.remove(iterator.next().getJSON("balance"));
 	         request.getSession().setAttribute(userId+groupId+"balance", balance);
-	         //System.out.println("balance="+balance);
+	         System.out.println("balance="+balance);
 	         
 	         
 	         HashMap<String, Condition> keyConditions = new HashMap<String, Condition>();
@@ -148,10 +174,10 @@ public class payToSettle extends HttpServlet {
 	         queryRequest.setKeyConditions(keyConditions);
 	         QueryResult queryResult = get.client.query(queryRequest);
 	         System.out.println(queryResult.toString()+" test");
-	         List<Map<String, AttributeValue>> items = queryResult.getItems();
+	         List<Map<String, AttributeValue>> item = queryResult.getItems();
 	         System.out.println("list!");
 	         	         
-	         Iterator<Map<String, AttributeValue>> itemsIter = items.iterator();
+	         Iterator<Map<String, AttributeValue>> itemsIter = item.iterator();
 	         String totalBalance = null;
 	         String user=null;
 	         ArrayList<userBalance> ubList=new ArrayList<userBalance>();

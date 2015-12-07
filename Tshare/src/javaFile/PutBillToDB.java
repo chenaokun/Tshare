@@ -5,6 +5,7 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
@@ -23,8 +24,12 @@ import com.amazonaws.services.dynamodbv2.AmazonDynamoDB;
 import com.amazonaws.services.dynamodbv2.AmazonDynamoDBClient;
 import com.amazonaws.services.dynamodbv2.document.DynamoDB;
 import com.amazonaws.services.dynamodbv2.document.Item;
+import com.amazonaws.services.dynamodbv2.document.ItemCollection;
 import com.amazonaws.services.dynamodbv2.document.PutItemOutcome;
+import com.amazonaws.services.dynamodbv2.document.QueryOutcome;
+import com.amazonaws.services.dynamodbv2.document.RangeKeyCondition;
 import com.amazonaws.services.dynamodbv2.document.Table;
+import com.amazonaws.services.dynamodbv2.document.spec.QuerySpec;
 import com.amazonaws.services.dynamodbv2.model.AttributeValue;
 import com.amazonaws.services.dynamodbv2.model.AttributeValueUpdate;
 import com.amazonaws.services.dynamodbv2.model.UpdateItemRequest;
@@ -108,7 +113,7 @@ public class PutBillToDB extends HttpServlet {
 				if(count > 2000)
 				{
 					//resolve the possible deadlock situation, usually not to be used
-					DynamoDBLock.ResolveDeadlock(groupId, dateSecStr);
+					//DynamoDBLock.ResolveDeadlock(groupId, dateSecStr);
 				}
 			}
 		}
@@ -196,13 +201,26 @@ public class PutBillToDB extends HttpServlet {
 		//If not success, create a new one
 		try
 		{
+			
+			QuerySpec querySpec = new QuerySpec()
+			.withHashKey("groupId", groupId)
+			.withRangeKeyCondition(new RangeKeyCondition("userId").eq(userId))
+			.withConsistentRead(true);
+			ItemCollection<QueryOutcome> items = table.query(querySpec);
+
+			Iterator<Item> iterator = items.iterator();
+			
 			item = table.getItem("userId",userId, "groupId", groupId);
-			String balance = item.getJSON("balance");
+			
+			
+			String balance = iterator.next().getJSON("balance");
+			System.out.println(balance);
 			double newBalanceDouble = 
 					Double.parseDouble(balance.substring(1, balance.length()-1))+Double.parseDouble(billAmt);
 			BigDecimal newBalanceRound = new BigDecimal(newBalanceDouble).setScale(2, BigDecimal.ROUND_HALF_UP);
 			newBalance = 
 					String.valueOf(newBalanceRound);
+			System.out.println(userId+"balance"+newBalance);
 			
 		} catch (Exception e){
 			System.err.println(e.getMessage());
@@ -243,14 +261,25 @@ public class PutBillToDB extends HttpServlet {
 		//If not success, create a new one
 		try
 		{
+			QuerySpec querySpec = new QuerySpec()
+							.withHashKey("groupId", groupId)
+							.withRangeKeyCondition(new RangeKeyCondition("userId").eq(payer))
+							.withConsistentRead(true);
+			ItemCollection<QueryOutcome> items = table.query(querySpec);
+			
+			Iterator<Item> iterator = items.iterator();
+			
 			item = table.getItem("groupId", groupId,"userId", payer);
-			String balance = item.getJSON("balance");
+			String balance = iterator.next().getJSON("balance");
+			
+			System.out.println(balance);
+			
 			double newBalanceDouble = 
 					Double.parseDouble(balance.substring(1, balance.length()-1))-Double.parseDouble(billAmt)*(double)memCnt;
 			BigDecimal newBalanceRound = new BigDecimal(newBalanceDouble).setScale(2, BigDecimal.ROUND_HALF_UP);
 			newBalance = 
 					String.valueOf(newBalanceRound);
-			System.out.println("balance"+newBalance);
+			System.out.println(payer+"balance"+newBalance);
 			
 		} catch (Exception e){
 			System.err.println(e.getMessage());
