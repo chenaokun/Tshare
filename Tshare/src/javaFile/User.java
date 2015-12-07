@@ -1,6 +1,6 @@
 package javaFile;
 import com.amazonaws.services.dynamodbv2.document.Item;
-
+//This class is used to store user info
 public class User {
 	public String Id;
 	public String name;

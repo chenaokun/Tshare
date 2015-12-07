@@ -17,6 +17,7 @@ import com.amazonaws.services.dynamodbv2.AmazonDynamoDBClient;
 import com.amazonaws.services.dynamodbv2.document.DynamoDB;
 import com.amazonaws.services.dynamodbv2.document.Table;
 
+//This servlet is used for the function to delete a group member.
 public class deleteMember extends HttpServlet{
 	static DynamoDB dynamoDB= get.dynamoDB;
 	

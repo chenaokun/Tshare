@@ -10,6 +10,9 @@ import com.amazonaws.services.dynamodbv2.AmazonDynamoDB;
 import com.amazonaws.services.dynamodbv2.AmazonDynamoDBClient;
 import com.amazonaws.services.dynamodbv2.document.DynamoDB;
 
+//This class provides a public static DynamoDB variable with credentials read 
+//from /AwsCredentials.properties, and set the region.
+//This class is need to be initialized only when signing in or signing up.
 public class get {
 	static AWSCredentials credentials ;
 	 static AmazonDynamoDB client;

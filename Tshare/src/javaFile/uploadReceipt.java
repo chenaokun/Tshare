@@ -18,6 +18,7 @@ import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3Client;
 import com.amazonaws.services.s3.model.CannedAccessControlList;
 import com.amazonaws.services.s3.model.ObjectMetadata;
+//This class upload a receipt photo to S3 bucket "tsharebilling".
 
 public class uploadReceipt extends HttpServlet{
 	

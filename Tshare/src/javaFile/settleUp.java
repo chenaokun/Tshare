@@ -30,6 +30,7 @@ import com.amazonaws.services.dynamodbv2.model.Condition;
 import com.amazonaws.services.dynamodbv2.model.QueryRequest;
 import com.amazonaws.services.dynamodbv2.model.QueryResult;
 
+//This servlet calls the Solution class to provide an optimized plan, and present it to users.
 public class settleUp extends HttpServlet { 
 	
 	static DynamoDB dynamoDB= get.dynamoDB;

@@ -4,7 +4,7 @@ import java.util.Comparator;
 import java.util.HashMap;
 import java.util.PriorityQueue;
 
-
+//This class provides an optimized settling-up plan.
 public class Solution {
 	int maxGroupMember=100;
     public HashMap<String[], Double> getSolution(ArrayList<userBalance> ubList) {

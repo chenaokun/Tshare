@@ -26,6 +26,7 @@ import com.amazonaws.services.dynamodbv2.model.AttributeValueUpdate;
 import com.amazonaws.services.dynamodbv2.model.DeleteItemRequest;
 import com.amazonaws.services.dynamodbv2.model.UpdateItemRequest;
 
+//This servlet is used to delete a bill in a group.
 public class deleteBill extends HttpServlet{
 	static DynamoDB dynamoDB= get.dynamoDB;
 	

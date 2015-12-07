@@ -40,6 +40,7 @@ import com.amazonaws.services.dynamodbv2.model.UpdateItemResult;
 
 import javaFile.DynamoDBLock;
 
+//This servlet receives settle-up payments and update the database data.
 public class payToSettle extends HttpServlet {
 	static DynamoDB dynamoDB= get.dynamoDB;
  protected void doGet(HttpServletRequest request, 
@@ -149,7 +150,7 @@ public class payToSettle extends HttpServlet {
         .withAttributeUpdates(updateItems);
 		get.client.updateItem(updateItemRequest);
 		
-		//reload sessions for settle-up
+		//reload sessions for settle-up function
 		try {	       
 			querySpec = new QuerySpec()
 			.withHashKey("groupId", groupId)

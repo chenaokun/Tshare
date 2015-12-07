@@ -20,6 +20,7 @@ import com.amazonaws.services.dynamodbv2.document.DynamoDB;
 import com.amazonaws.services.dynamodbv2.document.Table;
 import com.amazonaws.services.dynamodbv2.model.DeleteItemRequest;
 
+//This servlet is used to delete a group.
 public class deleteGroup extends HttpServlet{
 	
 	static DynamoDB dynamoDB= get.dynamoDB;

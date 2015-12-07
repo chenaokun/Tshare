@@ -17,6 +17,7 @@ import com.amazonaws.services.dynamodbv2.document.DynamoDB;
 import com.amazonaws.services.dynamodbv2.document.Item;
 import com.amazonaws.services.dynamodbv2.document.Table;
 
+//This servlet is called when user wants to add a new member to the group.
 public class addMember extends HttpServlet{
 	static DynamoDB dynamoDB= get.dynamoDB;
 	
@@ -31,6 +32,7 @@ public class addMember extends HttpServlet{
 		HashMap<String,String> groupToImg=(HashMap<String, String>) request.getSession().getAttribute("groupToImg");
 		System.out.println("addMember.java: "+groupId);
 		
+		//Member-group information is stored in currentBalance table with a default balance "0".
 	    Table table= dynamoDB.getTable("currentBalance");
 	    String[] member = list.split(";");
 	    for(int i=0; i < member.length; i++){

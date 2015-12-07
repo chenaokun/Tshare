@@ -14,6 +14,7 @@ import com.amazonaws.services.dynamodbv2.AmazonDynamoDB;
 import com.amazonaws.services.dynamodbv2.AmazonDynamoDBClient;
 import com.amazonaws.services.dynamodbv2.document.DynamoDB;
 
+//This servlet is used to provide summary of account info at welcome page.
 public class updateSummary extends HttpServlet{	
 	protected void doGet(HttpServletRequest request, 
 		     HttpServletResponse response) throws ServletException, IOException 

@@ -23,6 +23,9 @@ import com.amazonaws.services.s3.AmazonS3Client;
 import com.amazonaws.services.s3.model.CannedAccessControlList;
 import com.amazonaws.services.s3.model.ObjectMetadata;
 
+//This servlet is used for the sign-up function. It will check if all the important 
+//info is filled out, if the passwords match, and if the userId has already been
+//registered.
 public class signUp extends HttpServlet{
 	static DynamoDB dynamoDB;
 	 

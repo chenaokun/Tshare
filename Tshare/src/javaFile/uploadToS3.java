@@ -18,7 +18,7 @@ import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3Client;
 import com.amazonaws.services.s3.model.CannedAccessControlList;
 import com.amazonaws.services.s3.model.ObjectMetadata;
-
+//This class uploads avatars to S3 storage.
 public class uploadToS3 extends HttpServlet{
 	
 	

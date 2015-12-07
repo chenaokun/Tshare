@@ -20,6 +20,8 @@ import com.amazonaws.services.dynamodbv2.model.AttributeValue;
 import com.amazonaws.services.dynamodbv2.model.AttributeValueUpdate;
 import com.amazonaws.services.dynamodbv2.model.UpdateItemRequest;
 
+
+//This servlet update profile information like password, user name.
 public class updateProfile extends HttpServlet{
 	static DynamoDB dynamoDB= get.dynamoDB;
 	

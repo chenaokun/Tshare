@@ -19,6 +19,7 @@ import com.amazonaws.services.s3.AmazonS3Client;
 import com.amazonaws.services.s3.model.CannedAccessControlList;
 import com.amazonaws.services.s3.model.ObjectMetadata;
 
+//This servlet is used when user wants to update their avatar picture.
 public class deleteAndUpload extends HttpServlet{
 	
 	
